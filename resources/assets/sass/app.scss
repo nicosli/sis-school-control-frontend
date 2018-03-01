@@ -1,9 +1,15 @@
-
 // Fonts
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+@import url(https://fonts.googleapis.com/css?family=Roboto:100,300,400,500);
 
 // Variables
 @import "variables";
-
 // Bootstrap
-@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+@import 'node_modules/bootstrap/scss/bootstrap.scss';
+
+// FontAwesome 5
+@import 'resources/assets/css/fontawesome/scss/fontawesome.scss';
+// Styles
+@import 'resources/assets/css/fontawesome/scss/fa-brands.scss';
+@import 'resources/assets/css/fontawesome/scss/fa-regular.scss';
+@import 'resources/assets/css/fontawesome/scss/fa-solid.scss';

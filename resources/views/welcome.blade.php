@@ -73,7 +73,7 @@
                 </div>
 
                 <div class="links">
-                <a href="{{asset('/login')}}">Login</a>
+                <a href="{{asset('/Login')}}">Login</a>
                 </div>
             </div>
         </div>

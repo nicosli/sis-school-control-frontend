@@ -13470,9 +13470,3 @@ readers do not read off random characters that represent icons */
   font-weight: 900;
 }
 
-
-.form-signin {
-    max-width: 450px;
-    padding: 15px;
-    margin: 0 auto;
-}

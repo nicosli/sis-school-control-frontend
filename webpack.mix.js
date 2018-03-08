@@ -29,7 +29,7 @@ mix.scripts([
 
 mix.browserSync({
     open: 'external',
-    host: 'local.gestionarreserva',
-    proxy: 'local.gestionarreserva',
+    host: 'local.siscontrolescolar',
+    proxy: 'local.siscontrolescolar',
     port: 8080
 });

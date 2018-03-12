@@ -12,9 +12,6 @@
     <body class="bg-light" style="padding:0">
         @yield('contenido')
         
-        <!-- Js -->
-        <script src="{!!asset('/js/app.js')!!}"></script>
-        
         @yield('script')
     </body>
 </html>

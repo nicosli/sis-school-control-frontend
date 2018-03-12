@@ -11,9 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/Login', function () {
+use App\Htpp\Controllers\ModulosController;
+
+Route::get('/', 'ModulosController@inicio')->middleware('auth.api');
+
+Route::post('/auth', 'ModulosController@auth');
+Route::get('/logout', 'ModulosController@logout');
+Route::get('/login', function () {
     return view('login');
+});
+
+View::composer(['menu', 'paginas.diagonales'], function($view)
+{
+    $view->with('menuPerson', session()->get('menuPerson'));
 });

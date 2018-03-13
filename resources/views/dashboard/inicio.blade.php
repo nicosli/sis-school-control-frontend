@@ -16,10 +16,29 @@
         </div>
     </div>
     <div class="my-3 p-3 bg-white rounded box-shadow">
-        <code>
-            access_token<br>
-            {!!$res->access_token!!}
-        </code>
+        <div class="row">
+            <div class="col-xl-3 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="font-weight-bold d-inline" data-toggle="tooltip" data-placement="top" title="Acriss: SFAR">
+                            {!!$me->firstname!!}
+                            {!!$me->lastname!!}
+                        </p>
+                        <div class="clearfix mb-3"></div>
+                        <div class="lineAuto"></div>
+                        <img src="{!!asset('/img/avatar_gender_'.$me->gender.'.png')!!}" class="mx-auto d-block mb-3 mt-3">
+                        <h5 class="mb-3"><span class="badge badge-primary font-weight-normal pb-1">Username {!!$me->username!!}</span></h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-9">
+                <div class="card">
+                    <div class="card-body">
+                        {!!$me->email!!}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </main>
 @endsection

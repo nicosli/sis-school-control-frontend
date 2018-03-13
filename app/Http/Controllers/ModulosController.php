@@ -2,6 +2,7 @@
     
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
+use App\Util;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client as HttpClient;
 use Guzzle\Http\Exception\ClientErrorResponseException;
@@ -20,39 +21,44 @@ class ModulosController extends Controller{
     }
 
     public function inicio(){
-        return view('dashboard.inicio', ['res' => session()->get('token_api')]);
+        return view('dashboard.inicio', [
+            'res'   => session()->get('token_api'),
+            'me'    => session()->get('me')
+        ]);
     }
 
     public function auth(Request $request){
         $response = $this->client->request('POST', '/oauth/token', 
             [
-                'auth' => [$request->input('user'), $request->input('password')],
+                'auth' => [config('api.username'), config('api.password')],
                 'query' => [
-                    'username'      => config('api.username'),
-                    'password'      => config('api.password'),
+                    'username'      => $request->input('user'),
+                    'password'      => $request->input('password'),
                     'grant_type'    => config('api.grant_type')
                 ]
             ]
         );
         $res = json_decode($response->getBody()->getContents());
         if(isset($res->error))
-            return back()->withInput()->with('status', $res->message);
+            return back()->withInput()->with('status', $res->error_description);
         else{
             $resMenu = $this->client->request('GET', '/menu/bypersontype', [
                     'query' => ['access_token' => $res->access_token]
                 ]
             );
             $menuPerson = json_decode($resMenu->getBody()->getContents());
+            $menuHtml = Util::buildMenu($menuPerson);
             session()->regenerate();
             session(['token_api' => $res]);
             session(['menuPerson' => $menuPerson]);
+            session(['menuHtml' => $menuHtml]);
+            session(['me' => $res->me]);
             return redirect('/');
         }
     }
 
     public function logout(){
-        session()->forget('token_api');
-        session()->forget('menuPerson');
+        session()->flush();
         return redirect('/');
     }
 }

@@ -17,12 +17,12 @@
 				{{ csrf_field() }}
 				<div class="form-group">
 					<label for="user">Usuario</label>
-					<input type="text" class="form-control" id="user" name="user" aria-describedby="userhelp" placeholder="Ingrese su usuario" value="eduApi_clientId">
+					<input type="text" class="form-control" id="user" name="user" aria-describedby="userhelp" placeholder="Ingrese su usuario" value="admin">
 					<small id="tokenhelp" class="form-text text-muted">Compuesto por letras.</small>
 				</div>
 				<div class="form-group">
 					<label for="apellido">Contraseña</label>
-					<input type="password" class="form-control" id="password" name="password" placeholder="Ingrese su contraseña" value="3du4p100">
+					<input type="password" class="form-control" id="password" name="password" placeholder="Ingrese su contraseña" value="ok00">
 				</div>
 				<button type="submit" class="btn btn-primary mt-3">Entrar al sistema</button>
 			</form>

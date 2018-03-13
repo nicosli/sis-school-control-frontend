@@ -23,5 +23,5 @@ Route::get('/login', function () {
 
 View::composer(['menu', 'paginas.diagonales'], function($view)
 {
-    $view->with('menuPerson', session()->get('menuPerson'));
+    $view->with('menuHtml', session()->get('menuHtml'));
 });

@@ -26680,7 +26680,7 @@ return zhTw;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(127);
-module.exports = __webpack_require__(144);
+module.exports = __webpack_require__(142);
 
 
 /***/ }),
@@ -26688,10 +26688,8 @@ module.exports = __webpack_require__(144);
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(128);
-__webpack_require__(139);
-__webpack_require__(140);
 
-Vue.component('list-administrative', __webpack_require__(141));
+Vue.component('list-administrative', __webpack_require__(139));
 
 var app = new Vue({
     el: '#app'
@@ -63531,32 +63529,14 @@ webpackContext.id = 138;
 
 /***/ }),
 /* 139 */
-/***/ (function(module, exports) {
-
-
-
-/***/ }),
-/* 140 */
-/***/ (function(module, exports) {
-
-$(function () {
-    'use strict';
-
-    $('[data-toggle="offcanvas"]').on('click', function () {
-        $('.offcanvas-collapse').toggleClass('open');
-    });
-});
-
-/***/ }),
-/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(142)
+var normalizeComponent = __webpack_require__(140)
 /* script */
 var __vue_script__ = null
 /* template */
-var __vue_template__ = __webpack_require__(143)
+var __vue_template__ = __webpack_require__(141)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -63595,7 +63575,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 142 */
+/* 140 */
 /***/ (function(module, exports) {
 
 /* globals __VUE_SSR_CONTEXT__ */
@@ -63704,7 +63684,7 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
-/* 143 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -63724,7 +63704,7 @@ if (false) {
 }
 
 /***/ }),
-/* 144 */
+/* 142 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

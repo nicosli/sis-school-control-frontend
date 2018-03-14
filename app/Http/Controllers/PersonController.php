@@ -20,7 +20,24 @@ class PersonController extends Controller{
         );
     }
 
-    public function add(){
-        return view('person.inicio');
+    public function administrative(){
+        return view('person.administrative');
     }
+
+    public function teaching(){
+        return view('person.teaching');
+    }
+    
+    public function guardian(){
+        return view('person.guardian');
+    }
+    
+    public function parent(){
+        return view('person.parent');
+    }
+    
+    public function student(){
+        return view('person.student');
+    }
+    
 }

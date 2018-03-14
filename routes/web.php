@@ -26,3 +26,11 @@ View::composer(['menu', 'paginas.diagonales'], function($view)
 {
     $view->with('menuHtml', session()->get('menuHtml'));
 });
+
+Route::group(['prefix' => 'Usuarios'], function() {
+    Route::get('/Administrativo', 'PersonController@administrative');
+    Route::get('/Docente', 'PersonController@teaching');
+    Route::get('/Tutores', 'PersonController@guardian');
+    Route::get('/Padres', 'PersonController@parent');
+    Route::get('/Estudiante', 'PersonController@student');
+});

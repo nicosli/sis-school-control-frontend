@@ -13,11 +13,14 @@
         @section('menu')
         @show
 
-        @yield('contenido')
+        <div id="app">
+            @yield('contenido')
+        </div>
 
         
         <!-- Js -->
-        <script src="{!!asset('/js/app.js')!!}"></script>
+        <script src="{!!asset('js/app.js')!!}"></script>
+        
         
         @yield('script')
     </body>

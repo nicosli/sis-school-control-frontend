@@ -20,6 +20,28 @@ class Util{
                 $html .= '</li>';
             }
         }
+        /*
+        |--------------------------------------------------------------------------
+        | Temporal
+        |--------------------------------------------------------------------------
+        | Esta parte del menú es temporal, mientras se termina el servicio en la API
+        |
+        */
+        $html .= '<li class="nav-item dropdown">';
+            $html .= '<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
+                $html .= 'Usuarios';
+            $html .= '</a>';
+            $html .= '<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">';
+                $html .= '<a class="dropdown-item" href="'.asset('/Usuarios/Administrativo').'">Personal Administrativo</a>';
+                $html .= '<a class="dropdown-item" href="'.asset('/Usuarios/Docente').'">Personal Docente</a>';
+                $html .= '<a class="dropdown-item" href="'.asset('/Usuarios/Tutores').'">Tutores</a>';
+                $html .= '<a class="dropdown-item" href="'.asset('/Usuarios/Padres').'">Padres de familia</a>';
+                $html .= '<a class="dropdown-item" href="'.asset('/Usuarios/Estudiante').'">Estudiantes</a>';
+                $html .= '<div class="dropdown-divider"></div>';
+                $html .= '<a class="dropdown-item" href="'.asset('/Usuarios/Sistema').'">Sistema</a>';
+            $html .= '</div>';
+        $html .= '</li>';
+
         return $html;
     }
 }

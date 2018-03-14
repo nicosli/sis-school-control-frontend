@@ -51,6 +51,7 @@ class ModulosController extends Controller{
             $menuHtml = Util::buildMenu($menuPerson);
             session()->regenerate();
             session(['token_api' => $res]);
+            session(['access_token' => $res->access_token]);
             session(['menuPerson' => $menuPerson]);
             session(['menuHtml' => $menuHtml]);
             session(['me' => $res->me]);

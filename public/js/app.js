@@ -26685,8 +26685,9 @@ module.exports = __webpack_require__(144);
 
 /***/ }),
 /* 127 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
 __webpack_require__(128);
 __webpack_require__(139);
 __webpack_require__(140);
@@ -26699,8 +26700,11 @@ var app = new Vue({
 
 /***/ }),
 /* 128 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_js__ = __webpack_require__(166);
 
 window._ = __webpack_require__(129);
 
@@ -26734,6 +26738,8 @@ Vue.http.interceptors.push(function (request, next) {
   next();
 });
 
+Vue.http.options.root = __WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* apiHost */];
+window.Laravel = "";
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -63554,7 +63560,7 @@ $(function () {
 var disposed = false
 var normalizeComponent = __webpack_require__(142)
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__(165)
 /* template */
 var __vue_template__ = __webpack_require__(143)
 /* template functional */
@@ -63711,9 +63717,70 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h1", [_vm._v("Lista de personal administrativo")])
+  return _c("div", [
+    _c("h6", { staticClass: "border-bottom border-gray pb-2 mb-2" }, [
+      _vm._v("Tabla de personal administrativo")
+    ]),
+    _vm._v(" "),
+    _vm._m(0),
+    _vm._v(" "),
+    _c("table", { staticClass: "table" }, [
+      _vm._m(1),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        _vm._l(_vm.persons, function(person, key) {
+          return _c("tr", { key: key }, [
+            _c("th", { attrs: { scope: "row" } }, [_vm._v(_vm._s(person.id))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(person.firstname))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(person.lasname))])
+          ])
+        })
+      )
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("form", { attrs: { lpformnum: "1" } }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "inputQuery" } }, [
+          _c("i", { staticClass: "fab fa-searchengin" }),
+          _vm._v(" Buscar usuario")
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            id: "inputQuery",
+            "aria-describedby": "emailHelp",
+            placeholder: "Ingrese una búsqueda..."
+          }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-light" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Id")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Primer Nombre")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Apellido")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -63728,6 +63795,93 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 145 */,
+/* 146 */,
+/* 147 */,
+/* 148 */,
+/* 149 */,
+/* 150 */,
+/* 151 */,
+/* 152 */,
+/* 153 */,
+/* 154 */,
+/* 155 */,
+/* 156 */,
+/* 157 */,
+/* 158 */,
+/* 159 */,
+/* 160 */,
+/* 161 */,
+/* 162 */,
+/* 163 */,
+/* 164 */,
+/* 165 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    methods: {
+        fetchListAdministrative: function fetchListAdministrative() {
+            this.$http.get('person', {
+                params: {
+                    access_token: window.access_token
+                }
+            }).then(function (response) {
+                console.log(response);
+            });
+        }
+    },
+    data: function data() {
+        return {
+            persons: []
+        };
+    },
+    mounted: function mounted() {
+        this.fetchListAdministrative();
+    }
+});
+
+/***/ }),
+/* 166 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return apiHost; });
+var baseUrl = '';
+baseUrl = 'http://local.controlescolarapi:8080/';
+var apiHost = baseUrl;
 
 /***/ })
 /******/ ]);

@@ -7,7 +7,9 @@
 
         <title>Sis Control Escolar - @yield('title')</title>
         <link rel="stylesheet" type="text/css" href="{!! asset('/css/app.css') !!}">
-
+        <script>
+            window.access_token = "{!!$access_token!!}";
+        </script>
     </head>
     <body class="bg-light">
         @section('menu')

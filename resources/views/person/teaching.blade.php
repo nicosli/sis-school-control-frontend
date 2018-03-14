@@ -4,6 +4,7 @@
 @section('menu')
     @parent
     @include('menu', ['item' => 'inicio'])
+    @include('person.submenu', ['item' => 'teaching'])
 @endsection
 
 @section('contenido')

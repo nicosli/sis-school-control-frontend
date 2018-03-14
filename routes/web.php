@@ -22,9 +22,11 @@ Route::get('/login', function () {
     return view('login');
 });
 
-View::composer(['menu', 'paginas.diagonales'], function($view)
-{
+View::composer(['menu'], function($view){
     $view->with('menuHtml', session()->get('menuHtml'));
+});
+View::composer(['template.app'], function($view){
+    $view->with('access_token',  session()->get('access_token'));
 });
 
 Route::group(['prefix' => 'Usuarios'], function() {

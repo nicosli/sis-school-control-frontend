@@ -14,6 +14,7 @@
 use App\Htpp\Controllers\ModulosController;
 
 Route::get('/', 'ModulosController@inicio')->middleware('auth.api');
+Route::get('/add/person', 'PersonController@add')->middleware('auth.api');
 
 Route::post('/auth', 'ModulosController@auth');
 Route::get('/logout', 'ModulosController@logout');

@@ -3,13 +3,13 @@
 
 @section('menu')
     @parent
-    @include('menu', ['item' => 'resumen'])
+    @include('menu', ['item' => 'inicio'])
 @endsection
 
 @section('contenido')
 <main role="main" class="container">
     <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-primary rounded box-shadow">
-        <i class="mr-3 fas fa-edit fa-2x"></i>
+        <i class="mr-3 fas fa-cloud fa-2x"></i>
         <div class="lh-100">
             <h6 class="mb-1 text-white lh-100">Dashboard</h6>
             <p class="mb-0">Módulo inicio</p>
@@ -17,7 +17,7 @@
     </div>
     <div class="my-3 p-3 bg-white rounded box-shadow">
         <div class="row">
-            <div class="col-xl-3 mb-3">
+            <div class="col-xl-3 mb-3 mb-sm-0">
                 <div class="card">
                     <div class="card-body">
                         <p class="font-weight-bold d-inline" data-toggle="tooltip" data-placement="top" title="Acriss: SFAR">

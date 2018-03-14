@@ -30,7 +30,7 @@
     export default {
         methods:{
             fetchListAdministrative(){
-                this.$http.get('person',{
+                this.$http.get('person/'+this.page+'/'+this.size,{
                     params: {
                         access_token: window.access_token
                     }
@@ -38,11 +38,22 @@
                 .then(response => {
                     console.log(response)
                 });
+            },
+            nextPage(){
+                this.page += 1;
+                this.fetchListAdministrative();
+            },
+            beforePage(){
+                this.page -= 1;
+                this.fetchListAdministrative();
             }
         },
         data(){
             return {
-                persons: []
+                persons: [],
+                page: '1',
+                size: '10',
+                query: ''
             };
         },
         mounted() {

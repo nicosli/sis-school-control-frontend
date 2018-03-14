@@ -63854,18 +63854,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     methods: {
         fetchListAdministrative: function fetchListAdministrative() {
-            this.$http.get('person', {
+            this.$http.get('person/' + this.page + '/' + this.size, {
                 params: {
                     access_token: window.access_token
                 }
             }).then(function (response) {
                 console.log(response);
             });
+        },
+        nextPage: function nextPage() {
+            this.page += 1;
+            this.fetchListAdministrative();
+        },
+        beforePage: function beforePage() {
+            this.page -= 1;
+            this.fetchListAdministrative();
         }
     },
     data: function data() {
         return {
-            persons: []
+            persons: [],
+            page: '1',
+            size: '10',
+            query: ''
         };
     },
     mounted: function mounted() {

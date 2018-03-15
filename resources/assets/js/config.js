@@ -1,3 +1,2 @@
-let baseUrl = ''
-baseUrl = 'http://local.controlescolarapi:8080/';
+let baseUrl = 'http://local.controlescolarapi:8080/';
 export const apiHost = baseUrl

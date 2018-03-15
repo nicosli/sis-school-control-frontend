@@ -26740,6 +26740,7 @@ Vue.http.interceptors.push(function (request, next) {
 
 Vue.http.options.root = __WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* apiHost */];
 window.Laravel = "";
+
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -63539,7 +63540,9 @@ webpackContext.id = 138;
 /* 139 */
 /***/ (function(module, exports) {
 
-
+window.logTit = 'background:#35495e; padding: 1px 10px 1px 10px; border-radius: 3px 0 0 3px; color: #fff';
+window.logCont = 'background:#28a3ea; padding: 1px 10px 1px 10px; border-radius: 0 3px 3px 0;  color: #fff';
+console.log('%cSis Control Escolar - Alpha %cv1.0.0', logTit, logCont);
 
 /***/ }),
 /* 140 */
@@ -63854,7 +63857,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     methods: {
         fetchListAdministrative: function fetchListAdministrative() {
-            this.$http.get('person/' + this.page + '/' + this.size, {
+            this.$http.get('person/1/' + this.page + '/' + this.size, {
                 params: {
                     access_token: window.access_token
                 }
@@ -63874,7 +63877,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             persons: [],
-            page: '1',
+            page: '0',
             size: '10',
             query: ''
         };
@@ -63890,8 +63893,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return apiHost; });
-var baseUrl = '';
-baseUrl = 'http://local.controlescolarapi:8080/';
+var baseUrl = 'http://local.controlescolarapi:8080/';
 var apiHost = baseUrl;
 
 /***/ })

@@ -30,7 +30,7 @@
     export default {
         methods:{
             fetchListAdministrative(){
-                this.$http.get('person/'+this.page+'/'+this.size,{
+                this.$http.get('person/1/'+this.page+'/'+this.size,{
                     params: {
                         access_token: window.access_token
                     }
@@ -51,7 +51,7 @@
         data(){
             return {
                 persons: [],
-                page: '1',
+                page: '0',
                 size: '10',
                 query: ''
             };

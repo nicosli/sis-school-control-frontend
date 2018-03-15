@@ -16,7 +16,13 @@ class AuthApi
     public function handle($request, Closure $next)
     {
         if( session()->exists('token_api') ){
-            return $next($request);
+            $tmsis = (float)(strtotime(date('Y-m-d H:i:s')));
+            $tm = (float)(session()->get('token_api')->expires_in_timestamp / 1000);
+            
+            if($tmsis < $tm)
+                return $next($request);
+            else 
+                return redirect('/login');
         }
         else {
             return redirect('/login');

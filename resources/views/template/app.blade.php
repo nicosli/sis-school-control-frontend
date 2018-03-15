@@ -19,6 +19,12 @@
             @yield('contenido')
         </div>
 
+        <div class="container">
+            <code>
+                La sesión expira: {!!$timestamp_token!!}
+            </code>
+        </div>
+
         
         <!-- Js -->
         <script src="{!!asset('js/app.js')!!}"></script>

@@ -8,7 +8,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
                         <i class="far fa-edit"></i>
-                        Editar {{ personEdit.fullname }} 
+                        Editar 
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -16,6 +16,33 @@
                 </div>
                 <div class="modal-body">
                     <form>
+                        <div class="card border-dark mb-3">
+                            <div class="card-body text-dark p-0">
+                                <div class="d-flex p-3">
+                                    <img 
+                                        :src="'/img/avatars/'+personEdit.imgpath+'.png'" 
+                                        v-if="personEdit.imgpath!=null"
+                                        class="imgAvatar mr-2">
+                                    <div class="lh-100">
+                                        <h5 class="ml-1 mb-1">{{ personEdit.fullname }}</h5>
+                                        <p class="ml-1 mb-2">Módulo para editar datos del usuario</p>
+                                        <a href="#" class="badge badge-light mb-1" v-on:click="editAvatarClick()">Editar avatar</a>
+                                    </div>
+                                </div>
+                                <div class="card border-0" v-if="showEditPerson">
+                                    <div class="card-body text-dark border-top rounded-0 border-light">
+                                        <div v-for="avatar in avatars" :key="avatar" class="d-inline">
+                                            <img 
+                                                :src="'/img/avatars/'+avatar+'.png'" 
+                                                class="imgAvatar mr-2 mb-2 cursor-pointer" 
+                                                v-on:click="selectAvatarClick(avatar)">
+                                        </div>
+                                        <a href="#" class="badge badge-light mb-1" v-on:click="editAvatarClick()"><i class="far fa-times-circle"></i> cerrar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="firstname">Nombres</label>
@@ -127,17 +154,37 @@
                 if(parseFloat(window.timestamp_token) <= Math.floor(Date.now() / 1000)){
                     window.location.href = '/';
                 }
+            },
+            checkAvatar: function(){
+                if(this.personEdit.imgpath == null){
+                    if(this.personEdit.gender == 'M')
+                        this.personEdit.imgpath = 2;
+                    else
+                        this.personEdit.imgpath = 1;
+                }
+                
+            },
+            editAvatarClick: function(){
+                this.showEditPerson = !this.showEditPerson;
+            },
+            selectAvatarClick: function(sel){
+                this.personEdit.imgpath = sel;
             }
         },
         data(){
             return {
-                dateformatpicker: 'yyyy-MM-dd'
+                dateformatpicker: 'yyyy-MM-dd',
+                showEditPerson: false,
+                avatars:[1,2,3,4,5,6,7,8,9,10,11,12]
             };
         },
         mounted(){
             var vm = this;
             $('.modalConfigEvents').on('show.bs.modal', function (e) {
                 vm.checkSession();
+            })
+            $('.modalConfigEvents').on('shown.bs.modal', function (e) {
+                vm.checkAvatar();
             })
             $('.modalConfigEvents').on('hide.bs.modal', function (e) {
                 vm.checkSession();
@@ -151,3 +198,9 @@
         }
     }
 </script>
+<style>
+    .imgAvatar{
+        width: 58px;
+        height: 61px;
+    }
+</style>

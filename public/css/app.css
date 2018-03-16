@@ -13567,7 +13567,7 @@ body {
     margin: 0 auto;
 }
 .lineAuto {
-    height: 155px;
+    height: 168px;
     position: absolute;
     margin-left: 4%;
 }
@@ -13586,4 +13586,7 @@ body {
 .lineAuto:after {
     right: -3px;
     bottom: 0px;
+}
+.cursor-pointer{
+    cursor: pointer !important;
 }

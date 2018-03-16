@@ -9,6 +9,7 @@
         <link rel="stylesheet" type="text/css" href="{!! asset('/css/app.css') !!}">
         <script>
             window.access_token = "{!!$access_token!!}";
+            window.timestamp_token = "{!!$timestamp_token!!}";
         </script>
     </head>
     <body class="bg-light">
@@ -21,7 +22,7 @@
 
         <div class="container">
             <code>
-                La sesión expira: {!!$timestamp_token!!}
+                La sesión expira: {!!$tmhuman!!}
             </code>
         </div>
 

@@ -26,9 +26,12 @@ View::composer(['menu'], function($view){
     $view->with('menuHtml', session()->get('menuHtml'));
 });
 View::composer(['template.app'], function($view){
-    $timestamp_token = (float)(session()->get('token_api')->expires_in_timestamp / 1000);
-    $timestamp_token = date('Y-m-d H:i:s', $timestamp_token - 18000);
-    $view->with('access_token',  session()->get('access_token'))->with('timestamp_token', $timestamp_token);
+    $tm = (float)(session()->get('token_api')->expires_in_timestamp / 1000);
+    $tmhuman = date('Y-m-d H:i:s', $tm - 18000);
+    $view
+        ->with('access_token',  session()->get('access_token'))
+        ->with('tmhuman', $tmhuman)
+        ->with('timestamp_token', $tm);
 });
 
 Route::group(['prefix' => 'Usuarios', 'middleware' => ['auth.api']], function() {

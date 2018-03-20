@@ -1,4 +1,6 @@
 <div>
+    <pulse-loader :loading="pulseLoader.loading" :color="pulseLoader.color" :size="pulseLoader.size"></pulse-loader>
+    
     <div v-if="totalElements == 0" class="alert alert-primary mb-0" role="alert">
         Sin registros...
     </div>

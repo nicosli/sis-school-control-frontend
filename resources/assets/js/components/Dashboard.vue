@@ -10,6 +10,7 @@
                     <div class="clearfix mb-3"></div>
                     <div class="lineAuto"></div>
                     <img 
+                        v-if="me != ''"
                         :src="'/img/avatars/'+me.imgpath+'.png'" 
                         class="mx-auto d-block mb-3 mt-3">
                     <h5 class="mb-1" v-if="me != ''">

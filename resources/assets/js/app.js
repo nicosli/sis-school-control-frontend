@@ -3,8 +3,13 @@ require('./funciones')
 require('./offcanvas')
 
 Vue.component(
-    'list-administrative',
-    require('./components/list/Administrative.vue')
+    'list-person',
+    require('./components/list/listPerson.vue')
+);
+
+Vue.component(
+    'dashboard',
+    require('./components/Dashboard.vue')
 );
 
 const app = new Vue({

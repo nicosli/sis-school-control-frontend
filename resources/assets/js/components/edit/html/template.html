@@ -1,0 +1,88 @@
+<div>
+    <!-- MODAL -->
+    <div class="modal fade modalEdit modalConfigEvents" tabindex="-1" role="dialog" aria-labelledby="modalEdit" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        <i class="far fa-edit"></i> Editar
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="card border-dark mb-3">
+                            <div class="card-body text-dark p-0">
+                                <div class="d-flex p-3">
+                                    <img :src="'/img/avatars/'+editPerson.imgpath+'.png'" v-if="editPerson.imgpath!=null" class="imgAvatar mr-2">
+                                    <div class="lh-100">
+                                        <h5 class="ml-1 mb-1">{{ editPerson.fullname }}</h5>
+                                        <p class="ml-1 mb-2">Módulo para editar datos del usuario</p>
+                                        <a href="#" class="badge badge-light mb-1" v-on:click="editAvatarClick()">Editar avatar</a>
+                                    </div>
+                                </div>
+                                <div class="card border-0" v-if="showEditPerson">
+                                    <div class="card-body text-dark border-top rounded-0 border-light">
+                                        <div v-for="avatar in avatars" :key="avatar" class="d-inline">
+                                            <img :src="'/img/avatars/'+avatar+'.png'" class="imgAvatar mr-2 mb-2 cursor-pointer" v-on:click="selectAvatarClick(avatar)">
+                                        </div>
+                                        <a href="#" class="badge badge-light mb-1" v-on:click="editAvatarClick()"><i class="far fa-times-circle"></i> cerrar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="firstname">Nombres</label>
+                                <input type="text" class="form-control" id="firstname" placeholder="Introduzca sus nombres" v-model="editPerson.firstname">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="lastname">Apellidos</label>
+                                <input type="text" class="form-control" id="lastname" placeholder="Introduzca sus apellidos" v-model="editPerson.lastname">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="lastname">Fecha de cumpleaños</label>
+                                <datepicker v-model="editPerson.birthdate" input-class="form-control" :format="dateformatpicker" language="es"></datepicker>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="lastname">gender</label>
+                                <input type="text" class="form-control" id="curp" placeholder="Introduzca su curp" v-model="editPerson.gender">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="lastname">email</label>
+                                <input type="text" class="form-control" id="email" placeholder="Introduzca su email" v-model="editPerson.email">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="lastname">Profesión</label>
+                                <input type="text" class="form-control" id="email" placeholder="Introduzca su Profesión" v-model="editPerson.profession">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="lastname">Celular</label>
+                                <input type="text" class="form-control" id="cellphone" placeholder="Introduzca su celular" v-model="editPerson.cellphone">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="lastname">Teléfono</label>
+                                <input type="text" class="form-control" id="phone" placeholder="Introduzca su teléfono" v-model="editPerson.phone">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="lastname">Número fiscal</label>
+                                <input type="text" class="form-control" id="curp" placeholder="Introduzca su curp" v-model="editPerson.fiscalNumber">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="lastname">CURP</label>
+                                <input type="text" class="form-control" id="curp" placeholder="Introduzca su curp" v-model="editPerson.curp">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

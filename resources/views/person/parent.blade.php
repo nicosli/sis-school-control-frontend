@@ -17,7 +17,7 @@
         </div>
     </div>
     <div class="my-3 p-3 bg-white rounded box-shadow">
-        
+        <list-person type="4"></list-person>
     </div>
 </main>
 @endsection

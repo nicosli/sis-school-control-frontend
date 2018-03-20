@@ -41,7 +41,7 @@ VALUES ('2018-01-01', '0000000000', 'eeeeeeeeee', 'admin@eduApi.com', 'Admin', '
                 'fiscal_number'   => $faker->numerify('RFC-########'),
                 'fullname'		  => $faker->name($gender[$gender_idx]),
                 'gender'		  => $gender[$gender_idx],
-                'imgpath'		  => $gender[$gender_idx]=='male'?1:2,
+                'imgpath'		  => $gender[$gender_idx]=='male'?2:1,
                 'lastname'		  => $faker->lastName,
                 'nationality'	  => 'M',
                 'password'		  => $faker->sha256,

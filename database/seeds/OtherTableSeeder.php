@@ -16,7 +16,7 @@ class OtherTableSeeder extends Seeder
     	$faker = Faker::create();
 
         // Configuracion:
-         DB::insert("REPLACE INTO configuration (id, created_at, created_by, status, updated_at, updated_by, name, value) VALUES (1,NULL,'eduApi','A',NULL,'eduApi','setInitConfig','true')");
+         DB::insert("REPLACE INTO configuration (name, value) VALUES ('setInitConfig','true')");
 
 
          //Tipos de documento:

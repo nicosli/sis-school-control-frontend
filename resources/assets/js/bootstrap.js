@@ -32,6 +32,8 @@ Vue.http.interceptors.push((request, next) => {
 import { apiHost } from './config.js'
 Vue.http.options.root = apiHost
 window.Laravel = "";
+import VeeValidate from 'vee-validate';
+Vue.use(VeeValidate);
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

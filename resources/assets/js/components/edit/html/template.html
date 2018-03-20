@@ -53,7 +53,16 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="lastname">email</label>
-                                <input type="text" class="form-control" id="email" placeholder="Introduzca su email" v-model="editPerson.email">
+                                <input 
+                                    type="email" 
+                                    :class="{'form-control': true, 'is-invalid': errors.has('email') }" 
+                                    name="email" 
+                                    v-validate="'required|email'" 
+                                    placeholder="Introduzca su email" 
+                                    v-model="editPerson.email">
+                                <span 
+                                    v-show="errors.has('email')" 
+                                    class="invalid-feedback">{{ errors.first('email') }}</span>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="lastname">Profesión</label>

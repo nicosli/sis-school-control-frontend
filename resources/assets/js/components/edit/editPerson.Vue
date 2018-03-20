@@ -32,6 +32,9 @@
                 vm.checkSession();
             })
         },
+        beforeUpdate() {
+            this.$validator.validateAll();
+        },
         props:{
             editPerson: {required:true}
         },

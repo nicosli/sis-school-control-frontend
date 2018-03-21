@@ -12,6 +12,9 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    <div class="alert alert-danger" role="alert" v-show="modalError">
+                        Algo salió mal, intenta de nuevo más tarde <strong>:'(</strong>
+                    </div>
                     <form>
                         <div class="card border-dark mb-3">
                             <div class="card-body text-dark p-0">
@@ -45,7 +48,12 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="lastname">Fecha de cumpleaños</label>
-                                <datepicker v-model="editPerson.birthdate" input-class="form-control" :format="dateformatpicker" language="es"></datepicker>
+                                <flat-pickr 
+                                    v-model="editPerson.birthdate"
+                                    :config="flatPickrConfig" 
+                                    class="form-control" 
+                                    placeholder="Selecciona una fecha" 
+                                    name="birthdate"></flat-pickr>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="lastname">gender</label>
@@ -88,8 +96,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" @click="updatePerson()">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" :disabled="buttonDisabled">Close</button>
+                    <button type="button" class="btn btn-primary" @click="updatePerson()" :disabled="buttonDisabled">Save changes</button>
                 </div>
             </div>
         </div>

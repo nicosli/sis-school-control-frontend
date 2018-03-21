@@ -27,8 +27,8 @@
   },
   "dependencies": {
     "vee-validate": "^2.0.6",
+    "vue-flatpickr-component": "^7.0.0",
     "vue-spinner": "^1.0.3",
-    "vuejs-datepicker": "^0.9.29",
     "vuejs-paginate": "^1.8.0"
   }
 }

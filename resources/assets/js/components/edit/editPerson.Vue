@@ -1,19 +1,24 @@
 <template src="./html/template.html"></template>
 <script>
-    import Datepicker from 'vuejs-datepicker';
+    import flatPickr from 'vue-flatpickr-component';
+    import 'flatpickr/dist/flatpickr.css';
+    import 'flatpickr/dist/themes/material_blue.css';
+    import {Spanish} from 'flatpickr/dist/l10n/es';
+
     export default {
         name: 'ModalEditPerson',
         methods:{
             updatePerson(){
-                this.$http.put('person/?'+'access_token='+window.access_token, {                    
-                    "id": 1,
-                    "firstname": "nico"                    
-                })
+                this.modalError = false;
+                this.buttonDisabled = true;
+                this.$http.put('person/?'+'access_token='+window.access_token, this.editPerson)
                 .then(response => {
-                    console.log(response)
+                    $('.modalConfigEvents').modal('hide');
+                    this.buttonDisabled = false;
                 })
                 .catch(error => {                    
-                    
+                    this.modalError = true;
+                    this.buttonDisabled = false;
                 });
             },
             checkSession: function(){
@@ -30,15 +35,24 @@
         },
         data(){
             return {
-                dateformatpicker: 'yyyy-MM-dd',
+                flatPickrConfig: {
+                    wrap: true, // set wrap to true only when using 'input-group'
+                    altFormat: 'M	j, Y',
+                    altInput: true,
+                    dateFormat: 'Y-m-d',
+                    locale: Spanish
+                },
                 showEditPerson: false,
-                avatars:[1,2,3,4,5,6,7,8,9,10,11,12]
+                avatars:[1,2,3,4,5,6,7,8,9,10,11,12],
+                modalError: false,
+                buttonDisabled:false
             };
         },
         mounted(){
             var vm = this;
             $('.modalConfigEvents').on('show.bs.modal', function (e) {
                 vm.checkSession();
+                vm.showEditPerson = false;
             })
             $('.modalConfigEvents').on('hide.bs.modal', function (e) {
                 vm.checkSession();
@@ -47,11 +61,11 @@
         // beforeUpdate() {
         //    this.$validator.validateAll();
         // },
-        props:{
+        props: {
             editPerson: {required:true}
         },
         components: {
-            Datepicker
+            flatPickr
         }
     }
 </script>

@@ -12,32 +12,41 @@
                 <input type="text" class="form-control" id="inputQuery" aria-describedby="emailHelp" placeholder="Ingrese una búsqueda...">
             </div>
         </form>
-        <table class="table">
-            <thead class="thead-light">
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Celular</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Tipo</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for='(person, key) in persons' :key='key'>
-                    <th scope="row">{{ person.id }}</th>
-                    <td>{{ person.fullname }}</td>
-                    <td>{{ person.cellphone }}</td>
-                    <td>{{ person.email }}</td>
-                    <td>{{ person.persontype.description }}</td>
-                    <td>
-                        <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target=".modalEdit" @click="showModalEdit(person)">Editar</button>
-                    </td>
-                    <td><button type="button" class="btn btn-outline-danger btn-sm">Baja</button></td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Celular</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for='(person, key) in persons' :key='key'>
+                        <th scope="row">{{ person.id }}</th>
+                        <td>{{ person.fullname }}</td>
+                        <td>{{ person.cellphone }}</td>
+                        <td>{{ person.email }}</td>
+                        <td>{{ person.persontype.description }}</td>
+                        <td>
+                            <button 
+                                type="button" 
+                                class="btn btn-outline-primary btn-sm" 
+                                data-toggle="modal" 
+                                data-target=".modalEdit"
+                                @click="showModalEdit(person)">Editar</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-outline-danger btn-sm">Baja</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
         <nav>
             <paginate 
                 :page-count="pagInfo.totalPages" 

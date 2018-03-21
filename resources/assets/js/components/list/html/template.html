@@ -1,10 +1,10 @@
 <div>
     <pulse-loader :loading="pulseLoader.loading" :color="pulseLoader.color" :size="pulseLoader.size"></pulse-loader>
     
-    <div v-if="totalElements == 0" class="alert alert-primary mb-0" role="alert">
+    <div v-if="pagInfo.totalElements == 0" class="alert alert-primary mb-0" role="alert">
         Sin registros...
     </div>
-    <div v-if="totalElements > 0">
+    <div v-if="pagInfo.totalElements > 0">
         <h6 class="border-bottom border-gray pb-2 mb-2">Tabla de registros</h6>
         <form lpformnum="1">
             <div class="form-group">
@@ -38,6 +38,22 @@
                 </tr>
             </tbody>
         </table>
+        <nav>
+            <paginate 
+                :page-count="pagInfo.totalPages" 
+                :containerClass="'pagination'"
+                :page-class="'page-item'"
+                :page-link-class="'page-link'"
+                :prev-class="'page-item'"
+                :prev-link-class="'page-link'"
+                :next-class="'page-item'"
+                :next-link-class="'page-link'"
+                :click-handler="pageChanged" 
+                :prev-text="'Anterior'" 
+                :next-text="'Siguiente'">
+            </paginate>
+        </nav>
+        <div>Página {{pagInfo.page+1}} de {{pagInfo.totalPages}} - ({{pagInfo.totalElements}} Elementos)</div>
     </div>
     <!-- MODAL -->
     <ModalEditPerson :editPerson="editPerson"></ModalEditPerson>

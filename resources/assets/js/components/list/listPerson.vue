@@ -4,51 +4,61 @@
     import Datepicker from 'vuejs-datepicker';
     import ModalEditPerson from '../edit/editPerson.vue';
     import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
+    import Paginate from 'vuejs-paginate'
+
     export default {
         methods:{
             fetchListAdministrative(){
                 this.pulseLoader.loading = true;
-                this.$http.get('person/'+this.type+'/'+this.page+'/'+this.size,{
+                this.$http.get('person/'+this.type+'/'+this.pagInfo.page+'/'+this.pagInfo.size,{
                     params: {
                         access_token: window.access_token
                     }
                 })
                 .then(response => {
                     this.persons = response.body.content;
-                    this.totalElements = response.body.totalElements;
-                    if(response.status == 204)
-                        this.totalElements = 0;
+                    this.pagInfo.totalElements = response.body.totalElements;
+                    if(response.status == 204){
+                        this.pagInfo.totalElements = 0;
+                    }else{
+                        this.pagInfo.first = response.body.first;
+                        this.pagInfo.last = response.body.last;
+                        this.pagInfo.totalPages = response.body.totalPages;
+                        this.pagInfo.number = response.body.number;
+                        this.pagInfo.totalElements = response.body.totalElements;
+                    }
                     this.pulseLoader.loading = false;
                 })
-                .catch(error => {
-                    console.log(error);
+                .catch(error => {                    
+                    
                 });
             },
             showModalEdit(person){
                 this.editPerson = Object.assign({}, this.editPerson, person);;
             },
-            nextPage(){
-                this.page += 1;
-                this.fetchListAdministrative();
-            },
-            beforePage(){
-                this.page -= 1;
+            pageChanged(page){
+                this.pagInfo.page = page-1;
                 this.fetchListAdministrative();
             }
         },
         data(){
             return {
                 persons: [],
-                totalElements: -1,
                 pulseLoader:{
                     color:'#7b7b7b',
                     size:'15px',
                     loading:true
                 },
                 editPerson:'',
-                page: '0',
-                size: '10',
-                query: '',
+                pagInfo:{
+                    totalElements: -1,
+                    page: 0,
+                    size: 5,
+                    query: '',
+                    first: true,
+                    last: false,
+                    totalPages: 0
+                },
                 dateformatpicker: 'yyyy-MM-dd'
             };
         },
@@ -61,7 +71,8 @@
         components: {
             Datepicker,
             ModalEditPerson,
-            PulseLoader
+            PulseLoader,
+            Paginate
         }
     }
 </script>

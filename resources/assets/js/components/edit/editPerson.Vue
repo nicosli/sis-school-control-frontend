@@ -32,9 +32,9 @@
                 vm.checkSession();
             })
         },
-        beforeUpdate() {
-            this.$validator.validateAll();
-        },
+        // beforeUpdate() {
+        //    this.$validator.validateAll();
+        // },
         props:{
             editPerson: {required:true}
         },

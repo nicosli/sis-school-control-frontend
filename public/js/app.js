@@ -71268,6 +71268,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'ModalEditPerson',
     methods: {
+        updatePerson: function updatePerson() {
+            this.$http.put('person/?' + 'access_token=' + window.access_token, {
+                "id": 1,
+                "firstname": "nico"
+            }).then(function (response) {
+                console.log(response);
+            }).catch(function (error) {});
+        },
+
         checkSession: function checkSession() {
             if (parseFloat(window.timestamp_token) <= Math.floor(Date.now() / 1000)) {
                 window.location.href = '/';
@@ -71798,7 +71807,30 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm._m(1)
+            _c("div", { staticClass: "modal-footer" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-secondary",
+                  attrs: { type: "button", "data-dismiss": "modal" }
+                },
+                [_vm._v("Close")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      _vm.updatePerson()
+                    }
+                  }
+                },
+                [_vm._v("Save changes")]
+              )
+            ])
           ])
         ])
       ]
@@ -71831,27 +71863,6 @@ var staticRenderFns = [
           }
         },
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-secondary",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("Close")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", attrs: { type: "button" } },
-        [_vm._v("Save changes")]
       )
     ])
   }

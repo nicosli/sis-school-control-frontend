@@ -4,6 +4,18 @@
     export default {
         name: 'ModalEditPerson',
         methods:{
+            updatePerson(){
+                this.$http.put('person/?'+'access_token='+window.access_token, {                    
+                    "id": 1,
+                    "firstname": "nico"                    
+                })
+                .then(response => {
+                    console.log(response)
+                })
+                .catch(error => {                    
+                    
+                });
+            },
             checkSession: function(){
                 if(parseFloat(window.timestamp_token) <= Math.floor(Date.now() / 1000)){
                     window.location.href = '/';

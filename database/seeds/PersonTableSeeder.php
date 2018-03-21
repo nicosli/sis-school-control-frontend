@@ -12,25 +12,40 @@ class PersonTableSeeder extends Seeder
      */
     public function run()
     {
-
-    	$faker = Faker::create();	
-
-
-    	DB::insert("REPLACE INTO person (birthdate, cellphone, curp, email, firstname, fiscal_number, fullname, gender, imgpath, lastname, nationality, password, phone, profession, register, secondlastname, username, address_id, group_id, marital_status_id, person_type_id, resume_id, school_id) 
-VALUES ('2018-01-01', '0000000000', 'eeeeeeeeee', 'admin@eduApi.com', 'Admin', 'ffffffffffff', 'Administrator', 'M', NULL, 'Admin', 'M', '8c3818afbd9338f12350229831de9cf7230b696273919be4371d11b48714feb6', '0000000000', 'pppppppp', NULL, 'Admin', 'admin', NULL, NULL, NULL, 1, NULL, NULL)");
-
-
-		$gender = ['male', 'female'];
+        $faker = Faker::create();
+        $gender = ['male', 'female'];
+        
+        // ADMIN -------
+        DB::table('person')->insert([
+            'birthdate'       => $faker->dateTimeThisCentury->format('Y-m-d'),
+            'cellphone'       => $faker->phoneNumber,
+            'curp'			  => $faker->numerify('CURP-######'),
+            'email'			  => 'admin@eduApi.com',
+            'firstname'       => 'Admin',
+            'fiscal_number'   => $faker->numerify('RFC-########'),
+            'fullname'		  => 'Admi Admin',
+            'gender'		  => 'male',
+            'imgpath'		  => 2,
+            'lastname'		  => 'Admin',
+            'nationality'	  => 'M',
+            'password'		  => '8c3818afbd9338f12350229831de9cf7230b696273919be4371d11b48714feb6',
+            'phone' 		  => $faker->phoneNumber,
+            'profession' 	  => $faker->sentence(2),                
+            'username'		  => 'Admin',
+            'address_id'	  => null,
+            'marital_status_id' => rand(1,5),
+            'person_type_id'	=> 1,
+        ]);
 
         foreach (range(1, 500) as $i => $v) {        	
         	$gender_idx = rand(0,1);
 
-        	 DB::table('address')->insert([
-        	 	'street'  => $faker->address,
-        	 	'township_id' => rand(1, 145850)
-        	 ]);
+        	DB::table('address')->insert([
+        		'street'  => $faker->address,
+        		'township_id' => rand(1, 145850)
+        	]);
 
-        	 $address_id = DB::getPdo()->lastInsertId();
+        	$address_id = DB::getPdo()->lastInsertId();
 
             DB::table('person')->insert([
                 'birthdate'       => $faker->dateTimeThisCentury->format('Y-m-d'),
@@ -51,7 +66,6 @@ VALUES ('2018-01-01', '0000000000', 'eeeeeeeeee', 'admin@eduApi.com', 'Admin', '
                 'address_id'	  => $address_id,
                 'marital_status_id' => rand(1,5),
                 'person_type_id'	=> rand(1,9),
-
             ]);
         }
     }

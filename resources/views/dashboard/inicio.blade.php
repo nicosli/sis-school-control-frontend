@@ -16,7 +16,7 @@
         </div>
     </div>
     <div class="my-3 p-3 bg-white rounded box-shadow">
-        <dashboard></dashboard>
+        <dashboard person_id="{!!$me->id!!}"></dashboard>
     </div>
 </main>
 @endsection

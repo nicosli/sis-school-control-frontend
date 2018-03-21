@@ -41,7 +41,7 @@
     export default {
         methods:{
             fetchMe(){
-                this.$http.get('person/me/',{
+                this.$http.get('person/'+this.person_id,{
                     params: {
                         access_token: window.access_token
                     }
@@ -68,6 +68,9 @@
         },
         components: {
             ModalEditPerson
+        },
+        props:{
+            person_id: {required:true}
         }
     }
 </script>

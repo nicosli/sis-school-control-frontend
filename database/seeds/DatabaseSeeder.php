@@ -11,11 +11,7 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-
-    	
-
-         
+    {         
         $this->call([
 			        CountryTableSeeder::class,
 			        StateTableSeeder::class,
@@ -25,9 +21,5 @@ class DatabaseSeeder extends Seeder
 			        TownshipTableSeeder::class,
 			        PersonTableSeeder::class,
 			    ]);
-
-
-         
-
     }
 }

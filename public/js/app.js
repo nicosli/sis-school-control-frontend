@@ -71312,10 +71312,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             vm.checkSession();
         });
     },
-    beforeUpdate: function beforeUpdate() {
-        this.$validator.validateAll();
-    },
 
+    // beforeUpdate() {
+    //    this.$validator.validateAll();
+    // },
     props: {
         editPerson: { required: true }
     },
@@ -72350,7 +72350,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         fetchMe: function fetchMe() {
             var _this = this;
 
-            this.$http.get('person/me/', {
+            this.$http.get('person/' + this.person_id, {
                 params: {
                     access_token: window.access_token
                 }
@@ -72374,6 +72374,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     components: {
         ModalEditPerson: __WEBPACK_IMPORTED_MODULE_0__edit_editPerson_vue___default.a
+    },
+    props: {
+        person_id: { required: true }
     }
 });
 

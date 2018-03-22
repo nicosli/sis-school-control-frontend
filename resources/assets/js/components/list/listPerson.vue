@@ -11,6 +11,7 @@
                 this.pulseLoader.loading = true;
                 this.$http.get('person/'+this.type+'/'+this.pagInfo.page+'/'+this.pagInfo.size,{
                     params: {
+                        query: this.query,
                         access_token: window.access_token
                     }
                 })
@@ -67,16 +68,17 @@
                 var vm = this;
                 clearTimeout(this.timeout);
                 this.timeout = setTimeout(function () {
-                    console.log('Input Value:', query);
+                    vm.query = query;
+                    console.log('Input Value:', vm.query);
                     vm.fetchListPerson();
                 }, 500);
             },
             confirmDelete(person){
                 this.el = document.createElement("div");
-                this.el.innerHTML = "Usuario a eliminar: <span class='spDel'>"+person.fullname+"</span>";
+                this.el.innerHTML = "Usuario: <span class='spDel'>"+person.fullname+"</span>";
                 swal({
                     title: "¿Estás seguro?",
-                    text: "Una vez eliminado no podrás recuperar este usuario!",
+                    text: "Una vez eliminado, no podrás recuperar este usuario!",
                     content: this.el,
                     //icon: "warning",
                     buttons: true,
@@ -109,10 +111,13 @@
                 },
                 dateformatpicker: 'yyyy-MM-dd',
                 timeout:null,
-                el:''
+                el:'',
+                quert:'',
+                me_id:''
             };
         },
         mounted() {
+            this.me_id = window.me_id;
             this.fetchListPerson();
             var timeout = null;
             $('#inputQuery').on('keyup', function () {

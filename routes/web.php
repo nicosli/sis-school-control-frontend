@@ -29,6 +29,7 @@ View::composer(['template.app'], function($view){
     $tmhuman = date('Y-m-d H:i:s', $tm - 18000);
     $view
         ->with('access_token',  session()->get('access_token'))
+        ->with('me_id',  session()->get('me')->id)
         ->with('tmhuman', $tmhuman)
         ->with('timestamp_token', $tm);
 });

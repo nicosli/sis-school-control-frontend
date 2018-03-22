@@ -10,6 +10,7 @@
         <script>
             window.access_token = "{!!$access_token!!}";
             window.timestamp_token = "{!!$timestamp_token!!}";
+            window.me_id = "{!!$me_id!!}";
         </script>
     </head>
     <body class="bg-light">

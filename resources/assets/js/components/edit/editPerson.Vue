@@ -11,10 +11,12 @@
             updatePerson(){
                 this.modalError = false;
                 this.buttonDisabled = true;
+                this.editPerson.fullname = this.editPerson.firstname + ' ' + this.editPerson.lastname;
                 this.$http.put('person/?'+'access_token='+window.access_token, this.editPerson)
                 .then(response => {
                     $('.modalConfigEvents').modal('hide');
                     this.buttonDisabled = false;
+                    this.$emit('personEdited');
                 })
                 .catch(error => {                    
                     this.modalError = true;
@@ -36,7 +38,7 @@
         data(){
             return {
                 flatPickrConfig: {
-                    wrap: true, // set wrap to true only when using 'input-group'
+                    wrap: true, 
                     altFormat: 'M	j, Y',
                     altInput: true,
                     dateFormat: 'Y-m-d',

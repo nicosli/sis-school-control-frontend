@@ -31,7 +31,7 @@
                                         <div v-for="avatar in avatars" :key="avatar" class="d-inline">
                                             <img :src="'/img/avatars/'+avatar+'.png'" class="imgAvatar mr-2 mb-2 cursor-pointer" v-on:click="selectAvatarClick(avatar)">
                                         </div>
-                                        <a href="#" class="badge badge-light mb-1" v-on:click="editAvatarClick()"><i class="far fa-times-circle"></i> cerrar</a>
+                                        <a href="#" class="badge badge-light mb-1 text-danger" v-on:click="editAvatarClick()"><i class="far fa-times-circle"></i> cerrar</a>
                                     </div>
                                 </div>
                             </div>

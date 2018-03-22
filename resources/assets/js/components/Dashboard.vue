@@ -33,7 +33,7 @@
         </div>
     </div>
     <!-- MODAL -->
-    <ModalEditPerson :editPerson="editPerson"></ModalEditPerson>
+    <ModalEditPerson :editPerson="editPerson" @personEdited="personEdited"></ModalEditPerson>
 </div>
 </template>
 <script>
@@ -55,6 +55,9 @@
             },
             showModalEdit(person){
                 this.editPerson = Object.assign({}, this.editPerson, person);
+            },
+            personEdited(){
+                this.fetchMe();
             }
         },
         data(){

@@ -1,14 +1,13 @@
 <template src="./html/template.html"></template>
 
 <script>
-    import Datepicker from 'vuejs-datepicker';
     import ModalEditPerson from '../edit/editPerson.vue';
     import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
     import Paginate from 'vuejs-paginate'
 
     export default {
         methods:{
-            fetchListAdministrative(){
+            fetchListPerson(){
                 this.pulseLoader.loading = true;
                 this.$http.get('person/'+this.type+'/'+this.pagInfo.page+'/'+this.pagInfo.size,{
                     params: {
@@ -38,7 +37,10 @@
             },
             pageChanged(page){
                 this.pagInfo.page = page-1;
-                this.fetchListAdministrative();
+                this.fetchListPerson();
+            },
+            personEdited(){
+                this.fetchListPerson();
             }
         },
         data(){
@@ -63,16 +65,20 @@
             };
         },
         mounted() {
-            this.fetchListAdministrative();
+            this.fetchListPerson();
         },
         props:{
             type: {required:true}
         },
         components: {
-            Datepicker,
             ModalEditPerson,
             PulseLoader,
             Paginate
+        },
+        watch: {
+            buttonDisabled: function(){
+                console.log("cambio");
+            }
         }
     }
 </script>

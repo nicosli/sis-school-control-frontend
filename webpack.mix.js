@@ -13,8 +13,7 @@ let mix = require('laravel-mix');
 
 mix.sass('resources/assets/sass/app.scss', 'public/mixed/css/app.css');
 mix.copy('resources/assets/css/fontawesome/webfonts', 'public/webfonts');
-mix.js('resources/assets/js/app.js', 'public/js/');
-
+mix.js('resources/assets/js/app.js', 'public/js/').minify('public/js/app.js');
 
 mix.styles([
     'public/mixed/css/app.css',

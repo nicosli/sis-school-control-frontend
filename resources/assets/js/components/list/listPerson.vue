@@ -2,8 +2,8 @@
 
 <script>
     import ModalEditPerson from '../edit/editPerson.vue';
-    import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
-    import Paginate from 'vuejs-paginate'
+    import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
+    import Paginate from 'vuejs-paginate';
 
     export default {
         methods:{
@@ -32,6 +32,23 @@
                     
                 });
             },
+            deletePerson(id){
+                this.$http.delete('person/'+id,{
+                    params: {
+                        access_token: window.access_token
+                    }
+                })
+                .then(response => {
+                    this.fetchListPerson();
+                    swal("Hecho!", "El usuario ha sido eliminado exitosamente", "success");
+                })
+                .catch(error => {
+                    new Noty({
+                        type:'error',
+                        text: 'Algo salió mal'
+                    }).show();
+                });
+            },
             showModalEdit(person){
                 this.editPerson = Object.assign({}, this.editPerson, person);;
             },
@@ -41,6 +58,10 @@
             },
             personEdited(){
                 this.fetchListPerson();
+                new Noty({
+                    type:'success',
+                    text: 'El usuario ha sido editado exitosamente'
+                }).show();
             },
             searchQuery(query){
                 var vm = this;
@@ -49,6 +70,23 @@
                     console.log('Input Value:', query);
                     vm.fetchListPerson();
                 }, 500);
+            },
+            confirmDelete(person){
+                this.el = document.createElement("div");
+                this.el.innerHTML = "Usuario a eliminar: <span class='spDel'>"+person.fullname+"</span>";
+                swal({
+                    title: "¿Estás seguro?",
+                    text: "Una vez eliminado no podrás recuperar este usuario!",
+                    content: this.el,
+                    //icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        this.deletePerson(person.id);
+                    }
+                });
             }
         },
         data(){
@@ -63,14 +101,15 @@
                 pagInfo:{
                     totalElements: -1,
                     page: 0,
-                    size: 5,
+                    size: 7,
                     query: '',
                     first: true,
                     last: false,
                     totalPages: 0
                 },
                 dateformatpicker: 'yyyy-MM-dd',
-                timeout:null
+                timeout:null,
+                el:''
             };
         },
         mounted() {
@@ -78,8 +117,7 @@
             var timeout = null;
             $('#inputQuery').on('keyup', function () {
                 console.log("keyup");
-                var that = this;
-                
+                var that = this; 
             });
         },
         props:{
@@ -97,3 +135,21 @@
         }
     }
 </script>
+
+<style>
+.swal-footer {
+    background-color: rgb(245, 248, 250);
+    margin-top: 32px;
+    border-top: 1px solid #E9EEF1;
+    overflow: hidden;
+}
+.swal-title:not(:last-child){
+    margin-bottom: 6px;
+}
+.swal-content{
+    margin-top:6px;
+}
+.spDel{
+    color: #C00;
+}
+</style>

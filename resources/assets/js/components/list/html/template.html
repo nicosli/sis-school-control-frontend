@@ -41,7 +41,10 @@
                                 @click="showModalEdit(person)">Editar</button>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-outline-danger btn-sm">Baja</button>
+                            <button
+                                type="button" 
+                                @click="confirmDelete(person)"
+                                class="btn btn-outline-danger btn-sm">Baja</button>
                         </td>
                     </tr>
                 </tbody>

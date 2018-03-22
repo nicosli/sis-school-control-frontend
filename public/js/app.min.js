@@ -86704,6 +86704,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.$http.get('person/' + this.type + '/' + this.pagInfo.page + '/' + this.pagInfo.size, {
                 params: {
                     query: this.query,
+                    field: this.sort.field,
+                    direction: this.sort.direction,
                     access_token: window.access_token
                 }
             }).then(function (response) {
@@ -86778,6 +86780,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     _this3.deletePerson(person.id);
                 }
             });
+        },
+        orderTable: function orderTable(field) {
+            this.sort.field = field;
         }
     },
     data: function data() {
@@ -86802,7 +86807,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             timeout: null,
             el: '',
             quert: '',
-            me_id: ''
+            me_id: '',
+            sort: {
+                field: 'id',
+                direction: 'ASC'
+            }
         };
     },
     mounted: function mounted() {
@@ -90623,7 +90632,85 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "table-responsive" }, [
               _c("table", { staticClass: "table" }, [
-                _vm._m(1),
+                _c("thead", { staticClass: "thead-light" }, [
+                  _c("tr", [
+                    _c("th", { attrs: { scope: "col" } }, [
+                      _c(
+                        "span",
+                        {
+                          staticClass: "cursor-pointer",
+                          on: {
+                            click: function($event) {
+                              _vm.orderTable("id")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\r\n                                id\r\n                                "
+                          ),
+                          _c("i", {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value:
+                                  _vm.sort.field == "id" &&
+                                  _vm.sort.direction == "ASC",
+                                expression:
+                                  "sort.field=='id'&& sort.direction=='ASC'"
+                              }
+                            ],
+                            staticClass: "fas fa-sort-alpha-up"
+                          })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("th", { attrs: { scope: "col" } }, [
+                      _c(
+                        "span",
+                        {
+                          staticClass: "cursor-pointer",
+                          on: {
+                            click: function($event) {
+                              _vm.orderTable("fullname")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\r\n                                nombre\r\n                                "
+                          ),
+                          _c("i", {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value:
+                                  _vm.sort.field == "fullname" &&
+                                  _vm.sort.direction == "ASC",
+                                expression:
+                                  "sort.field=='fullname'&& sort.direction=='ASC'"
+                              }
+                            ],
+                            staticClass: "fas fa-sort-alpha-up"
+                          })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("th", { attrs: { scope: "col" } }, [_vm._v("Celular")]),
+                    _vm._v(" "),
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo")]),
+                    _vm._v(" "),
+                    _c("th", { attrs: { scope: "col" } }),
+                    _vm._v(" "),
+                    _c("th", { attrs: { scope: "col" } })
+                  ])
+                ]),
                 _vm._v(" "),
                 _c(
                   "tbody",
@@ -90743,22 +90830,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("thead", { staticClass: "thead-light" }, [
-      _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Id")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Celular")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Email")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } })
-      ])
+    return _c("th", { attrs: { scope: "col" } }, [
+      _c("span", { staticClass: "cursor-pointer" }, [_vm._v("Email")])
     ])
   }
 ]

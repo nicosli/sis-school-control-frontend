@@ -11,8 +11,10 @@
                 this.pulseLoader.loading = true;
                 this.$http.get('person/'+this.type+'/'+this.pagInfo.page+'/'+this.pagInfo.size,{
                     params: {
-                        query: this.query,
-                        access_token: window.access_token
+                        query:          this.query,
+                        field:          this.sort.field,
+                        direction:      this.sort.direction,
+                        access_token:   window.access_token
                     }
                 })
                 .then(response => {
@@ -89,6 +91,9 @@
                         this.deletePerson(person.id);
                     }
                 });
+            },
+            orderTable(field){
+                this.sort.field = field;
             }
         },
         data(){
@@ -113,7 +118,11 @@
                 timeout:null,
                 el:'',
                 quert:'',
-                me_id:''
+                me_id:'',
+                sort: {
+                    field:'id',
+                    direction:'ASC'
+                }
             };
         },
         mounted() {

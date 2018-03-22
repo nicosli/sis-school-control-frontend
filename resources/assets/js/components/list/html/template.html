@@ -16,10 +16,24 @@
             <table class="table">
                 <thead class="thead-light">
                     <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Nombre</th>
+                        <th scope="col">
+                            <span class="cursor-pointer" @click="orderTable('id')">
+                                id
+                                <i v-show="sort.field=='id'&& sort.direction=='ASC'" 
+                                class="fas fa-sort-alpha-up"></i>
+                            </span>
+                        </th>
+                        <th scope="col">
+                            <span class="cursor-pointer" @click="orderTable('fullname')">
+                                nombre
+                                <i v-show="sort.field=='fullname'&& sort.direction=='ASC'" 
+                                class="fas fa-sort-alpha-up"></i>
+                            </span>
+                        </th>
                         <th scope="col">Celular</th>
-                        <th scope="col">Email</th>
+                        <th scope="col">
+                            <span class="cursor-pointer">Email</span>
+                        </th>
                         <th scope="col">Tipo</th>
                         <th scope="col"></th>
                         <th scope="col"></th>

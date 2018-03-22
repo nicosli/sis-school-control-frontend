@@ -41,6 +41,14 @@
             },
             personEdited(){
                 this.fetchListPerson();
+            },
+            searchQuery(query){
+                var vm = this;
+                clearTimeout(this.timeout);
+                this.timeout = setTimeout(function () {
+                    console.log('Input Value:', query);
+                    vm.fetchListPerson();
+                }, 500);
             }
         },
         data(){
@@ -61,11 +69,18 @@
                     last: false,
                     totalPages: 0
                 },
-                dateformatpicker: 'yyyy-MM-dd'
+                dateformatpicker: 'yyyy-MM-dd',
+                timeout:null
             };
         },
         mounted() {
             this.fetchListPerson();
+            var timeout = null;
+            $('#inputQuery').on('keyup', function () {
+                console.log("keyup");
+                var that = this;
+                
+            });
         },
         props:{
             type: {required:true}

@@ -9,7 +9,7 @@
         <form lpformnum="1">
             <div class="form-group">
                 <label for="inputQuery"><i class="fab fa-searchengin"></i> Buscar usuario</label>
-                <input type="text" class="form-control" id="inputQuery" aria-describedby="emailHelp" placeholder="Ingrese una búsqueda...">
+                <input type="text" class="form-control" id="inputQuery" v-on:keyup="searchQuery($event.target.value)" aria-describedby="emailHelp" placeholder="Ingrese una búsqueda...">
             </div>
         </form>
         <div class="table-responsive">

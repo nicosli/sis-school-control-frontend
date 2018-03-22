@@ -71496,6 +71496,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         personEdited: function personEdited() {
             this.fetchListPerson();
+        },
+        searchQuery: function searchQuery(query) {
+            var vm = this;
+            clearTimeout(this.timeout);
+            this.timeout = setTimeout(function () {
+                console.log('Input Value:', query);
+                vm.fetchListPerson();
+            }, 500);
         }
     },
     data: function data() {
@@ -71516,11 +71524,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 last: false,
                 totalPages: 0
             },
-            dateformatpicker: 'yyyy-MM-dd'
+            dateformatpicker: 'yyyy-MM-dd',
+            timeout: null
         };
     },
     mounted: function mounted() {
         this.fetchListPerson();
+        var timeout = null;
+        $('#inputQuery').on('keyup', function () {
+            console.log("keyup");
+            var that = this;
+        });
     },
 
     props: {
@@ -75308,7 +75322,26 @@ var render = function() {
               _vm._v("Tabla de registros")
             ]),
             _vm._v(" "),
-            _vm._m(0),
+            _c("form", { attrs: { lpformnum: "1" } }, [
+              _c("div", { staticClass: "form-group" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "inputQuery",
+                    "aria-describedby": "emailHelp",
+                    placeholder: "Ingrese una búsqueda..."
+                  },
+                  on: {
+                    keyup: function($event) {
+                      _vm.searchQuery($event.target.value)
+                    }
+                  }
+                })
+              ])
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "table-responsive" }, [
               _c("table", { staticClass: "table" }, [
@@ -75406,23 +75439,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("form", { attrs: { lpformnum: "1" } }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "inputQuery" } }, [
-          _c("i", { staticClass: "fab fa-searchengin" }),
-          _vm._v(" Buscar usuario")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            type: "text",
-            id: "inputQuery",
-            "aria-describedby": "emailHelp",
-            placeholder: "Ingrese una búsqueda..."
-          }
-        })
-      ])
+    return _c("label", { attrs: { for: "inputQuery" } }, [
+      _c("i", { staticClass: "fab fa-searchengin" }),
+      _vm._v(" Buscar usuario")
     ])
   },
   function() {

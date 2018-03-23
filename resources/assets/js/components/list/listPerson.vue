@@ -7,6 +7,11 @@
 
     export default {
         methods:{
+            orderTable(field){
+                this.sort.field = field;
+                this.sort.direction = (this.sort.direction=='ASC')? 'DESC' : 'ASC';
+                this.fetchListPerson();
+            },
             fetchListPerson(){
                 this.pulseLoader.loading = true;
                 this.$http.get('person/'+this.type+'/'+this.pagInfo.page+'/'+this.pagInfo.size,{
@@ -28,6 +33,7 @@
                         this.pagInfo.totalPages = response.body.totalPages;
                         this.pagInfo.number = response.body.number;
                         this.pagInfo.totalElements = response.body.totalElements;
+                        this.pagInfo.sort = response.body.sort[0];
                     }
                     this.pulseLoader.loading = false;
                 })
@@ -77,7 +83,7 @@
                 clearTimeout(this.timeout);
                 this.timeout = setTimeout(function () {
                     vm.query = query;
-                    console.log('Input Value:', vm.query);
+                    vm.pagInfo.page = 0;
                     vm.fetchListPerson();
                 }, 500);
             },
@@ -97,10 +103,7 @@
                         this.deletePerson(person.id);
                     }
                 });
-            },
-            orderTable(field){
-                this.sort.field = field;
-            },
+            }
         },
         data(){
             return {
@@ -118,7 +121,8 @@
                     query: '',
                     first: true,
                     last: false,
-                    totalPages: 0
+                    totalPages: 0,
+                    sort:''
                 },
                 dateformatpicker: 'yyyy-MM-dd',
                 timeout:null,
@@ -138,10 +142,6 @@
             this.me_id = window.me_id;
             this.fetchListPerson();
             var timeout = null;
-            $('#inputQuery').on('keyup', function () {
-                console.log("keyup");
-                var that = this; 
-            });
         },
         props:{
             type: {required:true}

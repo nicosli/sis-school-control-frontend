@@ -1,17 +1,17 @@
 <div>
-    <pulse-loader :loading="pulseLoader.loading" :color="pulseLoader.color" :size="pulseLoader.size"></pulse-loader>
+    <!--<pulse-loader :loading="pulseLoader.loading" :color="pulseLoader.color" :size="pulseLoader.size"></pulse-loader>-->
     
+    <h6 class="border-bottom border-gray pb-2 mb-2">Tabla de registros</h6>
+    <form lpformnum="1">
+        <div class="form-group">
+            <label for="inputQuery"><i class="fab fa-searchengin"></i> Buscar usuario</label>
+            <input type="text" class="form-control" id="inputQuery" v-on:keyup="searchQuery($event.target.value)" aria-describedby="emailHelp" placeholder="Ingrese una búsqueda...">
+        </div>
+    </form>
     <div v-if="pagInfo.totalElements == 0" class="alert alert-primary mb-0" role="alert">
         Sin registros...
     </div>
     <div v-if="pagInfo.totalElements > 0">
-        <h6 class="border-bottom border-gray pb-2 mb-2">Tabla de registros</h6>
-        <form lpformnum="1">
-            <div class="form-group">
-                <label for="inputQuery"><i class="fab fa-searchengin"></i> Buscar usuario</label>
-                <input type="text" class="form-control" id="inputQuery" v-on:keyup="searchQuery($event.target.value)" aria-describedby="emailHelp" placeholder="Ingrese una búsqueda...">
-            </div>
-        </form>
         <div class="table-responsive">
             <table class="table">
                 <thead class="thead-light">
@@ -19,20 +19,38 @@
                         <th scope="col">
                             <span class="cursor-pointer" @click="orderTable('id')">
                                 id
-                                <i v-show="sort.field=='id'&& sort.direction=='ASC'" 
-                                class="fas fa-sort-alpha-up"></i>
+                                <i v-show="pagInfo.sort.property == 'id' && pagInfo.sort.ascending == true" 
+                                class="fas fa-sort-numeric-up"></i>
+                                <i v-show="pagInfo.sort.property == 'id' && pagInfo.sort.descending == true" 
+                                class="fas fa-sort-numeric-down"></i>
                             </span>
                         </th>
                         <th scope="col">
                             <span class="cursor-pointer" @click="orderTable('fullname')">
                                 nombre
-                                <i v-show="sort.field=='fullname'&& sort.direction=='ASC'" 
+                                <i v-show="pagInfo.sort.property == 'fullname' && pagInfo.sort.ascending == true" 
                                 class="fas fa-sort-alpha-up"></i>
+                                <i v-show="pagInfo.sort.property == 'fullname' && pagInfo.sort.descending == true" 
+                                class="fas fa-sort-alpha-down"></i>
                             </span>
                         </th>
-                        <th scope="col">Celular</th>
                         <th scope="col">
-                            <span class="cursor-pointer">Email</span>
+                            <span class="cursor-pointer" @click="orderTable('cellphone')">
+                                Celular
+                                <i v-show="pagInfo.sort.property == 'cellphone' && pagInfo.sort.ascending == true" 
+                                class="fas fa-sort-numeric-up"></i>
+                                <i v-show="pagInfo.sort.property == 'cellphone' && pagInfo.sort.descending == true" 
+                                class="fas fa-sort-numeric-down"></i>
+                            </span>
+                        </th>
+                        <th scope="col">
+                            <span class="cursor-pointer" @click="orderTable('email')">
+                                Email
+                                <i v-show="pagInfo.sort.property == 'email' && pagInfo.sort.ascending == true" 
+                                class="fas fa-sort-alpha-up"></i>
+                                <i v-show="pagInfo.sort.property == 'email' && pagInfo.sort.descending == true" 
+                                class="fas fa-sort-alpha-down"></i>
+                            </span>
                         </th>
                         <th scope="col">Tipo</th>
                         <th scope="col"></th>

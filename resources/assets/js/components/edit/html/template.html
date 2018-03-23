@@ -23,7 +23,7 @@
                                     <div class="lh-100">
                                         <h5 class="ml-1 mb-1">{{ editPerson.fullname }}</h5>
                                         <p class="ml-1 mb-2">Módulo para editar datos del usuario</p>
-                                        <a href="#" class="badge badge-light mb-1" v-on:click="editAvatarClick()">Editar avatar</a>
+                                        <a href="#" class="badge badge-light mb-1" v-on:click.self.prevent="editAvatarClick()">Editar avatar</a>
                                     </div>
                                 </div>
                                 <div class="card border-0" v-if="showEditPerson">
@@ -31,7 +31,7 @@
                                         <div v-for="avatar in avatars" :key="avatar" class="d-inline">
                                             <img :src="'/img/avatars/'+avatar+'.png'" class="imgAvatar mr-2 mb-2 cursor-pointer" v-on:click="selectAvatarClick(avatar)">
                                         </div>
-                                        <a href="#" class="badge badge-light mb-1 text-danger" v-on:click="editAvatarClick()"><i class="far fa-times-circle"></i> cerrar</a>
+                                        <a href="#" class="badge badge-light mb-1 text-danger" v-on:click.self.prevent="editAvatarClick()"><i class="far fa-times-circle"></i> cerrar</a>
                                     </div>
                                 </div>
                             </div>

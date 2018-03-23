@@ -27603,8 +27603,10 @@ var app = new Vue({
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_js__ = __webpack_require__(143);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vee_validate__ = __webpack_require__(144);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_sweetalert__ = __webpack_require__(145);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_sweetalert___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_sweetalert__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vee_validate_dist_locale_es__ = __webpack_require__(196);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vee_validate_dist_locale_es___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vee_validate_dist_locale_es__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_sweetalert__ = __webpack_require__(145);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_sweetalert___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_sweetalert__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 window._ = __webpack_require__(135);
@@ -27626,10 +27628,15 @@ Vue.http.interceptors.push(function (request, next) {
 
 Vue.http.options.root = __WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* apiHost */];
 
-Vue.use(__WEBPACK_IMPORTED_MODULE_1_vee_validate__["a" /* default */]);
+
+
+__WEBPACK_IMPORTED_MODULE_1_vee_validate__["a" /* Validator */].localize('es', __WEBPACK_IMPORTED_MODULE_2_vee_validate_dist_locale_es___default.a);
+Vue.use(__WEBPACK_IMPORTED_MODULE_1_vee_validate__["b" /* default */]);
+
 
 window.moment = __webpack_require__(0);
 window.Noty = __webpack_require__(147);
+
 Noty.overrideDefaults({
     layout: 'topRight',
     theme: 'metroui',
@@ -64169,7 +64176,7 @@ var apiHost = baseUrl;
 /* unused harmony export directive */
 /* unused harmony export mixin */
 /* unused harmony export mapFields */
-/* unused harmony export Validator */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Validator; });
 /* unused harmony export ErrorBag */
 /* unused harmony export Rules */
 /* unused harmony export ErrorComponent */
@@ -71183,7 +71190,7 @@ var index_esm = {
 };
 
 
-/* harmony default export */ __webpack_exports__["a"] = (index_esm);
+/* harmony default export */ __webpack_exports__["b"] = (index_esm);
 
 
 /***/ }),
@@ -86740,19 +86747,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }).show();
             });
         },
-        showModalEdit: function showModalEdit(person) {
-            this.editPerson = Object.assign({}, this.editPerson, person);;
+        showModalEdit: function showModalEdit(person, key) {
+            this.editPerson = Object.assign({}, this.editPerson, person);
+            this.editingPerson_id = person.id;
+            this.key = key;
         },
         pageChanged: function pageChanged(page) {
             this.pagInfo.page = page - 1;
             this.fetchListPerson();
         },
-        personEdited: function personEdited() {
-            this.fetchListPerson();
+        personEdited: function personEdited(editPerson) {
+            this.persons[this.key] = editPerson;
+            this.key = '';
             new Noty({
                 type: 'success',
                 text: 'El usuario ha sido editado exitosamente'
             }).show();
+        },
+        modalClosed: function modalClosed() {
+            this.editingPerson_id = '';
         },
         searchQuery: function searchQuery(query) {
             var vm = this;
@@ -86767,7 +86780,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this3 = this;
 
             this.el = document.createElement("div");
-            this.el.innerHTML = "Usuario: <span class='spDel'>" + person.fullname + "</span>";
+            this.el.innerHTML = "Eliminar a <span class='spDel'>" + person.fullname + "</span>";
             swal({
                 title: "¿Estás seguro?",
                 text: "Una vez eliminado, no podrás recuperar este usuario!",
@@ -86811,7 +86824,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             sort: {
                 field: 'id',
                 direction: 'ASC'
-            }
+            },
+            editingPerson_id: '',
+            editedPerson_id: '',
+            key: ''
         };
     },
     mounted: function mounted() {
@@ -86945,7 +86961,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.$http.put('person/?' + 'access_token=' + window.access_token, this.editPerson).then(function (response) {
                 $('.modalConfigEvents').modal('hide');
                 _this.buttonDisabled = false;
-                _this.$emit('personEdited');
+                _this.$emit('personEdited', _this.editPerson);
             }).catch(function (error) {
                 _this.modalError = true;
                 _this.buttonDisabled = false;
@@ -86987,12 +87003,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
         $('.modalConfigEvents').on('hide.bs.modal', function (e) {
             vm.checkSession();
+            vm.$emit('modalEditClose');
         });
     },
 
-    // beforeUpdate() {
-    //    this.$validator.validateAll();
-    // },
     props: {
         editPerson: { required: true }
     },
@@ -89927,16 +89941,25 @@ var render = function() {
                     _c("input", {
                       directives: [
                         {
+                          name: "validate",
+                          rawName: "v-validate",
+                          value: "required|alpha_spaces",
+                          expression: "'required|alpha_spaces'"
+                        },
+                        {
                           name: "model",
                           rawName: "v-model",
                           value: _vm.editPerson.firstname,
                           expression: "editPerson.firstname"
                         }
                       ],
-                      staticClass: "form-control",
+                      class: {
+                        "form-control": true,
+                        "is-invalid": _vm.errors.has("firstname")
+                      },
                       attrs: {
                         type: "text",
-                        id: "firstname",
+                        name: "firstname",
                         placeholder: "Introduzca sus nombres"
                       },
                       domProps: { value: _vm.editPerson.firstname },
@@ -89952,7 +89975,23 @@ var render = function() {
                           )
                         }
                       }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.errors.has("firstname"),
+                            expression: "errors.has('firstname')"
+                          }
+                        ],
+                        staticClass: "invalid-feedback"
+                      },
+                      [_vm._v(_vm._s(_vm.errors.first("firstname")))]
+                    )
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group col-md-12" }, [
@@ -89963,16 +90002,25 @@ var render = function() {
                     _c("input", {
                       directives: [
                         {
+                          name: "validate",
+                          rawName: "v-validate",
+                          value: "required|alpha_spaces",
+                          expression: "'required|alpha_spaces'"
+                        },
+                        {
                           name: "model",
                           rawName: "v-model",
                           value: _vm.editPerson.lastname,
                           expression: "editPerson.lastname"
                         }
                       ],
-                      staticClass: "form-control",
+                      class: {
+                        "form-control": true,
+                        "is-invalid": _vm.errors.has("lastname")
+                      },
                       attrs: {
                         type: "text",
-                        id: "lastname",
+                        name: "lastname",
                         placeholder: "Introduzca sus apellidos"
                       },
                       domProps: { value: _vm.editPerson.lastname },
@@ -89988,7 +90036,23 @@ var render = function() {
                           )
                         }
                       }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.errors.has("lastname"),
+                            expression: "errors.has('lastname')"
+                          }
+                        ],
+                        staticClass: "invalid-feedback"
+                      },
+                      [_vm._v(_vm._s(_vm.errors.first("lastname")))]
+                    )
                   ]),
                   _vm._v(" "),
                   _c(
@@ -90119,17 +90183,26 @@ var render = function() {
                     _c("input", {
                       directives: [
                         {
+                          name: "validate",
+                          rawName: "v-validate",
+                          value: "required|alpha_spaces",
+                          expression: "'required|alpha_spaces'"
+                        },
+                        {
                           name: "model",
                           rawName: "v-model",
                           value: _vm.editPerson.profession,
                           expression: "editPerson.profession"
                         }
                       ],
-                      staticClass: "form-control",
+                      class: {
+                        "form-control": true,
+                        "is-invalid": _vm.errors.has("profession")
+                      },
                       attrs: {
                         type: "text",
-                        id: "email",
-                        placeholder: "Introduzca su Profesión"
+                        name: "profession",
+                        placeholder: "Introduzca su profesión"
                       },
                       domProps: { value: _vm.editPerson.profession },
                       on: {
@@ -90144,7 +90217,23 @@ var render = function() {
                           )
                         }
                       }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.errors.has("profession"),
+                            expression: "errors.has('profession')"
+                          }
+                        ],
+                        staticClass: "invalid-feedback"
+                      },
+                      [_vm._v(_vm._s(_vm.errors.first("profession")))]
+                    )
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group col-md-6" }, [
@@ -90155,16 +90244,25 @@ var render = function() {
                     _c("input", {
                       directives: [
                         {
+                          name: "validate",
+                          rawName: "v-validate",
+                          value: "required|digits:10",
+                          expression: "'required|digits:10'"
+                        },
+                        {
                           name: "model",
                           rawName: "v-model",
                           value: _vm.editPerson.cellphone,
                           expression: "editPerson.cellphone"
                         }
                       ],
-                      staticClass: "form-control",
+                      class: {
+                        "form-control": true,
+                        "is-invalid": _vm.errors.has("cellphone")
+                      },
                       attrs: {
                         type: "text",
-                        id: "cellphone",
+                        name: "cellphone",
                         placeholder: "Introduzca su celular"
                       },
                       domProps: { value: _vm.editPerson.cellphone },
@@ -90180,7 +90278,23 @@ var render = function() {
                           )
                         }
                       }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.errors.has("cellphone"),
+                            expression: "errors.has('cellphone')"
+                          }
+                        ],
+                        staticClass: "invalid-feedback"
+                      },
+                      [_vm._v(_vm._s(_vm.errors.first("cellphone")))]
+                    )
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group col-md-6" }, [
@@ -90191,16 +90305,25 @@ var render = function() {
                     _c("input", {
                       directives: [
                         {
+                          name: "validate",
+                          rawName: "v-validate",
+                          value: "required|digits:10",
+                          expression: "'required|digits:10'"
+                        },
+                        {
                           name: "model",
                           rawName: "v-model",
                           value: _vm.editPerson.phone,
                           expression: "editPerson.phone"
                         }
                       ],
-                      staticClass: "form-control",
+                      class: {
+                        "form-control": true,
+                        "is-invalid": _vm.errors.has("phone")
+                      },
                       attrs: {
                         type: "text",
-                        id: "phone",
+                        name: "phone",
                         placeholder: "Introduzca su teléfono"
                       },
                       domProps: { value: _vm.editPerson.phone },
@@ -90212,16 +90335,38 @@ var render = function() {
                           _vm.$set(_vm.editPerson, "phone", $event.target.value)
                         }
                       }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.errors.has("phone"),
+                            expression: "errors.has('phone')"
+                          }
+                        ],
+                        staticClass: "invalid-feedback"
+                      },
+                      [_vm._v(_vm._s(_vm.errors.first("phone")))]
+                    )
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group col-md-6" }, [
                     _c("label", { attrs: { for: "lastname" } }, [
-                      _vm._v("Número fiscal")
+                      _vm._v("RFC")
                     ]),
                     _vm._v(" "),
                     _c("input", {
                       directives: [
+                        {
+                          name: "validate",
+                          rawName: "v-validate",
+                          value: "required|alpha_num|min:11|max:13",
+                          expression: "'required|alpha_num|min:11|max:13'"
+                        },
                         {
                           name: "model",
                           rawName: "v-model",
@@ -90229,11 +90374,14 @@ var render = function() {
                           expression: "editPerson.fiscalNumber"
                         }
                       ],
-                      staticClass: "form-control",
+                      class: {
+                        "form-control": true,
+                        "is-invalid": _vm.errors.has("fiscalNumber")
+                      },
                       attrs: {
                         type: "text",
-                        id: "curp",
-                        placeholder: "Introduzca su curp"
+                        name: "fiscalNumber",
+                        placeholder: "Introduzca su RFC"
                       },
                       domProps: { value: _vm.editPerson.fiscalNumber },
                       on: {
@@ -90248,7 +90396,23 @@ var render = function() {
                           )
                         }
                       }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.errors.has("fiscalNumber"),
+                            expression: "errors.has('fiscalNumber')"
+                          }
+                        ],
+                        staticClass: "invalid-feedback"
+                      },
+                      [_vm._v(_vm._s(_vm.errors.first("fiscalNumber")))]
+                    )
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group col-md-6" }, [
@@ -90259,16 +90423,25 @@ var render = function() {
                     _c("input", {
                       directives: [
                         {
+                          name: "validate",
+                          rawName: "v-validate",
+                          value: "required|alpha_num|min:11|max:18",
+                          expression: "'required|alpha_num|min:11|max:18'"
+                        },
+                        {
                           name: "model",
                           rawName: "v-model",
                           value: _vm.editPerson.curp,
                           expression: "editPerson.curp"
                         }
                       ],
-                      staticClass: "form-control",
+                      class: {
+                        "form-control": true,
+                        "is-invalid": _vm.errors.has("curp")
+                      },
                       attrs: {
                         type: "text",
-                        id: "curp",
+                        name: "curp",
                         placeholder: "Introduzca su curp"
                       },
                       domProps: { value: _vm.editPerson.curp },
@@ -90280,7 +90453,23 @@ var render = function() {
                           _vm.$set(_vm.editPerson, "curp", $event.target.value)
                         }
                       }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.errors.has("curp"),
+                            expression: "errors.has('curp')"
+                          }
+                        ],
+                        staticClass: "invalid-feedback"
+                      },
+                      [_vm._v(_vm._s(_vm.errors.first("curp")))]
+                    )
                   ])
                 ])
               ])
@@ -90715,58 +90904,69 @@ var render = function() {
                 _c(
                   "tbody",
                   _vm._l(_vm.persons, function(person, key) {
-                    return _c("tr", { key: key }, [
-                      _c("th", { attrs: { scope: "row" } }, [
-                        _vm._v(_vm._s(person.id))
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(person.fullname))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(person.cellphone))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(person.email))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(person.persontype.description))]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-outline-primary btn-sm",
-                            attrs: {
-                              type: "button",
-                              "data-toggle": "modal",
-                              "data-target": ".modalEdit"
-                            },
-                            on: {
-                              click: function($event) {
-                                _vm.showModalEdit(person)
+                    return _c(
+                      "tr",
+                      {
+                        key: key,
+                        class: {
+                          "table-primary": person.id == _vm.editingPerson_id
+                        }
+                      },
+                      [
+                        _c("th", { attrs: { scope: "row" } }, [
+                          _vm._v(_vm._s(person.id))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(person.fullname))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(person.cellphone))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(person.email))]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(_vm._s(person.persontype.description))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-outline-primary btn-sm",
+                              attrs: {
+                                type: "button",
+                                "data-toggle": "modal",
+                                "data-target": ".modalEdit"
+                              },
+                              on: {
+                                click: function($event) {
+                                  _vm.showModalEdit(person, key)
+                                }
                               }
-                            }
-                          },
-                          [_vm._v("Editar")]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-outline-danger btn-sm",
-                            attrs: {
-                              disabled: _vm.me_id == person.id,
-                              type: "button"
                             },
-                            on: {
-                              click: function($event) {
-                                _vm.confirmDelete(person)
+                            [_vm._v("Editar")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-outline-danger btn-sm",
+                              attrs: {
+                                disabled: _vm.me_id == person.id,
+                                type: "button"
+                              },
+                              on: {
+                                click: function($event) {
+                                  _vm.confirmDelete(person)
+                                }
                               }
-                            }
-                          },
-                          [_vm._v("Baja")]
-                        )
-                      ])
-                    ])
+                            },
+                            [_vm._v("Baja")]
+                          )
+                        ])
+                      ]
+                    )
                   })
                 )
               ])
@@ -90810,7 +91010,7 @@ var render = function() {
       _vm._v(" "),
       _c("ModalEditPerson", {
         attrs: { editPerson: _vm.editPerson },
-        on: { personEdited: _vm.personEdited }
+        on: { personEdited: _vm.personEdited, modalEditClose: _vm.modalClosed }
       })
     ],
     1
@@ -91149,10 +91349,16 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.swal-footer {\r\n    background-color: rgb(245, 248, 250);\r\n    margin-top: 32px;\r\n    border-top: 1px solid #E9EEF1;\r\n    overflow: hidden;\n}\n.swal-title:not(:last-child){\r\n    margin-bottom: 6px;\n}\n.swal-content{\r\n    margin-top:6px;\n}\n.spDel{\r\n    color: #C00;\n}\r\n", ""]);
+exports.push([module.i, "\n.swal-footer {\r\n    background-color: rgb(245, 248, 250);\r\n    margin-top: 32px;\r\n    border-top: 1px solid #E9EEF1;\r\n    overflow: hidden;\n}\n.swal-title:not(:last-child){\r\n    margin-bottom: 6px;\n}\n.swal-content{\r\n    margin-top:6px;\n}\n.spDel{\r\n    color: #C00;\n}\n.edited {\r\n    background-color: #FFF;\r\n    -webkit-transition: background-color 2000ms linear;\r\n    transition: background-color 2000ms linear;\n}\r\n", ""]);
 
 // exports
 
+
+/***/ }),
+/* 196 */
+/***/ (function(module, exports, __webpack_require__) {
+
+!function(e,n){ true?module.exports=n():"function"==typeof define&&define.amd?define(n):(e.__vee_validate_locale__es=e.__vee_validate_locale__es||{},e.__vee_validate_locale__es.js=n())}(this,function(){"use strict";var e,n={name:"es",messages:{_default:function(e){return"El campo "+e+" no es válido."},after:function(e,n){var o=n[0];return"El campo "+e+" debe ser posterior "+(n[1]?"o igual ":"")+"a "+o+"."},alpha_dash:function(e){return"El campo "+e+" solo debe contener letras, números y guiones."},alpha_num:function(e){return"El campo "+e+" solo debe contener letras y números."},alpha_spaces:function(e){return"El campo "+e+" solo debe contener letras y espacios."},alpha:function(e){return"El campo "+e+" solo debe contener letras."},before:function(e,n){var o=n[0];return"El campo "+e+" debe ser anterior "+(n[1]?"o igual ":"")+"a "+o+"."},between:function(e,n){return"El campo "+e+" debe estar entre "+n[0]+" y "+n[1]+"."},confirmed:function(e){return"El campo "+e+" no coincide."},credit_card:function(e){return"El campo "+e+" es inválido."},date_between:function(e,n){return"El campo "+e+" debe estar entre "+n[0]+" y "+n[1]+"."},date_format:function(e,n){return"El campo "+e+" debe tener formato formato "+n[0]+"."},decimal:function(e,n){void 0===n&&(n=[]);var o=n[0];return void 0===o&&(o="*"),"El campo "+e+" debe ser númerico y contener "+("*"===o?"":o)+" puntos decimales."},digits:function(e,n){return"El campo "+e+" debe ser númerico y contener exactamente "+n[0]+" dígitos."},dimensions:function(e,n){return"El campo "+e+" debe ser de "+n[0]+" pixeles por "+n[1]+" pixeles."},email:function(e){return"El campo "+e+" debe ser un correo electrónico válido."},ext:function(e){return"El campo "+e+" debe ser un archivo válido."},image:function(e){return"El campo "+e+" debe ser una imagen."},in:function(e){return"El campo "+e+" debe ser un valor válido."},integer:function(e){return"El campo "+e+" debe ser un entero."},ip:function(e){return"El campo "+e+" debe ser una dirección ip válida."},length:function(e,n){var o=n[0],r=n[1];return r?"El largo del campo "+e+" debe estar entre "+o+" y "+r+".":"El largo del campo "+e+" debe ser "+o+"."},max:function(e,n){return"El campo "+e+" no debe ser mayor a "+n[0]+" caracteres."},max_value:function(e,n){return"El campo "+e+" debe de ser "+n[0]+" o menor."},mimes:function(e){return"El campo "+e+" debe ser un tipo de archivo válido."},min:function(e,n){return"El campo "+e+" debe tener al menos "+n[0]+" caracteres."},min_value:function(e,n){return"El campo "+e+" debe ser "+n[0]+" o superior."},not_in:function(e){return"El campo "+e+" debe ser un valor válido."},numeric:function(e){return"El campo "+e+" debe contener solo caracteres númericos."},regex:function(e){return"El formato del campo "+e+" no es válido."},required:function(e){return"El campo "+e+" es obligatorio."},size:function(e,n){var o,r,t,a=n[0];return"El campo "+e+" debe ser menor a "+(o=a,r=1024,t=0==(o=Number(o)*r)?0:Math.floor(Math.log(o)/Math.log(r)),1*(o/Math.pow(r,t)).toFixed(2)+" "+["Byte","KB","MB","GB","TB","PB","EB","ZB","YB"][t])+"."},url:function(e){return"El campo "+e+" no es una URL válida."}},attributes:{}};"undefined"!=typeof VeeValidate&&VeeValidate.Validator.localize(((e={})[n.name]=n,e));return n});
 
 /***/ })
 /******/ ]);

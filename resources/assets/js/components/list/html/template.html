@@ -40,7 +40,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for='(person, key) in persons' :key='key'>
+                    <tr v-for='(person, key) in persons' 
+                        :key='key' 
+                        :class="{'table-primary': person.id == editingPerson_id}">
                         <th scope="row">{{ person.id }}</th>
                         <td>{{ person.fullname }}</td>
                         <td>{{ person.cellphone }}</td>
@@ -52,7 +54,7 @@
                                 class="btn btn-outline-primary btn-sm" 
                                 data-toggle="modal" 
                                 data-target=".modalEdit"
-                                @click="showModalEdit(person)">Editar</button>
+                                @click="showModalEdit(person, key)">Editar</button>
                         </td>
                         <td>
                             <button
@@ -83,5 +85,8 @@
         <div>Página {{pagInfo.page+1}} de {{pagInfo.totalPages}} - ({{pagInfo.totalElements}} Elementos)</div>
     </div>
     <!-- MODAL -->
-    <ModalEditPerson :editPerson="editPerson" @personEdited="personEdited"></ModalEditPerson>
+    <ModalEditPerson 
+        :editPerson="editPerson"
+        @personEdited="personEdited"
+        @modalEditClose="modalClosed"></ModalEditPerson>
 </div>

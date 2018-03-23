@@ -16,7 +16,7 @@
                 .then(response => {
                     $('.modalConfigEvents').modal('hide');
                     this.buttonDisabled = false;
-                    this.$emit('personEdited');
+                    this.$emit('personEdited', this.editPerson);
                 })
                 .catch(error => {                    
                     this.modalError = true;
@@ -58,11 +58,9 @@
             })
             $('.modalConfigEvents').on('hide.bs.modal', function (e) {
                 vm.checkSession();
+                vm.$emit('modalEditClose');
             })
         },
-        // beforeUpdate() {
-        //    this.$validator.validateAll();
-        // },
         props: {
             editPerson: {required:true}
         },

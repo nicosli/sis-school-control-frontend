@@ -1,4 +1,3 @@
-
 window._ = require('lodash');
 
 window.$ = window.jQuery = require('jquery');
@@ -17,11 +16,16 @@ Vue.http.interceptors.push((request, next) => {
 
 import { apiHost } from './config.js'
 Vue.http.options.root = apiHost
-import VeeValidate from 'vee-validate';
+
+import VeeValidate, { Validator } from 'vee-validate';
+import es from 'vee-validate/dist/locale/es';
+Validator.localize('es', es);
 Vue.use(VeeValidate);
+
 import swal from 'sweetalert';
 window.moment = require('moment');
 window.Noty = require('noty');
+
 Noty.overrideDefaults({
     layout: 'topRight',
     theme: 'metroui',

@@ -40,11 +40,29 @@
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="firstname">Nombres</label>
-                                <input type="text" class="form-control" id="firstname" placeholder="Introduzca sus nombres" v-model="editPerson.firstname">
+                                <input 
+                                    type="text" 
+                                    name="firstname"
+                                    :class="{'form-control': true, 'is-invalid': errors.has('firstname') }"
+                                    v-validate="'required|alpha_spaces'"
+                                    placeholder="Introduzca sus nombres" 
+                                    v-model="editPerson.firstname">
+                                <span 
+                                    v-show="errors.has('firstname')" 
+                                    class="invalid-feedback">{{ errors.first('firstname') }}</span>
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="lastname">Apellidos</label>
-                                <input type="text" class="form-control" id="lastname" placeholder="Introduzca sus apellidos" v-model="editPerson.lastname">
+                                <input 
+                                    type="text" 
+                                    name="lastname"
+                                    :class="{'form-control': true, 'is-invalid': errors.has('lastname') }"
+                                    v-validate="'required|alpha_spaces'"
+                                    placeholder="Introduzca sus apellidos" 
+                                    v-model="editPerson.lastname">
+                                <span 
+                                    v-show="errors.has('lastname')" 
+                                    class="invalid-feedback">{{ errors.first('lastname') }}</span>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="lastname">Fecha de cumpleaños</label>
@@ -74,23 +92,68 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="lastname">Profesión</label>
-                                <input type="text" class="form-control" id="email" placeholder="Introduzca su Profesión" v-model="editPerson.profession">
+                                <input 
+                                    type="text" 
+                                    name="profession"
+                                    :class="{'form-control': true, 'is-invalid': errors.has('profession') }"
+                                    v-validate="'required|alpha_spaces'"
+                                    placeholder="Introduzca su profesión" 
+                                    v-model="editPerson.profession">
+                                <span 
+                                    v-show="errors.has('profession')" 
+                                    class="invalid-feedback">{{ errors.first('profession') }}</span>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="lastname">Celular</label>
-                                <input type="text" class="form-control" id="cellphone" placeholder="Introduzca su celular" v-model="editPerson.cellphone">
+                                <input 
+                                    type="text" 
+                                    name="cellphone"
+                                    :class="{'form-control': true, 'is-invalid': errors.has('cellphone') }"
+                                    v-validate="'required|digits:10'"
+                                    placeholder="Introduzca su celular" 
+                                    v-model="editPerson.cellphone">
+                                <span 
+                                    v-show="errors.has('cellphone')" 
+                                    class="invalid-feedback">{{ errors.first('cellphone') }}</span>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="lastname">Teléfono</label>
-                                <input type="text" class="form-control" id="phone" placeholder="Introduzca su teléfono" v-model="editPerson.phone">
+                                <input 
+                                    type="text" 
+                                    name="phone"
+                                    :class="{'form-control': true, 'is-invalid': errors.has('phone') }"
+                                    v-validate="'required|digits:10'"
+                                    placeholder="Introduzca su teléfono" 
+                                    v-model="editPerson.phone">
+                                <span 
+                                    v-show="errors.has('phone')" 
+                                    class="invalid-feedback">{{ errors.first('phone') }}</span>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="lastname">Número fiscal</label>
-                                <input type="text" class="form-control" id="curp" placeholder="Introduzca su curp" v-model="editPerson.fiscalNumber">
+                                <label for="lastname">RFC</label>
+                                <input 
+                                    type="text" 
+                                    name="fiscalNumber"
+                                    :class="{'form-control': true, 'is-invalid': errors.has('fiscalNumber') }"
+                                    v-validate="'required|alpha_num|min:11|max:13'"
+                                    placeholder="Introduzca su RFC" 
+                                    v-model="editPerson.fiscalNumber">
+                                <span 
+                                    v-show="errors.has('fiscalNumber')" 
+                                    class="invalid-feedback">{{ errors.first('fiscalNumber') }}</span>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="lastname">CURP</label>
-                                <input type="text" class="form-control" id="curp" placeholder="Introduzca su curp" v-model="editPerson.curp">
+                                <input 
+                                    type="text" 
+                                    name="curp"
+                                    :class="{'form-control': true, 'is-invalid': errors.has('curp') }"
+                                    v-validate="'required|alpha_num|min:11|max:18'"
+                                    placeholder="Introduzca su curp" 
+                                    v-model="editPerson.curp">
+                                <span 
+                                    v-show="errors.has('curp')" 
+                                    class="invalid-feedback">{{ errors.first('curp') }}</span>
                             </div>
                         </div>
                     </form>

@@ -52,19 +52,25 @@
                     }).show();
                 });
             },
-            showModalEdit(person){
-                this.editPerson = Object.assign({}, this.editPerson, person);;
+            showModalEdit(person, key){
+                this.editPerson = Object.assign({}, this.editPerson, person);
+                this.editingPerson_id = person.id;
+                this.key = key;
             },
             pageChanged(page){
                 this.pagInfo.page = page-1;
                 this.fetchListPerson();
             },
-            personEdited(){
-                this.fetchListPerson();
+            personEdited(editPerson){
+                this.persons[this.key] = editPerson;
+                this.key = '';
                 new Noty({
                     type:'success',
                     text: 'El usuario ha sido editado exitosamente'
                 }).show();
+            },
+            modalClosed(){
+                this.editingPerson_id = '';
             },
             searchQuery(query){
                 var vm = this;
@@ -77,7 +83,7 @@
             },
             confirmDelete(person){
                 this.el = document.createElement("div");
-                this.el.innerHTML = "Usuario: <span class='spDel'>"+person.fullname+"</span>";
+                this.el.innerHTML = "Eliminar a <span class='spDel'>"+person.fullname+"</span>";
                 swal({
                     title: "¿Estás seguro?",
                     text: "Una vez eliminado, no podrás recuperar este usuario!",
@@ -94,7 +100,7 @@
             },
             orderTable(field){
                 this.sort.field = field;
-            }
+            },
         },
         data(){
             return {
@@ -122,7 +128,10 @@
                 sort: {
                     field:'id',
                     direction:'ASC'
-                }
+                },
+                editingPerson_id:'',
+                editedPerson_id:'',
+                key:''
             };
         },
         mounted() {
@@ -165,5 +174,11 @@
 }
 .spDel{
     color: #C00;
+}
+.edited {
+    background-color: #FFF;
+    -webkit-transition: background-color 2000ms linear;
+    -ms-transition: background-color 2000ms linear;
+    transition: background-color 2000ms linear;
 }
 </style>

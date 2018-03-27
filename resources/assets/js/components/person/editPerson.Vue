@@ -1,4 +1,4 @@
-<template src="./html/template.html"></template>
+<template src="./html/editPerson.html"></template>
 <script>
     import flatPickr from 'vue-flatpickr-component';
     import 'flatpickr/dist/flatpickr.css';

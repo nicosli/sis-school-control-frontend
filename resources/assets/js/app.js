@@ -5,12 +5,12 @@ require('./offcanvas')
 
 Vue.component(
     'list-person',
-    require('./components/list/listPerson.vue')
+    require('./components/person/listPerson.vue')
 );
 
 Vue.component(
     'dashboard',
-    require('./components/Dashboard.vue')
+    require('./components/home/Dashboard.vue')
 );
 
 const app = new Vue({

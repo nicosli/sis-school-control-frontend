@@ -37,7 +37,7 @@
 </div>
 </template>
 <script>
-    import ModalEditPerson from './edit/editPerson.vue';
+    import ModalEditPerson from '../person/editPerson.vue';
     export default {
         methods:{
             fetchMe(){

@@ -16,6 +16,7 @@ Vue.http.interceptors.push((request, next) => {
 
 import { apiHost } from './config.js'
 Vue.http.options.root = apiHost
+window.apiHost = apiHost;
 
 import VeeValidate, { Validator } from 'vee-validate';
 import es from 'vee-validate/dist/locale/es';

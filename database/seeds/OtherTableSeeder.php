@@ -46,42 +46,54 @@ class OtherTableSeeder extends Seeder
 
         //maritalstatus        
 		DB::table('maritalstatus')->insert([
-            'description'       => 'Married'                       
+            'description'       => 'Casado'                       
         ]);
         DB::table('maritalstatus')->insert([
-            'description'       => 'Civil Union'                       
+            'description'       => 'Unión Civil'                       
         ]);
         DB::table('maritalstatus')->insert([
-            'description'       => 'Divorced'                       
+            'description'       => 'Divorciado'                       
         ]);
         DB::table('maritalstatus')->insert([
-            'description'       => 'Widower'                       
+            'description'       => 'Viudo'                       
         ]);
         DB::table('maritalstatus')->insert([
-            'description'       => 'Single'                       
+            'description'       => 'Soltero'                       
         ]);
 	
 		
         	
         //Menu
         DB::insert("REPLACE INTO menu (description, i18n, icon, url, sub_menu_parent_id) VALUES 
-					('Home','system.menu.100','system.icon.home','../home/home.htm',NULL),
-					('General','system.menu.200','system.icon.general',NULL,NULL),
-					('Academic','system.menu.300','system.icon.academic',NULL,NULL),
-					('Administrative','system.menu.400','system.icon.admon',NULL,NULL),
-					('Settings','system.menu.500','system.icon.settings',NULL,NULL),
-					('Pictour','system.menu.600','system.icon.pictour','.../ey/pictour.htm',NULL),
-					('Student','system.submenu.201',NULL,'../general/student.htm',2),
-					('Employee','system.submenu.202',NULL,'../general/employee.htm',2),
-					('Registration','system.submenu.203',NULL,'../general/enrollment.htm',2),
-					('Courses','system.submenu.301',NULL,NULL,3),
-					('Assignments','system.submenu.302',NULL,NULL,3),
-					('Grades/Transcript','system.submenu.303',NULL,NULL,3),
-					('School','system.submenu.304',NULL,'../administration/school.htm',3),
-					('Accounting','system.submenu.401',NULL,NULL,4),
-					('Academic Year','system.submenu.501',NULL,'../settings/schoolYear.htm',5),
-					('Groups','system.submenu.502',NULL,'../settings/group.htm',5),
-					('Classrooms','system.submenu.503',NULL,'../settings/classroom.htm',5)");
+					('Home','system.menu.100','system.icon.home','/',NULL),					
+					('Académico','system.menu.200','system.icon.academic',NULL,NULL),
+					('Usuarios','system.menu.300','system.icon.user',NULL,NULL),
+					('Administración','system.menu.400','system.icon.admon',NULL,NULL),					
+					('ePublish','system.menu.600','system.icon.pictour','/epublish',NULL),
+					('Configuración','system.menu.600','system.icon.settings','/settings',NULL),
+
+					('Curso Escolar','system.submenu.201',NULL,'/Academic/Schoolyear',2),
+					('Grados','system.submenu.202',NULL,'/Academic/Grades',2),
+					('Grupos','system.submenu.203',NULL,'/Academic/Groups',2),
+					('Salones','system.submenu.204',NULL,'/Academic/Classrooms',2),
+					('Materias','system.submenu.205',NULL,'/Academic/Assignments',2),
+					('Escuela','system.submenu.206',NULL,'/Academic/School',2),
+					('Autorizaciones','system.submenu.207',NULL,'/Academic/Authorizations',2),
+
+					('Lista Asistencia','system.submenu.2031',NULL,'/Academic/Groups/Lists',9),
+
+					('Materias Asignadas','system.submenu.2051',NULL,'/Academic/Assignments/Lists',11),
+					('Recursos','system.submenu.2052',NULL,'/Academic/Assignments/Resources',11),
+
+					('Personal Administrativo','system.submenu.301',NULL,'/Usuarios/Administrativo',3),
+					('Personal Docente','system.submenu.302',NULL,'/Usuarios/Docente',3),
+					('Tutores','system.submenu.303',NULL,'/Usuarios/Tutores',3),
+					('Padres de familia','system.submenu.304',NULL,'/Usuarios/Padres',3),
+					('Estudiantes','system.submenu.305',NULL,'/Usuarios/Estudiantes',3),
+					
+					('Contable','system.submenu.401',NULL,'/Administrative/Accounting',4)		
+					
+					");
 
 
 
@@ -150,15 +162,15 @@ class OtherTableSeeder extends Seeder
 
         //relationship_type
         DB::insert("REPLACE INTO relationship_type (description, i18n) VALUES 
-					('Father','person.relationship.father'),
-					('Mother','person.relationship.mother'),
-					('Son','person.relationship.son'),
-					('Daugthar','person.relationship.daughtar'),
-					('Aunt','person.relationship.aunt'),
-					('Oncle','person.relationship.oncle'),
-					('Grandfather','person.relationship.grandfather'),
-					('Grandmother','person.relationship.grandmother'),
-					('Mentor','person.relationship.tutor')");
+                    ('Padre','person.relationship.father'),
+                    ('Madre','person.relationship.mother'),
+                    ('Hijo','person.relationship.son'),
+                    ('Hija','person.relationship.daughtar'),
+                    ('Tia','person.relationship.aunt'),
+                    ('Tio','person.relationship.uncle'),
+                    ('Abuelo','person.relationship.grandfather'),
+                    ('Abuela','person.relationship.grandmother'),
+                    ('Mentor','person.relationship.tutor')");
 
 
         //persontype_has_menu
@@ -168,8 +180,6 @@ class OtherTableSeeder extends Seeder
 					(3,1),
 					(4,1),
 					(5,1),
-					(6,1),
-					(1,9),
-					(8,9)");
+					(6,1)");
     }
 }

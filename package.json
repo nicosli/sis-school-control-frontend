@@ -33,6 +33,7 @@
     "vue-flatpickr-component": "^7.0.0",
     "vue-spinner": "^1.0.3",
     "vue2-typeahead": "^1.0.30",
+    "vuejs-auto-complete": "^0.6.5",
     "vuejs-paginate": "^1.8.0"
   }
 }

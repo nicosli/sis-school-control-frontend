@@ -64,6 +64,13 @@
             },
             onChangeMaritalStatus(){
                 console.log(this.selected);
+            },
+            apiEndPoint(){
+                //return window.apiHost + 'address/?access_token=' + window.access_token + '&query=';
+                return 'https://api.github.com/search/repositories?q=';
+            },
+            formattedDisplay (result) {
+                return result.colonia + ', ' + result.ciudad + ' ' + result.estado
             }
         },
         data(){
@@ -81,7 +88,7 @@
                 buttonDisabled:false,
                 maritalStatusArray: '',
                 typeConf:{
-                    apiHostQuery: apiHost+'address?access_token='+window.access_token+'&query='
+                    apiHostQuery: window.apiHost+'address/?access_token='+window.access_token+'&query='
                 },
                 maritalstatus: ''
             };
@@ -121,5 +128,11 @@
     }
     .autocomplete__inputs input{
         height: 2.5em;
+    }
+    .autocomplete img{
+        vertical-align: 0px;
+    }
+    .autocomplete__results{
+        max-height: 250px !important;
     }
 </style>

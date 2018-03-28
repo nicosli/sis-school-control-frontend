@@ -115,13 +115,13 @@
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label>Código postal o Colonia</label>
+                                        
                                         <autocomplete
-                                            :source="typeConf.apiHostQuery"
-                                            placeholder="Búsqueda por código postal"
-                                            inputClass="form-control"
-                                            inputss-class="form-control"
-                                            results-display="attributes">
-                                        </autocomplete>
+                                        :source="typeConf.apiHostQuery"
+                                        results-property="content"
+                                        :results-display="formattedDisplay">
+                                      </autocomplete>
+                                        
                                         <label for="address" class="mt-2">Dirección</label>
                                         <textarea class="form-control" id="address" rows="3" placeholder="Dirección"></textarea>
                                     </div>

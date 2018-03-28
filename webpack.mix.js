@@ -18,7 +18,8 @@ mix.js('resources/assets/js/app.js', 'public/js/').minify('public/js/app.js');
 mix.styles([
     'public/mixed/css/app.css',
     'resources/assets/css/offcanvas.css',
-    'resources/assets/css/custom.css'
+    'resources/assets/css/custom.css',
+    'node_modules/vue2-autocomplete-js/dist/style/vue2-autocomplete.css'
 ], 'public/css/app.css', './');
 
 mix.browserSync({

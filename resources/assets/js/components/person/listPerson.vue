@@ -127,7 +127,6 @@
                 dateformatpicker: 'yyyy-MM-dd',
                 timeout:null,
                 el:'',
-                quert:'',
                 me_id:'',
                 sort: {
                     field:'id',
@@ -153,7 +152,7 @@
         },
         watch: {
             buttonDisabled: function(){
-                console.log("cambio");
+                
             }
         }
     }

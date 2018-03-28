@@ -4,10 +4,21 @@
     import 'flatpickr/dist/flatpickr.css';
     import 'flatpickr/dist/themes/material_blue.css';
     import {Spanish} from 'flatpickr/dist/l10n/es';
+    import Autocomplete from 'vuejs-auto-complete'
 
     export default {
         name: 'ModalEditPerson',
         methods:{
+            fetchMaritalStatus(){
+                this.$http.get('catalog/maritalstatus?'+'access_token='+window.access_token, this.editPerson)
+                .then(response => {
+                    this.maritalStatusArray = response.body;
+                    this.maritalstatus = this.editPerson.maritalstatus.id;
+                })
+                .catch(error => {                    
+                
+                });
+            },
             updatePerson(){
                 this.modalError = false;
                 this.buttonDisabled = true;
@@ -33,6 +44,26 @@
             },
             selectAvatarClick: function(sel){
                 this.editPerson.imgpath = sel;
+            },
+            searchQueryCP(query){
+                this.$http.get('address/?query='+query+'&access_token='+window.access_token, this.editPerson)
+                .then(response => {
+                    this.cps = response.body;
+                })
+                .catch(error => {                    
+                    
+                });
+            },
+            searchCP(query){
+                var vm = this;
+                clearTimeout(this.timeout);
+                this.timeout = setTimeout(function () {
+                    vm.query = query;
+                    vm.searchQueryCP(query);
+                }, 500);
+            },
+            onChangeMaritalStatus(){
+                console.log(this.selected);
             }
         },
         data(){
@@ -47,14 +78,21 @@
                 showEditPerson: false,
                 avatars:[1,2,3,4,5,6,7,8,9,10,11,12],
                 modalError: false,
-                buttonDisabled:false
+                buttonDisabled:false,
+                maritalStatusArray: '',
+                typeConf:{
+                    apiHostQuery: apiHost+'address?access_token='+window.access_token+'&query='
+                },
+                maritalstatus: ''
             };
         },
         mounted(){
             var vm = this;
+
             $('.modalConfigEvents').on('show.bs.modal', function (e) {
                 vm.checkSession();
                 vm.showEditPerson = false;
+                vm.fetchMaritalStatus();
             })
             $('.modalConfigEvents').on('hide.bs.modal', function (e) {
                 vm.checkSession();
@@ -65,7 +103,14 @@
             editPerson: {required:true}
         },
         components: {
-            flatPickr
+            flatPickr, Autocomplete
+        },
+        watch: {
+            maritalstatus: function(maritalstatusId){
+                this.editPerson.maritalstatus = {
+                    id:maritalstatusId
+                };
+            }
         }
     }
 </script>
@@ -73,5 +118,8 @@
     .imgAvatar{
         width: 58px;
         height: 61px;
+    }
+    .autocomplete__inputs input{
+        height: 2.5em;
     }
 </style>

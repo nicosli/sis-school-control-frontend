@@ -70,7 +70,7 @@
                 return 'https://api.github.com/search/repositories?q=';
             },
             formattedDisplay (result) {
-                return result.colonia + ', ' + result.ciudad + ' ' + result.estado
+                return result.colonia + ', ' + result.ciudad + ' ' + result.estado + ', ' + result.zipcode
             }
         },
         data(){

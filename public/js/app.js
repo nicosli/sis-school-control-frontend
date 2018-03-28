@@ -87057,7 +87057,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return 'https://api.github.com/search/repositories?q=';
         },
         formattedDisplay: function formattedDisplay(result) {
-            return result.colonia + ', ' + result.ciudad + ' ' + result.estado;
+            return result.colonia + ', ' + result.ciudad + ' ' + result.estado + ', ' + result.zipcode;
         }
     },
     data: function data() {
@@ -90566,6 +90566,8 @@ var render = function() {
                                 attrs: {
                                   source: _vm.typeConf.apiHostQuery,
                                   "results-property": "content",
+                                  "initial-display":
+                                    "Gran Santa Fe, Cancún Quintana Roo, 77535",
                                   "results-display": _vm.formattedDisplay
                                 }
                               }),

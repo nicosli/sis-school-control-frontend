@@ -22,7 +22,8 @@
             updatePerson(){
                 this.modalError = false;
                 this.buttonDisabled = true;
-                this.editPerson.fullname = this.editPerson.firstname + ' ' + this.editPerson.lastname;
+                this.editPerson.fullname = this.editPerson.firstname + ' ' + this.editPerson.lastname;                
+                this.editPerson.address.township.id = this.cps.value;
                 this.$http.put('person/?'+'access_token='+window.access_token, this.editPerson)
                 .then(response => {
                     $('.modalConfigEvents').modal('hide');
@@ -48,7 +49,7 @@
             searchQueryCP(query){
                 this.$http.get('address/?query='+query+'&access_token='+window.access_token, this.editPerson)
                 .then(response => {
-                    this.cps = response.body;
+                    this.cps = response.body;                    
                 })
                 .catch(error => {                    
                     
@@ -71,6 +72,14 @@
             },
             formattedDisplay (result) {
                 return result.colonia + ', ' + result.ciudad + ' ' + result.estado + ', ' + result.zipcode
+            },
+            addAddressSelected(result){
+                this.cps = result;
+            },
+            initialDisplay(){
+                if(this.editPerson!== "undefined" && this.editPerson!='')
+                    return this.editPerson.address.township.description + ', ' + (this.editPerson.address.township.city.name!='NO_DATA')? this.editPerson.address.township.city.name:this.editPerson.address.township.municipality.description + ', ' + this.editPerson.address.township.city.state.name + ', ' + this.editPerson.address.township.zipcode
+                return 'Gran Santa Fe, Cancún Quintana Roo, 77535'
             }
         },
         data(){
@@ -100,7 +109,7 @@
                 vm.checkSession();
                 vm.showEditPerson = false;
                 vm.fetchMaritalStatus();
-            })
+            })           
             $('.modalConfigEvents').on('hide.bs.modal', function (e) {
                 vm.checkSession();
                 vm.$emit('modalEditClose');
@@ -117,7 +126,7 @@
                 this.editPerson.maritalstatus = {
                     id:maritalstatusId
                 };
-            }
+            }            
         }
     }
 </script>

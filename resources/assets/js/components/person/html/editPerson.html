@@ -119,12 +119,13 @@
                                         <autocomplete
                                         :source="typeConf.apiHostQuery"
                                         results-property="content"
-                                        :initial-display="'Gran Santa Fe, Cancún Quintana Roo, 77535'"
-                                        :results-display="formattedDisplay">
+                                        :initial-display="initialDisplay()"
+                                        :results-display="formattedDisplay"
+                                        @selected="addAddressSelected">
                                       </autocomplete>
                                         
                                         <label for="address" class="mt-2">Dirección</label>
-                                        <textarea class="form-control" id="address" rows="3" placeholder="Dirección"></textarea>
+                                        <input class="form-control" placeholder="Dirección" v-model="editPerson.address.street">
                                     </div>
                                 </div>
                             </div>

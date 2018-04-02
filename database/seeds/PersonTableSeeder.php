@@ -17,7 +17,7 @@ class PersonTableSeeder extends Seeder
         
         // ADMIN -------
         DB::table('person')->insert([
-            'birthdate'       => $faker->dateTimeThisCentury->format('Y-m-d'),
+            'birthdate'       => '1985-05-29',
             'cellphone'       => $faker->phoneNumber,
             'curp'			  => $faker->numerify('CURP-######'),
             'email'			  => 'admin@eduApi.com',

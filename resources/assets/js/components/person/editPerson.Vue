@@ -77,7 +77,7 @@
                 }
             },
             initialDisplay(){
-                this.$refs.autocomplete.display = this.editPerson.address.township.description+', '+this.editPerson.address.township.city.name+', '+this.editPerson.address.township.municipality.state.name+', '+this.editPerson.address.township.zipcode;
+                this.$refs.autocomplete.display = this.editPerson.address.township.description + ', ' + ((this.editPerson.address.township.city.name!='NO_DATA')? this.editPerson.address.township.city.name:this.editPerson.address.township.municipality.description) + ', ' + this.editPerson.address.township.city.state.name + ', ' + this.editPerson.address.township.zipcode;
             }
         },
         data(){
@@ -99,7 +99,8 @@
                 },
                 maritalstatus: '',
                 cps:'',
-                initialDisplayString: ''
+                initialDisplayString: '',
+                addressStreet: ''
             };
         },
         mounted(){
@@ -127,7 +128,11 @@
                 };
             },
             editPerson: function(){
+                this.addressStreet = this.editPerson.address.street;
                 this.initialDisplay();
+            },
+            addressStreet: function(street){
+                this.editPerson.address.street = street;
             }
         }
     }

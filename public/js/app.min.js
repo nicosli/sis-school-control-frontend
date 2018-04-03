@@ -86978,7 +86978,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.imgAvatar{\n    width: 58px;\n    height: 61px;\n}\n.autocomplete__inputs input{\n    height: 2.5em;\n}\n.autocomplete img{\n    vertical-align: 0px;\n}\n.autocomplete__results{\n    max-height: 250px !important;\n}\n", ""]);
+exports.push([module.i, "\n.imgAvatar{\n    width: 58px;\n    height: 61px;\n}\n.autocomplete__inputs input{\n    height: 2.35em;\n}\n.autocomplete img{\n    vertical-align: 0px;\n}\n.autocomplete__results{\n    max-height: 250px !important;\n}\n.autocomplete__box{\n    border:1px solid #ced4da !important;\n    border-radius: 0.25rem !important;\n}\n", ""]);
 
 // exports
 
@@ -90788,7 +90788,37 @@ var render = function() {
                               })
                             )
                           ])
-                        ])
+                        ]),
+                        _vm._v(" "),
+                        _c("label", { attrs: { for: "lastname" } }, [
+                          _vm._v("Relacionar Familia")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-row" }, [
+                          _c(
+                            "div",
+                            { staticClass: "form-group col-md-6" },
+                            [
+                              _vm.editPerson !== undefined
+                                ? _c("autocomplete", {
+                                    attrs: {
+                                      source: _vm.typeConf.apiHostQuery,
+                                      "results-property": "content",
+                                      "results-display": _vm.formattedDisplay
+                                    },
+                                    on: { selected: _vm.addAddressSelected }
+                                  })
+                                : _vm._e()
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _vm._m(2),
+                          _vm._v(" "),
+                          _vm._m(3)
+                        ]),
+                        _vm._v(" "),
+                        _vm._m(4)
                       ]
                     )
                   ]
@@ -90920,6 +90950,85 @@ var staticRenderFns = [
           )
         ]
       )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group col-md-4" }, [
+      _c("select", { staticClass: "form-control" }, [
+        _c("option", [_vm._v("Padre")]),
+        _vm._v(" "),
+        _c("option", [_vm._v("Tutor")]),
+        _vm._v(" "),
+        _c("option", [_vm._v("Hijo")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group col-md-2" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-outline-success btn-block",
+          attrs: { type: "button" }
+        },
+        [_c("i", { staticClass: "fas fa-user-plus" })]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("table", { staticClass: "table table-sm" }, [
+      _c("thead", { staticClass: "thead-light" }, [
+        _c("tr", [
+          _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+          _vm._v(" "),
+          _c("th", { attrs: { scope: "col" } }, [_vm._v("Relación")]),
+          _vm._v(" "),
+          _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
+          _vm._v(" "),
+          _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo")])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("tbody", [
+        _c("tr", [
+          _c("th", { attrs: { scope: "row" } }, [_vm._v("1")]),
+          _vm._v(" "),
+          _c("td", [_vm._v("Hijo")]),
+          _vm._v(" "),
+          _c("td", [_vm._v("Jacob Thornton")]),
+          _vm._v(" "),
+          _c("td", [_vm._v("Estudiante")])
+        ]),
+        _vm._v(" "),
+        _c("tr", [
+          _c("th", { attrs: { scope: "row" } }, [_vm._v("1")]),
+          _vm._v(" "),
+          _c("td", [_vm._v("Hijo")]),
+          _vm._v(" "),
+          _c("td", [_vm._v("Larry Page")]),
+          _vm._v(" "),
+          _c("td", [_vm._v("Estudiante")])
+        ]),
+        _vm._v(" "),
+        _c("tr", [
+          _c("th", { attrs: { scope: "row" } }, [_vm._v("1")]),
+          _vm._v(" "),
+          _c("td", [_vm._v("Hijo")]),
+          _vm._v(" "),
+          _c("td", [_vm._v("Luella Dare Rs.")]),
+          _vm._v(" "),
+          _c("td", [_vm._v("Estudiante")])
+        ])
+      ])
     ])
   }
 ]

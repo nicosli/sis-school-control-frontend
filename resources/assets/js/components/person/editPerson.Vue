@@ -143,12 +143,16 @@
         height: 61px;
     }
     .autocomplete__inputs input{
-        height: 2.5em;
+        height: 2.35em;
     }
     .autocomplete img{
         vertical-align: 0px;
     }
     .autocomplete__results{
         max-height: 250px !important;
+    }
+    .autocomplete__box{
+        border:1px solid #ced4da !important;
+        border-radius: 0.25rem !important;
     }
 </style>

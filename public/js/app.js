@@ -86872,8 +86872,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 text: "Una vez eliminado, no podrás recuperar este usuario!",
                 content: this.el,
                 //icon: "warning",
-                buttons: true,
-                dangerMode: true
+                //buttons: true,
+                dangerMode: true,
+                button: {
+                    text: "Eliminar",
+                    closeModal: false
+                }
             }).then(function (willDelete) {
                 if (willDelete) {
                     _this3.deletePerson(person.id);
@@ -91606,6 +91610,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -91626,6 +91632,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         personEdited: function personEdited() {
             this.fetchMe();
+            new Noty({
+                type: 'success',
+                text: 'El usuario ha sido editado exitosamente'
+            }).show();
         }
     },
     data: function data() {

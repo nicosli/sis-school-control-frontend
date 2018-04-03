@@ -33,7 +33,9 @@
         </div>
     </div>
     <!-- MODAL -->
-    <ModalEditPerson :editPerson="editPerson" @personEdited="personEdited"></ModalEditPerson>
+    <ModalEditPerson 
+        :editPerson="editPerson" 
+        @personEdited="personEdited"></ModalEditPerson>
 </div>
 </template>
 <script>
@@ -58,6 +60,10 @@
             },
             personEdited(){
                 this.fetchMe();
+                new Noty({
+                    type:'success',
+                    text: 'El usuario ha sido editado exitosamente'
+                }).show();
             }
         },
         data(){

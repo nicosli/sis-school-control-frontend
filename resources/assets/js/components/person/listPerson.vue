@@ -95,8 +95,12 @@
                     text: "Una vez eliminado, no podrás recuperar este usuario!",
                     content: this.el,
                     //icon: "warning",
-                    buttons: true,
+                    //buttons: true,
                     dangerMode: true,
+                    button:{
+                        text: "Eliminar",
+                        closeModal: false
+                    }
                 })
                 .then((willDelete) => {
                     if (willDelete) {

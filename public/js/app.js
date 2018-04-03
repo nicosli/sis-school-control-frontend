@@ -86874,9 +86874,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 //icon: "warning",
                 //buttons: true,
                 dangerMode: true,
-                button: {
-                    text: "Eliminar",
-                    closeModal: false
+                buttons: {
+                    cancel: {
+                        text: "Cancelar",
+                        closeModal: true,
+                        visible: true
+                    },
+                    confirm: {
+                        text: "Eliminar",
+                        closeModal: false
+                    }
                 }
             }).then(function (willDelete) {
                 if (willDelete) {
@@ -87068,7 +87075,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             };
         },
         initialDisplay: function initialDisplay() {
-            this.$refs.autocomplete.display = this.editPerson.address.township.description + ', ' + this.editPerson.address.township.city.name + ', ' + this.editPerson.address.township.municipality.state.name + ', ' + this.editPerson.address.township.zipcode;
+            this.$refs.autocomplete.display = this.editPerson.address.township.description + ', ' + (this.editPerson.address.township.city.name != 'NO_DATA' ? this.editPerson.address.township.city.name : this.editPerson.address.township.municipality.description) + ', ' + this.editPerson.address.township.city.state.name + ', ' + this.editPerson.address.township.zipcode;
         }
     },
     data: function data() {
@@ -87090,7 +87097,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             },
             maritalstatus: '',
             cps: '',
-            initialDisplayString: ''
+            initialDisplayString: '',
+            addressStreet: ''
         };
     },
     mounted: function mounted() {
@@ -87119,7 +87127,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             };
         },
         editPerson: function editPerson() {
+            this.addressStreet = this.editPerson.address.street;
             this.initialDisplay();
+        },
+        addressStreet: function addressStreet(street) {
+            this.editPerson.address.street = street;
         }
     }
 });
@@ -90688,8 +90700,25 @@ var render = function() {
                               ),
                               _vm._v(" "),
                               _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.addressStreet,
+                                    expression: "addressStreet"
+                                  }
+                                ],
                                 staticClass: "form-control",
-                                attrs: { placeholder: "Dirección" }
+                                attrs: { placeholder: "Dirección" },
+                                domProps: { value: _vm.addressStreet },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.addressStreet = $event.target.value
+                                  }
+                                }
                               })
                             ],
                             1

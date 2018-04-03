@@ -97,10 +97,17 @@
                     //icon: "warning",
                     //buttons: true,
                     dangerMode: true,
-                    button:{
-                        text: "Eliminar",
-                        closeModal: false
-                    }
+                    buttons:{
+                        cancel: {
+                            text: "Cancelar",
+                            closeModal: true,
+                            visible: true
+                        },
+                        confirm:{
+                            text: "Eliminar",
+                            closeModal: false
+                        },
+                    },
                 })
                 .then((willDelete) => {
                     if (willDelete) {

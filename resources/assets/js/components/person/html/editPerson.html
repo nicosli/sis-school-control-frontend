@@ -117,15 +117,16 @@
                                         <label>Código postal o Colonia</label>
                                         
                                         <autocomplete
-                                        :source="typeConf.apiHostQuery"
-                                        results-property="content"
-                                        :initial-display="initialDisplay()"
-                                        :results-display="formattedDisplay"
-                                        @selected="addAddressSelected">
-                                      </autocomplete>
+                                            v-if="editPerson!==undefined"
+                                            :source="typeConf.apiHostQuery"
+                                            results-property="content"
+                                            :results-display="formattedDisplay"
+                                            ref="autocomplete"
+                                            @selected="addAddressSelected">
+                                        </autocomplete>
                                         
                                         <label for="address" class="mt-2">Dirección</label>
-                                        <input class="form-control" placeholder="Dirección" v-model="editPerson.address.street">
+                                        <input class="form-control" placeholder="Dirección">
                                     </div>
                                 </div>
                             </div>

@@ -23,7 +23,6 @@
                 this.modalError = false;
                 this.buttonDisabled = true;
                 this.editPerson.fullname = this.editPerson.firstname + ' ' + this.editPerson.lastname;                
-                this.editPerson.address.township.id = this.cps.value;
                 this.$http.put('person/?'+'access_token='+window.access_token, this.editPerson)
                 .then(response => {
                     $('.modalConfigEvents').modal('hide');
@@ -66,20 +65,19 @@
             onChangeMaritalStatus(){
                 console.log(this.selected);
             },
-            apiEndPoint(){
-                //return window.apiHost + 'address/?access_token=' + window.access_token + '&query=';
-                return 'https://api.github.com/search/repositories?q=';
-            },
             formattedDisplay (result) {
                 return result.colonia + ', ' + result.ciudad + ' ' + result.estado + ', ' + result.zipcode
             },
             addAddressSelected(result){
                 this.cps = result;
+                this.editPerson.address = {
+                    township: {
+                        id: result.value
+                    }
+                }
             },
             initialDisplay(){
-                if(this.editPerson!== "undefined" && this.editPerson!='')
-                    return this.editPerson.address.township.description + ', ' + (this.editPerson.address.township.city.name!='NO_DATA')? this.editPerson.address.township.city.name:this.editPerson.address.township.municipality.description + ', ' + this.editPerson.address.township.city.state.name + ', ' + this.editPerson.address.township.zipcode
-                return 'Gran Santa Fe, Cancún Quintana Roo, 77535'
+                this.$refs.autocomplete.display = this.editPerson.address.township.description+', '+this.editPerson.address.township.city.name+', '+this.editPerson.address.township.municipality.state.name+', '+this.editPerson.address.township.zipcode;
             }
         },
         data(){
@@ -99,16 +97,17 @@
                 typeConf:{
                     apiHostQuery: window.apiHost+'address/?access_token='+window.access_token+'&query='
                 },
-                maritalstatus: ''
+                maritalstatus: '',
+                cps:'',
+                initialDisplayString: ''
             };
         },
         mounted(){
             var vm = this;
-
             $('.modalConfigEvents').on('show.bs.modal', function (e) {
                 vm.checkSession();
                 vm.showEditPerson = false;
-                vm.fetchMaritalStatus();
+                vm.fetchMaritalStatus();                
             })           
             $('.modalConfigEvents').on('hide.bs.modal', function (e) {
                 vm.checkSession();
@@ -126,7 +125,10 @@
                 this.editPerson.maritalstatus = {
                     id:maritalstatusId
                 };
-            }            
+            },
+            editPerson: function(){
+                this.initialDisplay();
+            }
         }
     }
 </script>

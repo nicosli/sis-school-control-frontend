@@ -87052,12 +87052,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         onChangeMaritalStatus: function onChangeMaritalStatus() {
             console.log(this.selected);
         },
-        apiEndPoint: function apiEndPoint() {
-            //return window.apiHost + 'address/?access_token=' + window.access_token + '&query=';
-            return 'https://api.github.com/search/repositories?q=';
-        },
         formattedDisplay: function formattedDisplay(result) {
             return result.colonia + ', ' + result.ciudad + ' ' + result.estado + ', ' + result.zipcode;
+        },
+        addAddressSelected: function addAddressSelected(result) {
+            this.cps = result;
+            this.editPerson.address = {
+                township: {
+                    id: result.value
+                }
+            };
+        },
+        initialDisplay: function initialDisplay() {
+            this.$refs.autocomplete.display = this.editPerson.address.township.description + ', ' + this.editPerson.address.township.city.name + ', ' + this.editPerson.address.township.municipality.state.name + ', ' + this.editPerson.address.township.zipcode;
         }
     },
     data: function data() {
@@ -87077,12 +87084,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             typeConf: {
                 apiHostQuery: window.apiHost + 'address/?access_token=' + window.access_token + '&query='
             },
-            maritalstatus: ''
+            maritalstatus: '',
+            cps: '',
+            initialDisplayString: ''
         };
     },
     mounted: function mounted() {
         var vm = this;
-
         $('.modalConfigEvents').on('show.bs.modal', function (e) {
             vm.checkSession();
             vm.showEditPerson = false;
@@ -87105,6 +87113,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.editPerson.maritalstatus = {
                 id: maritalstatusId
             };
+        },
+        editPerson: function editPerson() {
+            this.initialDisplay();
         }
     }
 });
@@ -90651,15 +90662,17 @@ var render = function() {
                             [
                               _c("label", [_vm._v("Código postal o Colonia")]),
                               _vm._v(" "),
-                              _c("autocomplete", {
-                                attrs: {
-                                  source: _vm.typeConf.apiHostQuery,
-                                  "results-property": "content",
-                                  "initial-display":
-                                    "Gran Santa Fe, Cancún Quintana Roo, 77535",
-                                  "results-display": _vm.formattedDisplay
-                                }
-                              }),
+                              _vm.editPerson !== undefined
+                                ? _c("autocomplete", {
+                                    ref: "autocomplete",
+                                    attrs: {
+                                      source: _vm.typeConf.apiHostQuery,
+                                      "results-property": "content",
+                                      "results-display": _vm.formattedDisplay
+                                    },
+                                    on: { selected: _vm.addAddressSelected }
+                                  })
+                                : _vm._e(),
                               _vm._v(" "),
                               _c(
                                 "label",
@@ -90670,13 +90683,9 @@ var render = function() {
                                 [_vm._v("Dirección")]
                               ),
                               _vm._v(" "),
-                              _c("textarea", {
+                              _c("input", {
                                 staticClass: "form-control",
-                                attrs: {
-                                  id: "address",
-                                  rows: "3",
-                                  placeholder: "Dirección"
-                                }
+                                attrs: { placeholder: "Dirección" }
                               })
                             ],
                             1

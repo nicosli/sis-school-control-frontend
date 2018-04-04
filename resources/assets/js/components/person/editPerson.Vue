@@ -73,26 +73,25 @@
             },
             addAddressSelected(result){
                 this.cps = result;
-                this.editPerson.address = {
-                    township: {
-                        id: result.value
-                    }
-                }
+                this.editPerson.address.township.id = result.value;
+                this.editPerson.address.township.description = result.display;
             },
             familySelected(result){
-                console.log(result);
-                console.log(this.$refs.autocompletePerson)
+                this.familyPersonSelected = result;
             },
             addFamily(){
-                console.log(this.$refs.autocompletePerson.isEmpty);
                 if(this.$refs.autocompletePerson.isEmpty == false){
                     this.familyPerson.push({
-                        id: this.$refs.autocompletePerson.value,
-                        nombre: this.$refs.autocompletePerson.display
+                        id: this.familyPersonSelected.value,
+                        type: this.familyPersonSelected.selectedObject.persontype.description,
+                        name: this.familyPersonSelected.display
                     });
                     this.$refs.autocompletePerson.clearValues();
+                    this.editPerson.family = this.familyPerson;
                 }
-                console.log(this.familyPerson.length)
+            },
+            removeFamily(index){
+                this.familyPerson.splice(index, 1)
             },
             initialDisplay(){
                 this.$refs.autocomplete.display = this.editPerson.address.township.description + ', ' + ((this.editPerson.address.township.city.name!='NO_DATA')? this.editPerson.address.township.city.name:this.editPerson.address.township.municipality.description) + ', ' + this.editPerson.address.township.city.state.name + ', ' + this.editPerson.address.township.zipcode;
@@ -120,7 +119,9 @@
                 cps:'',
                 initialDisplayString: '',
                 addressStreet: '',
-                familyPerson: []
+                familyPerson: [],
+                familyPersonSelected: '',
+                codePerson:''
             };
         },
         mounted(){
@@ -133,6 +134,8 @@
             $('.modalConfigEvents').on('hide.bs.modal', function (e) {
                 vm.checkSession();
                 vm.$emit('modalEditClose');
+                vm.modalError = false;
+                vm.familyPerson = [];
             })
         },
         props: {
@@ -148,11 +151,15 @@
                 };
             },
             editPerson: function(){
-                this.addressStreet = this.editPerson.address.street;
-                this.initialDisplay();
+                this.addressStreet = ("address" in this.editPerson)?this.editPerson.address.street:'';
+                this.codePerson = ("persontype" in this.editPerson)?this.editPerson.persontype.code:'';
+                if("address" in this.editPerson){
+                    this.initialDisplay();
+                }
             },
             addressStreet: function(street){
-                this.editPerson.address.street = street;
+                if("address" in this.editPerson)
+                    this.editPerson.address.street = street;
             }
         }
     }

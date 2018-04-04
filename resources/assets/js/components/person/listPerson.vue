@@ -70,6 +70,7 @@
             personEdited(editPerson){
                 this.persons[this.key] = editPerson;
                 this.key = '';
+                //this.fetchListPerson();
                 new Noty({
                     type:'success',
                     text: 'El usuario ha sido editado exitosamente'
@@ -77,6 +78,10 @@
             },
             modalClosed(){
                 this.editingPerson_id = '';
+                this.editPerson = '';
+                this.editPerson = {
+                    birthdate:''
+                }
             },
             searchQuery(query){
                 var vm = this;

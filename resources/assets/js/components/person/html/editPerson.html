@@ -142,8 +142,8 @@
                                         </select>
                                     </div>
                                 </div>
-                                <label for="lastname">Relacionar Familia</label>
-                                <div class="form-row">
+                                <label v-if="codePerson =='student'">Relacionar Tutor</label>
+                                <div class="form-row" v-if="codePerson =='student'">
                                     <div class="form-group col-md-10">
                                         <autocomplete
                                             v-if="editPerson!==undefined"
@@ -173,11 +173,16 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="person in familyPerson">
+                                        <tr v-for="(person, index) in familyPerson">
                                             <th scope="row">{{person.id}}</th>
-                                            <td>Tutor</td>
-                                            <td>{{person.nombre}}</td>
-                                            <td><button type="button" class="btn btn-outline-danger btn-sm">eliminar</button></td>
+                                            <td>{{person.type}}</td>
+                                            <td>{{person.name}}</td>
+                                            <td>
+                                                <button 
+                                                    type="button" 
+                                                    @click="removeFamily(index)"
+                                                    class="btn btn-outline-danger btn-sm">eliminar</button>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>

@@ -14,7 +14,7 @@
             },
             fetchListPerson(){
                 this.pulseLoader.loading = true;
-                this.$http.get('person/'+this.type+'/'+this.pagInfo.page+'/'+this.pagInfo.size,{
+                this.$http.get('person/'+this.code+'/'+this.pagInfo.page+'/'+this.pagInfo.size,{
                     params: {
                         query:          this.query,
                         field:          this.sort.field,
@@ -154,7 +154,7 @@
             var timeout = null;
         },
         props:{
-            type: {required:true}
+            code: {required:true}
         },
         components: {
             ModalEditPerson,

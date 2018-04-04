@@ -114,7 +114,7 @@
                 maritalStatusArray: '',
                 typeConf:{
                     apiHostQuery: window.apiHost+'address/?access_token='+window.access_token+'&query=',
-                    apiHostQueryPerson: window.apiHost+'person/8/0/7?field=id&direction=ASC&access_token='+window.access_token+'&query=',
+                    apiHostQueryPerson: window.apiHost+'person/tutor/0/7?field=id&direction=ASC&access_token='+window.access_token+'&query=',
                 },
                 maritalstatus: '',
                 cps:'',

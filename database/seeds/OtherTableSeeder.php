@@ -87,8 +87,7 @@ class OtherTableSeeder extends Seeder
 
 					('Personal Administrativo','system.submenu.301',NULL,'/Usuarios/Administrativo',3),
 					('Personal Docente','system.submenu.302',NULL,'/Usuarios/Docente',3),
-					('Tutores','system.submenu.303',NULL,'/Usuarios/Tutores',3),
-					('Padres de familia','system.submenu.304',NULL,'/Usuarios/Padres',3),
+					('Tutores','system.submenu.303',NULL,'/Usuarios/Tutores',3),					
 					('Estudiantes','system.submenu.305',NULL,'/Usuarios/Estudiantes',3),
 					
 					('Contable','system.submenu.401',NULL,'/Administrative/Accounting',4)		
@@ -109,8 +108,7 @@ class OtherTableSeeder extends Seeder
         DB::insert("REPLACE INTO role (description, name) VALUES 
         			('ROLADMIN','ADMINISTRATOR'),
 					('ROLASSISTANT','ASSISTANT'),
-					('ROLTEACHER','DEAN'),
-					('ROLPARENT','PARENT'),
+					('ROLTEACHER','DEAN'),					
 					('ROLSTUDENT','STUDENT'),
 					('ROLTUTOR','TUTOR')");
 
@@ -132,22 +130,17 @@ class OtherTableSeeder extends Seeder
 					(4,1),
 					(4,2),
 					(5,1),
-					(5,2),
-					(6,1),
-					(6,2)");
+					(5,2)");
 
 
         //persontype
-        DB::insert("REPLACE INTO persontype (description, i18n, role_id) VALUES 
-					('Director','person.type.100',1),
-					('Secretaria Academica','person.type.200',2),
-					('Secretaria Administrativa','person.type.201',2),
-					('Secretaria General','person.type.202',2),
-					('Profesor','person.type.300',3),
-					('Padre','person.type.400',4),
-					('Estudiante','person.type.500',5),
-					('Tutor','person.type.600',6),
-					('System','system.user',1)");
+        DB::insert("REPLACE INTO persontype (description,code, i18n, role_id) VALUES 
+					('Director','director','person.type.100',1),
+					('Secretaria', 'secretary', 'person.type.200',2),					
+					('Profesor','teacher','person.type.300',3),					
+					('Estudiante','student','person.type.500',4),
+					('Tutor','tutor','person.type.600',5),
+					('System','system','system.user',1)");
 
 
 

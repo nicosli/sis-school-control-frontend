@@ -65,7 +65,7 @@ class PersonTableSeeder extends Seeder
                 'username'		  => $faker->unique()->userName,
                 'address_id'	  => $address_id,
                 'marital_status_id' => rand(1,5),
-                'person_type_id'	=> rand(1,9),
+                'person_type_id'	=> rand(1,6),
             ]);
         }
     }

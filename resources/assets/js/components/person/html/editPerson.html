@@ -144,54 +144,40 @@
                                 </div>
                                 <label for="lastname">Relacionar Familia</label>
                                 <div class="form-row">
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-10">
                                         <autocomplete
                                             v-if="editPerson!==undefined"
-                                            :source="typeConf.apiHostQuery"
+                                            :source="typeConf.apiHostQueryPerson"
                                             results-property="content"
-                                            :results-display="formattedDisplay"
-                                            
-                                            @selected="addAddressSelected">
+                                            :results-display="formattedDisplayPerson"
+                                            ref="autocompletePerson"
+                                            @selected="familySelected">
                                         </autocomplete>
                                     </div>
-                                    <div class="form-group col-md-4">
-                                        <select class="form-control">
-                                            <option>Padre</option>
-                                            <option>Tutor</option>
-                                            <option>Hijo</option>
-                                        </select>
-                                    </div>
                                     <div class="form-group col-md-2">
-                                        <button type="button" class="btn btn-outline-success btn-block"><i class="fas fa-user-plus"></i></button>
+                                        <button 
+                                            type="button" 
+                                            @click="addFamily()"
+                                            class="btn btn-outline-success btn-block">
+                                                <i class="fas fa-user-plus"></i>
+                                        </button>
                                     </div>
                                 </div>
-                                <table class="table table-sm">
+                                <table class="table table-sm" v-if="familyPerson.length > 0">
                                     <thead class="thead-light">
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">Relación</th>
                                             <th scope="col">Nombre</th>
-                                            <th scope="col">Tipo</th>
+                                            <th scope="col"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Hijo</td>
-                                            <td>Jacob Thornton</td>
-                                            <td>Estudiante</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Hijo</td>
-                                            <td>Larry Page</td>
-                                            <td>Estudiante</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Hijo</td>
-                                            <td>Luella Dare Rs.</td>
-                                            <td>Estudiante</td>
+                                        <tr v-for="person in familyPerson">
+                                            <th scope="row">{{person.id}}</th>
+                                            <td>Tutor</td>
+                                            <td>{{person.nombre}}</td>
+                                            <td><button type="button" class="btn btn-outline-danger btn-sm">eliminar</button></td>
                                         </tr>
                                     </tbody>
                                 </table>

@@ -68,6 +68,9 @@
             formattedDisplay (result) {
                 return result.colonia + ', ' + result.ciudad + ' ' + result.estado + ', ' + result.zipcode
             },
+            formattedDisplayPerson (result) {
+                return result.fullname;
+            },
             addAddressSelected(result){
                 this.cps = result;
                 this.editPerson.address = {
@@ -75,6 +78,21 @@
                         id: result.value
                     }
                 }
+            },
+            familySelected(result){
+                console.log(result);
+                console.log(this.$refs.autocompletePerson)
+            },
+            addFamily(){
+                console.log(this.$refs.autocompletePerson.isEmpty);
+                if(this.$refs.autocompletePerson.isEmpty == false){
+                    this.familyPerson.push({
+                        id: this.$refs.autocompletePerson.value,
+                        nombre: this.$refs.autocompletePerson.display
+                    });
+                    this.$refs.autocompletePerson.clearValues();
+                }
+                console.log(this.familyPerson.length)
             },
             initialDisplay(){
                 this.$refs.autocomplete.display = this.editPerson.address.township.description + ', ' + ((this.editPerson.address.township.city.name!='NO_DATA')? this.editPerson.address.township.city.name:this.editPerson.address.township.municipality.description) + ', ' + this.editPerson.address.township.city.state.name + ', ' + this.editPerson.address.township.zipcode;
@@ -95,12 +113,14 @@
                 buttonDisabled:false,
                 maritalStatusArray: '',
                 typeConf:{
-                    apiHostQuery: window.apiHost+'address/?access_token='+window.access_token+'&query='
+                    apiHostQuery: window.apiHost+'address/?access_token='+window.access_token+'&query=',
+                    apiHostQueryPerson: window.apiHost+'person/8/0/7?field=id&direction=ASC&access_token='+window.access_token+'&query=',
                 },
                 maritalstatus: '',
                 cps:'',
                 initialDisplayString: '',
-                addressStreet: ''
+                addressStreet: '',
+                familyPerson: []
             };
         },
         mounted(){
@@ -108,7 +128,7 @@
             $('.modalConfigEvents').on('show.bs.modal', function (e) {
                 vm.checkSession();
                 vm.showEditPerson = false;
-                vm.fetchMaritalStatus();                
+                vm.fetchMaritalStatus();
             })           
             $('.modalConfigEvents').on('hide.bs.modal', function (e) {
                 vm.checkSession();

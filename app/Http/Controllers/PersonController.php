@@ -28,8 +28,8 @@ class PersonController extends Controller{
         return view('person.teaching');
     }
     
-    public function guardian(){
-        return view('person.guardian');
+    public function tutor(){
+        return view('person.tutor');
     }
     
     public function parent(){

@@ -37,7 +37,7 @@ View::composer(['template.app'], function($view){
 Route::group(['prefix' => 'Usuarios', 'middleware' => ['auth.api']], function() {
     Route::get('/Administrativo', 'PersonController@administrative');
     Route::get('/Docente', 'PersonController@teaching');
-    Route::get('/Tutores', 'PersonController@guardian');
+    Route::get('/Tutores', 'PersonController@tutor');
     Route::get('/Padres', 'PersonController@parent');
     Route::get('/Estudiante', 'PersonController@student');
 });

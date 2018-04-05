@@ -19,6 +19,15 @@
                 
                 });
             },
+            fetchRelationshipType(){
+                this.$http.get('catalog/relationshipType?'+'access_token='+window.access_token, this.editPerson)
+                .then(response => {
+                    this.relationshipTypeArray = response.body;                    
+                })
+                .catch(error => {                    
+                
+                });
+            },
             updatePerson(){
                 this.modalError = false;
                 this.buttonDisabled = true;
@@ -82,9 +91,13 @@
             addFamily(){
                 if(this.$refs.autocompletePerson.isEmpty == false){
                     this.familyPerson.push({
-                        id: this.familyPersonSelected.value,
-                        type: this.familyPersonSelected.selectedObject.persontype.description,
-                        name: this.familyPersonSelected.display
+                        relationshipType: this.relationshipType,
+                        relatedPerson:{
+                            id: this.familyPersonSelected.value,
+                            fullname: this.familyPersonSelected.display
+                        },
+                        familyName: this.editPerson.lastname,
+                        isTutor: 1
                     });
                     this.$refs.autocompletePerson.clearValues();
                     this.editPerson.family = this.familyPerson;
@@ -121,7 +134,9 @@
                 addressStreet: '',
                 familyPerson: [],
                 familyPersonSelected: '',
-                codePerson:''
+                codePerson:'',    
+                relationshipType: '',
+                relationshipTypeArray: ''
             };
         },
         mounted(){
@@ -130,6 +145,7 @@
                 vm.checkSession();
                 vm.showEditPerson = false;
                 vm.fetchMaritalStatus();
+                vm.fetchRelationshipType();
             })           
             $('.modalConfigEvents').on('hide.bs.modal', function (e) {
                 vm.checkSession();
@@ -147,12 +163,13 @@
         watch: {
             maritalstatus: function(maritalstatusId){
                 this.editPerson.maritalstatus = {
-                    id:maritalstatusId
+                    id:this.maritalstatus
                 };
             },
             editPerson: function(){
                 this.addressStreet = ("address" in this.editPerson)?this.editPerson.address.street:'';
                 this.codePerson = ("persontype" in this.editPerson)?this.editPerson.persontype.code:'';
+                this.familyPerson = ("family" in this.editPerson)?this.editPerson.family:'';
                 if("address" in this.editPerson){
                     this.initialDisplay();
                 }

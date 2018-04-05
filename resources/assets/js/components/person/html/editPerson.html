@@ -141,6 +141,17 @@
                                                 v-for="marital in maritalStatusArray">{{marital.description}}</option>
                                         </select>
                                     </div>
+                                </div>                                
+                                <div class="form-row" v-if="codePerson =='student'">
+                                    <div class="form-group col-md-12">
+                                        <label for="lastname">Relación</label>
+                                        <select v-model="relationshipType" class="form-control">
+                                            <option
+                                                :selected="relationship.id === 2 ? 'selected' : ''"
+                                                :value="relationship"
+                                                v-for="relationship in relationshipTypeArray">{{relationship.description}}</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <label v-if="codePerson =='student'">Relacionar Tutor</label>
                                 <div class="form-row" v-if="codePerson =='student'">
@@ -174,9 +185,9 @@
                                     </thead>
                                     <tbody>
                                         <tr v-for="(person, index) in familyPerson">
-                                            <th scope="row">{{person.id}}</th>
-                                            <td>{{person.type}}</td>
-                                            <td>{{person.name}}</td>
+                                            <th scope="row">{{person.relatedPerson.id}}</th>
+                                            <td>{{person.relationshipType.description}}</td>
+                                            <td>{{person.relatedPerson.fullname}}</td>
                                             <td>
                                                 <button 
                                                     type="button" 

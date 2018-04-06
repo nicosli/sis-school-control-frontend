@@ -82,8 +82,21 @@
             },
             addAddressSelected(result){
                 this.cps = result;
-                this.editPerson.address.township.id = result.value;
-                this.editPerson.address.township.description = result.display;
+                this.editPerson.address= {
+                    township:{
+                        id: result.value,
+                        description: result.selectedObject.colonia,
+                        zipcode: result.selectedObject.zipcode,
+                        city:{
+                            name: result.selectedObject.ciudad,
+                            state: {
+                                name: result.selectedObject.estado
+                            }
+                        }
+                    },
+                    status: "A"
+                }
+                
             },
             familySelected(result){
                 this.familyPersonSelected = result;
@@ -135,7 +148,7 @@
                 familyPerson: [],
                 familyPersonSelected: '',
                 codePerson:'',    
-                relationshipType: '',
+                relationshipType: '1',
                 relationshipTypeArray: ''
             };
         },
@@ -166,11 +179,11 @@
                     id:this.maritalstatus
                 };
             },
-            editPerson: function(){
-                this.addressStreet = ("address" in this.editPerson)?this.editPerson.address.street:'';
+            editPerson: function(){                
+                this.addressStreet = ("address" in this.editPerson && this.editPerson.address!==null)?this.editPerson.address.street:'';
                 this.codePerson = ("persontype" in this.editPerson)?this.editPerson.persontype.code:'';
                 this.familyPerson = ("family" in this.editPerson)?this.editPerson.family:'';
-                if("address" in this.editPerson){
+                if("address" in this.editPerson && this.editPerson.address!==null){
                     this.initialDisplay();
                 }
             },

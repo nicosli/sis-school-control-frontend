@@ -147,8 +147,8 @@
                                         <label for="lastname">Relación</label>
                                         <select v-model="relationshipType" class="form-control">
                                             <option
-                                                :selected="relationship.id === 2 ? 'selected' : ''"
-                                                :value="relationship"
+                                                :selected="(relationship.id === 1) ? 'selected' : ''"
+                                                :value="relationship.id"
                                                 v-for="relationship in relationshipTypeArray">{{relationship.description}}</option>
                                         </select>
                                     </div>
@@ -174,12 +174,16 @@
                                         </button>
                                     </div>
                                 </div>
+                                <div class="form-row" v-if="codePerson =='student'">
+                                    <h3>Familia {{ editPerson.lastname }}</h3>
+                                </div>
                                 <table class="table table-sm" v-if="familyPerson.length > 0">
                                     <thead class="thead-light">
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">Relación</th>
                                             <th scope="col">Nombre</th>
+                                            <th scope="col">Tutor</th>
                                             <th scope="col"></th>
                                         </tr>
                                     </thead>
@@ -188,6 +192,15 @@
                                             <th scope="row">{{person.relatedPerson.id}}</th>
                                             <td>{{person.relationshipType.description}}</td>
                                             <td>{{person.relatedPerson.fullname}}</td>
+                                            <td>
+                                                <input 
+                                                    type="checkbox" 
+                                                    v-model="person.isTutor"
+                                                    name="isTutor"
+                                                    true-value="1"
+                                                    false-value="0"
+                                                    >
+                                            </td>
                                             <td>
                                                 <button 
                                                     type="button" 

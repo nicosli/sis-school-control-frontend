@@ -9,7 +9,7 @@
     <a class="nav-link {!! ($item=='guardian')? 'active' : '' !!}" href="{!!asset('/Usuarios/Tutores')!!}">
         Tutores
     </a>
-    <a class="nav-link {!! ($item=='student')? 'active' : '' !!}" href="{!!asset('/Usuarios/Estudiante')!!}">
+    <a class="nav-link {!! ($item=='student')? 'active' : '' !!}" href="{!!asset('/Usuarios/Estudiantes')!!}">
         Estudiantes
     </a>
     </nav>

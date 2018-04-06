@@ -39,5 +39,5 @@ Route::group(['prefix' => 'Usuarios', 'middleware' => ['auth.api']], function() 
     Route::get('/Docente', 'PersonController@teaching');
     Route::get('/Tutores', 'PersonController@tutor');
     Route::get('/Padres', 'PersonController@parent');
-    Route::get('/Estudiante', 'PersonController@student');
+    Route::get('/Estudiantes', 'PersonController@student');
 });

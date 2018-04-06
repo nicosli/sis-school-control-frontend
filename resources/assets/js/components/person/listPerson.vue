@@ -63,6 +63,51 @@
                 this.editingPerson_id = person.id;
                 this.key = key;
             },
+            showModalAddPerson(){                
+                this.fetchPersonType(this.code);
+                this.editPerson = Object.assign({}, this.editPerson,  {
+                    status:'Inactivo',
+                    address: null,
+                    firstname : '',
+                    imgpath:'1',
+                    birthdate:'',
+                    gender:'',
+                    email:'',
+                    profession:'',
+                    fiscalNumber:'',
+                    curp:'',
+                    cellphone:'',
+                    phone:'',
+                    maritalstatus: {
+                        id: ''
+                    },
+                    persontype: {
+                        id: ''
+                    },
+                    family:[]
+                });
+            },
+            fetchPersonType(code){
+                this.$http.get('catalog/persontype/'+code,{
+                    params: {                       
+                        access_token:   window.access_token
+                    }
+                })
+                .then(response => {                    
+                    if(response.status != 200){
+                        this.editPerson.persontype= {
+                            id: 5, // por default cargo tutor, persona con menos permisos
+                            code: 'tutor'
+                        }
+                    }else{
+                        this.editPerson.persontype = response.body
+                    }                    
+                })
+                .catch(error => {                    
+                    
+                });
+
+            },
             pageChanged(page){
                 this.pagInfo.page = page-1;
                 this.fetchListPerson();

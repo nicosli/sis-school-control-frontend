@@ -31,17 +31,34 @@
             updatePerson(){
                 this.modalError = false;
                 this.buttonDisabled = true;
-                this.editPerson.fullname = this.editPerson.firstname + ' ' + this.editPerson.lastname;                
-                this.$http.put('person/?'+'access_token='+window.access_token, this.editPerson)
-                .then(response => {
-                    $('.modalConfigEvents').modal('hide');
-                    this.buttonDisabled = false;
-                    this.$emit('personEdited', this.editPerson);
-                })
-                .catch(error => {                    
-                    this.modalError = true;
-                    this.buttonDisabled = false;
-                });
+                this.editPerson.fullname = this.editPerson.firstname + ' ' + this.editPerson.lastname;
+
+                if("id" in this.editPerson){  // PARA HACER UN UPDATE EL ID DEBE EXISTIR
+                    this.$http.put('person/?'+'access_token='+window.access_token, this.editPerson)
+                        .then(response => {
+                            $('.modalConfigEvents').modal('hide');
+                            this.buttonDisabled = false;
+                            this.$emit('personEdited', this.editPerson);
+                        })
+                        .catch(error => {                    
+                            this.modalError = true;
+                            this.buttonDisabled = false;
+                            this.errorMessage = error.body.message;
+                        });
+                }else{
+                    this.$http.post('person/?'+'access_token='+window.access_token, this.editPerson)
+                        .then(response => {
+                            $('.modalConfigEvents').modal('hide');
+                            this.buttonDisabled = false;
+                            this.$emit('personEdited', this.editPerson);
+                        })
+                        .catch(error => {                    
+                            this.modalError = true;
+                            this.buttonDisabled = false;
+                            this.errorMessage = error.body.message;                            
+                        });
+                }
+                
             },
             checkSession: function(){
                 if(parseFloat(window.timestamp_token) <= Math.floor(Date.now() / 1000)){
@@ -135,6 +152,7 @@
                 showEditPerson: false,
                 avatars:[1,2,3,4,5,6,7,8,9,10,11,12],
                 modalError: false,
+                errorMessage :'',
                 buttonDisabled:false,
                 maritalStatusArray: '',
                 typeConf:{

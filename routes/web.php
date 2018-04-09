@@ -41,3 +41,13 @@ Route::group(['prefix' => 'Usuarios', 'middleware' => ['auth.api']], function() 
     Route::get('/Padres', 'PersonController@parent');
     Route::get('/Estudiantes', 'PersonController@student');
 });
+
+Route::group(['prefix' => 'Academic', 'middleware' => ['auth.api']], function() {
+    Route::get('/Schoolyear', 'AcademicController@schoolyear');
+    Route::get('/Grades', 'AcademicController@grades');
+    Route::get('/Groups', 'AcademicController@groups');
+    Route::get('/Classrooms', 'AcademicController@classrooms');
+    Route::get('/Assignments', 'AcademicController@assignments');
+    Route::get('/School', 'AcademicController@school');
+    Route::get('/Authorizations', 'AcademicController@authorizations');
+});

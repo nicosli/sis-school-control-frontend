@@ -166,13 +166,103 @@ class OtherTableSeeder extends Seeder
                     ('Mentor','person.relationship.tutor')");
 
 
-        //persontype_has_menu
+        //persontype_has_menu  Director
         DB::insert("REPLACE INTO persontype_has_menu (menu_id, person_type_id) VALUES 
 					(1,1),
 					(2,1),
 					(3,1),
 					(4,1),
 					(5,1),
-					(6,1)");
+					(6,1),
+					(7,1),
+					(8,1),
+					(9,1),
+					(10,1),
+					(11,1),
+					(12,1),
+					(13,1),
+					(14,1),
+					(15,1),
+					(16,1),
+					(17,1),
+					(18,1),
+					(19,1),
+					(20,1),
+					(21,1)");
+
+        //persontype_has_menu  System
+        DB::insert("REPLACE INTO persontype_has_menu (menu_id, person_type_id) VALUES 
+					(1,6),
+					(2,6),
+					(3,6),
+					(4,6),
+					(5,6),
+					(6,6),
+					(7,6),
+					(8,6),
+					(9,6),
+					(10,6),
+					(11,6),
+					(12,6),
+					(13,6),
+					(14,6),
+					(15,6),
+					(16,6),
+					(17,6),
+					(18,6),
+					(19,6),
+					(20,6),
+					(21,6)");
+
+
+         //persontype_has_menu  Secretary
+        DB::insert("REPLACE INTO persontype_has_menu (menu_id, person_type_id) VALUES 
+					(1,2),
+					(2,2),
+					(5,2),
+					(6,2),
+					(9,2),
+					(10,2),
+					(11,2),
+					(14,2),
+					(15,2),
+					(16,2)");
+
+
+         //persontype_has_menu  Professor
+        DB::insert("REPLACE INTO persontype_has_menu (menu_id, person_type_id) VALUES 
+					(1,3),
+					(2,3),
+					(5,3),
+					(6,3),
+					(9,3),
+					(10,3),
+					(11,3),
+					(14,3),
+					(15,3),
+					(16,3)");
+
+
+        //persontype_has_menu  Student
+        DB::insert("REPLACE INTO persontype_has_menu (menu_id, person_type_id) VALUES 
+					(1,4),
+					(2,4),
+					(5,4),
+					(6,4),
+					(9,4),
+					(10,4),
+					(11,4),					
+					(15,4),
+					(16,4)");
+
+
+         //persontype_has_menu  Tutor
+        DB::insert("REPLACE INTO persontype_has_menu (menu_id, person_type_id) VALUES 
+					(1,4),
+					(2,4),					
+					(6,4),										
+					(11,4),					
+					(13,4),
+					(16,4)");
     }
 }

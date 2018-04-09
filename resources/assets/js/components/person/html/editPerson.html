@@ -141,13 +141,13 @@
                                                 v-for="marital in maritalStatusArray">{{marital.description}}</option>
                                         </select>
                                     </div>
-                                </div>                                
+                                </div>
+                                <div class="dropdown-divider"></div>
                                 <div class="form-row" v-if="codePerson =='student'">
                                     <div class="form-group col-md-12">
                                         <label for="lastname">Relación</label>
                                         <select v-model="relationshipType" class="form-control">
                                             <option
-                                                :selected="(relationship.id === 1) ? 'selected' : ''"
                                                 :value="relationship"
                                                 v-for="relationship in relationshipTypeArray">{{relationship.description}}</option>
                                         </select>
@@ -174,8 +174,8 @@
                                         </button>
                                     </div>
                                 </div>
-                                <div class="form-row" v-if="codePerson =='student'">
-                                    <h3>Familia {{ editPerson.lastname }}</h3>
+                                <div class="form-row" v-if="familyPerson.length > 0">
+                                    <h4>Familia {{ editPerson.lastname }}</h4>
                                 </div>
                                 <table class="table table-sm" v-if="familyPerson.length > 0">
                                     <thead class="thead-light">
@@ -201,7 +201,7 @@
                                                     false-value="0"
                                                     >
                                             </td>
-                                            <td>
+                                            <td align="right">
                                                 <button 
                                                     type="button" 
                                                     @click="removeFamily(index)"

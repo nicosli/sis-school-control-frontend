@@ -82,7 +82,8 @@
                         id: ''
                     },
                     persontype: {
-                        id: ''
+                        id: '',
+                        code: this.code
                     },
                     family:[]
                 });

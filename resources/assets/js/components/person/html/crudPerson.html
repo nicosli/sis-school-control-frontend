@@ -65,8 +65,12 @@
                                         <span v-show="errors.has('form-person.lastname')" class="invalid-feedback">{{ errors.first('form-person.lastname') }}</span>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="lastname">Fecha de cumpleaños</label>
-                                        <flat-pickr v-model="editPerson.birthdate" :config="flatPickrConfig" class="form-control" placeholder="Selecciona una fecha"
+                                        <label>Fecha de cumpleaños</label>
+                                        <flat-pickr 
+                                            v-model="editPerson.birthdate" 
+                                            :config="flatPickrConfig" 
+                                            class="form-control" 
+                                            placeholder="Selecciona una fecha"
                                             name="birthdate"></flat-pickr>
                                     </div>
                                     <div class="form-group col-md-6">

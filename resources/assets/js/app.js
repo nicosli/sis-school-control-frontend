@@ -9,6 +9,11 @@ Vue.component(
 );
 
 Vue.component(
+    'school-year',
+    require('./components/academic/schoolYear.vue')
+);
+
+Vue.component(
     'dashboard',
     require('./components/home/Dashboard.vue')
 );

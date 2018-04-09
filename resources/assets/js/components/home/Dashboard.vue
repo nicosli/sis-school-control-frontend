@@ -39,7 +39,7 @@
 </div>
 </template>
 <script>
-    import ModalEditPerson from '../person/editPerson.vue';
+    import ModalEditPerson from '../person/crudPerson.vue';
     export default {
         methods:{
             fetchMe(){

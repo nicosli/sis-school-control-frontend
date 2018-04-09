@@ -1,7 +1,7 @@
 <template src="./html/listPerson.html"></template>
 
 <script>
-    import ModalEditPerson from './editPerson.vue';
+    import ModalEditPerson from './crudPerson.vue';
     import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
     import Paginate from 'vuejs-paginate';
 

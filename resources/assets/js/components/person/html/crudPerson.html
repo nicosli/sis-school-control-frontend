@@ -15,7 +15,7 @@
                     <div class="alert alert-danger" role="alert" v-show="modalError">
                         Algo salió mal, intenta de nuevo más tarde <strong>:'(</strong> - {{errorMessage}}                        
                     </div>
-                    <form>
+                    <form data-vv-scope="form-person">
                         <div class="card border-dark mb-3">
                             <div class="card-body text-dark p-0">
                                 <div class="d-flex p-3">
@@ -36,6 +36,9 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="alert alert-danger" role="alert" v-show="errorForm">
+                            Algunos campos son requeridos, intenta de nuevo...
+                        </div>
                         <nav>
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                 <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-general" role="tab" aria-controls="nav-general"
@@ -51,15 +54,15 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="firstname">Nombres</label>
-                                        <input type="text" name="firstname" :class="{'form-control': true, 'is-invalid': errors.has('firstname') }" v-validate="'required|alpha_spaces'"
+                                        <input type="text" name="firstname" :class="{'form-control': true, 'is-invalid': errors.has('form-person.firstname') }" v-validate="'required|alpha_spaces'"
                                             placeholder="Introduzca sus nombres" v-model="editPerson.firstname">
-                                        <span v-show="errors.has('firstname')" class="invalid-feedback">{{ errors.first('firstname') }}</span>
+                                        <span v-show="errors.has('form-person.firstname')" class="invalid-feedback">{{ errors.first('form-person.firstname') }}</span>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="lastname">Apellidos</label>
-                                        <input type="text" name="lastname" :class="{'form-control': true, 'is-invalid': errors.has('lastname') }" v-validate="'required|alpha_spaces'"
+                                        <input type="text" name="lastname" :class="{'form-control': true, 'is-invalid': errors.has('form-person.lastname') }" v-validate="'required|alpha_spaces'"
                                             placeholder="Introduzca sus apellidos" v-model="editPerson.lastname">
-                                        <span v-show="errors.has('lastname')" class="invalid-feedback">{{ errors.first('lastname') }}</span>
+                                        <span v-show="errors.has('form-person.lastname')" class="invalid-feedback">{{ errors.first('form-person.lastname') }}</span>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="lastname">Fecha de cumpleaños</label>
@@ -75,27 +78,27 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="lastname">email</label>
-                                        <input type="email" :class="{'form-control': true, 'is-invalid': errors.has('email') }" name="email" v-validate="'required|email'"
+                                        <input type="email" :class="{'form-control': true, 'is-invalid': errors.has('form-person.email') }" name="email" v-validate="'required|email'"
                                             placeholder="Introduzca su email" v-model="editPerson.email">
-                                        <span v-show="errors.has('email')" class="invalid-feedback">{{ errors.first('email') }}</span>
+                                        <span v-show="errors.has('form-person.email')" class="invalid-feedback">{{ errors.first('form-person.email') }}</span>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="lastname">Profesión</label>
-                                        <input type="text" name="profession" :class="{'form-control': true, 'is-invalid': errors.has('profession') }" v-validate="'required|alpha_spaces'"
+                                        <input type="text" name="profession" :class="{'form-control': true, 'is-invalid': errors.has('form-person.profession') }" v-validate="'required|alpha_spaces'"
                                             placeholder="Introduzca su profesión" v-model="editPerson.profession">
-                                        <span v-show="errors.has('profession')" class="invalid-feedback">{{ errors.first('profession') }}</span>
+                                        <span v-show="errors.has('form-person.profession')" class="invalid-feedback">{{ errors.first('form-person.profession') }}</span>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="lastname">RFC</label>
-                                        <input type="text" name="fiscalNumber" :class="{'form-control': true, 'is-invalid': errors.has('fiscalNumber') }" v-validate="'required|alpha_num|min:11|max:13'"
+                                        <input type="text" name="fiscalNumber" :class="{'form-control': true, 'is-invalid': errors.has('form-person.fiscalNumber') }" v-validate="'required|alpha_num|min:11|max:13'"
                                             placeholder="Introduzca su RFC" v-model="editPerson.fiscalNumber">
-                                        <span v-show="errors.has('fiscalNumber')" class="invalid-feedback">{{ errors.first('fiscalNumber') }}</span>
+                                        <span v-show="errors.has('form-person.fiscalNumber')" class="invalid-feedback">{{ errors.first('form-person.fiscalNumber') }}</span>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="lastname">CURP</label>
-                                        <input type="text" name="curp" :class="{'form-control': true, 'is-invalid': errors.has('curp') }" v-validate="'required|alpha_num|min:11|max:18'"
+                                        <input type="text" name="curp" :class="{'form-control': true, 'is-invalid': errors.has('form-person.curp') }" v-validate="'required|alpha_num|min:11|max:18'"
                                             placeholder="Introduzca su curp" v-model="editPerson.curp">
-                                        <span v-show="errors.has('curp')" class="invalid-feedback">{{ errors.first('curp') }}</span>
+                                        <span v-show="errors.has('form-person.curp')" class="invalid-feedback">{{ errors.first('form-person.curp') }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -103,15 +106,15 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="lastname">Celular</label>
-                                        <input type="text" name="cellphone" :class="{'form-control': true, 'is-invalid': errors.has('cellphone') }" v-validate="'required|digits:10'"
+                                        <input type="text" name="cellphone" :class="{'form-control': true, 'is-invalid': errors.has('form-person.cellphone') }" v-validate="'required|digits:10'"
                                             placeholder="Introduzca su celular" v-model="editPerson.cellphone">
-                                        <span v-show="errors.has('cellphone')" class="invalid-feedback">{{ errors.first('cellphone') }}</span>
+                                        <span v-show="errors.has('form-person.cellphone')" class="invalid-feedback">{{ errors.first('form-person.cellphone') }}</span>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="lastname">Teléfono</label>
-                                        <input type="text" name="phone" :class="{'form-control': true, 'is-invalid': errors.has('phone') }" v-validate="'required|digits:10'"
+                                        <input type="text" name="phone" :class="{'form-control': true, 'is-invalid': errors.has('form-person.phone') }" v-validate="'required|digits:10'"
                                             placeholder="Introduzca su teléfono" v-model="editPerson.phone">
-                                        <span v-show="errors.has('phone')" class="invalid-feedback">{{ errors.first('phone') }}</span>
+                                        <span v-show="errors.has('form-person.phone')" class="invalid-feedback">{{ errors.first('form-person.phone') }}</span>
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label>Código postal o Colonia</label>
@@ -142,7 +145,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="dropdown-divider"></div>
+                                <div class="dropdown-divider" v-if="codePerson =='student'"></div>
                                 <div class="form-row" v-if="codePerson =='student'">
                                     <div class="form-group col-md-12">
                                         <label for="lastname">Relación</label>

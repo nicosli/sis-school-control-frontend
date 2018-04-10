@@ -211,6 +211,8 @@
                 this.familyPerson = ("family" in this.editPerson)?this.editPerson.family:'';
                 if("address" in this.editPerson && this.editPerson.address!==null){
                     this.initialDisplay();
+                }else{
+                    this.$refs.autocomplete.clearValues();
                 }
             },
             addressStreet: function(street){

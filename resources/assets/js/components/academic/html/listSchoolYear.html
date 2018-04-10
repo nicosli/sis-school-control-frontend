@@ -4,7 +4,7 @@
         type="button" 
         class="btn btn-secondary mb-3" 
         data-toggle="modal" 
-        data-target=".modalEdit"
+        data-target=".modalSchoolYear"
         @click="showModalAddSchoolYear()"><i class="fas fa-user-plus"></i> Agregar</button>
 
     <table class="table" v-if="schoolYears.length > 0">
@@ -38,7 +38,7 @@
                         class="btn btn-outline-primary btn-sm" 
                         data-toggle="modal" 
                         data-target=".modalSchoolYear"
-                        @click="showModalAddSchoolYear(schoolYear)">Editar</button>
+                        @click="showModalEditSchoolYear(schoolYear)">Editar</button>
                 </td>
             </tr>
         </tbody>

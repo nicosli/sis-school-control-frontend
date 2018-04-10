@@ -10,7 +10,7 @@ Vue.component(
 
 Vue.component(
     'school-year',
-    require('./components/academic/schoolYear.vue')
+    require('./components/academic/listSchoolYear.vue')
 );
 
 Vue.component(

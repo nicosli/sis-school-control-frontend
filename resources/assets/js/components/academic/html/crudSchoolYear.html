@@ -10,10 +10,22 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    
+                <div class="modal-body">                    
                     <form data-vv-scope="form-schoolYear">
                         <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="name">Nombre del curso escolar</label>
+                                <input 
+                                    type="text" 
+                                    name="name" 
+                                    :class="{'form-control': true, 'is-invalid': errors.has('form-schoolYear.name') }"
+                                    v-validate="'required'" 
+                                    placeholder="Introduzca sus nombres" 
+                                    v-model="schoolYear.name">
+                                <span 
+                                    v-show="errors.has('form-schoolYear.name')" 
+                                    class="invalid-feedback">{{ errors.first('form-schoolYear.name') }}</span>
+                            </div>
                             <div class="form-group col-md-6">
                                 <label>Fecha Inicio</label>
                                 <flat-pickr 
@@ -31,6 +43,17 @@
                                     class="form-control" 
                                     placeholder="Selecciona una fecha"
                                     name="end"></flat-pickr>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="d-block">Estado del curso escolar</label>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="radioA" name="radioStatus" v-model="schoolYear.status" value="A" class="custom-control-input">
+                                    <label class="custom-control-label" for="radioA">Activo</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="radioI" name="radioStatus" v-model="schoolYear.status" value="I" class="custom-control-input">
+                                    <label class="custom-control-label" for="radioI">Inactivo</label>
+                                </div>
                             </div>
                         </div>
                     </form>

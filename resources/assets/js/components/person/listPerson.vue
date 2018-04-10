@@ -65,28 +65,7 @@
             },
             showModalAddPerson(){                
                 this.fetchPersonType(this.code);
-                this.editPerson = Object.assign({}, this.editPerson,  {
-                    status:'Inactivo',
-                    address: null,
-                    firstname : '',
-                    imgpath:'1',
-                    birthdate:'',
-                    gender:'',
-                    email:'',
-                    profession:'',
-                    fiscalNumber:'',
-                    curp:'',
-                    cellphone:'',
-                    phone:'',
-                    maritalstatus: {
-                        id: ''
-                    },
-                    persontype: {
-                        id: '',
-                        code: this.code
-                    },
-                    family:[]
-                });
+                this.editPerson = {}
             },
             fetchPersonType(code){
                 this.$http.get('catalog/persontype/'+code,{

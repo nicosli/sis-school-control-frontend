@@ -1,4 +1,4 @@
-<template src="./html/schoolYear.html"></template>
+<template src="./html/listSchoolYear.html"></template>
 <script>
 import modalSchoolYear from './crudSchoolYear.vue';
 export default {
@@ -14,6 +14,9 @@ export default {
                 });
         },
         showModalAddSchoolYear(schoolYear){
+            this.schoolYear = {}
+        },
+        showModalEditSchoolYear(schoolYear){
             this.schoolYear = Object.assign({}, this.schoolYear, schoolYear);
         }
     },

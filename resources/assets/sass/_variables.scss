@@ -1,7 +1,9 @@
 $blue: #28a3ea;
 $font-size-base : 0.9rem;
 
-
+.flatpickr-month{
+    height: 35px !important;
+}
 .lineAuto {
     border-left: 2px solid $blue;
 }

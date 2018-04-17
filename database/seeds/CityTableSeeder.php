@@ -11,7 +11,7 @@ class CityTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::insert("REPLACE INTO city (name, state_id) VALUES 
+        DB::insert("INSERT INTO city (name, state_province) VALUES 
 					('Aguascalientes', 1),
 					('Asientos', 1),
 					('Calvillo', 1),

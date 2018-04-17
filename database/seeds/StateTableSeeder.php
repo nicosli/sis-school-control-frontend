@@ -11,7 +11,7 @@ class StateTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::insert("REPLACE INTO state (code, name, country_id) VALUES 
+        DB::insert("INSERT INTO state_province (code, name, country) VALUES 
 					('AGS', 'Aguascalientes', 170),
 					('BC', 'Baja California', 170),
 					('BCS', 'Baja California Sur', 170),

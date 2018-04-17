@@ -16,11 +16,11 @@ class OtherTableSeeder extends Seeder
     	$faker = Faker::create();
 
         // Configuracion:
-         DB::insert("REPLACE INTO configuration (name, value) VALUES ('setInitConfig','true')");
+        // DB::insert("INSERT INTO configuration (name, value) VALUES ('setInitConfig','true')");
 
 
          //Tipos de documento:
-        foreach (range(1, 5) as $i => $v) {
+        /*foreach (range(1, 5) as $i => $v) {
             DB::table('document_type')->insert([
                 'description'       => $faker->sentence(10)                
             ]);
@@ -41,81 +41,130 @@ class OtherTableSeeder extends Seeder
 	            ]);
         	}
             
-        }
+        } */
+
+
+        // Gender
+        DB::table('individual.gender')->insert([
+            'id'            => 1,
+            'description'   => 'Male'
+        ]);
+        DB::table('individual.gender')->insert([
+            'id'            => 2,
+            'description'   => 'Female'
+        ]);
+
+
+        //contact_type
+        DB::table('individual.contact_type')->insert([
+            'id'            => 1,
+            'description'   => 'Address'
+        ]);
+        DB::table('individual.contact_type')->insert([
+            'id'            => 2,
+            'description'   => 'Email'
+        ]);
+        DB::table('individual.contact_type')->insert([
+            'id'            => 3,
+            'description'   => 'Phone'
+        ]);
+
+
+        //ADDRESS_TYPE
+        DB::table('individual.type')->insert([
+            'id'            => 1,
+            'description'   => 'Home'
+        ]);
+        DB::table('individual.type')->insert([
+            'id'            => 2,
+            'description'   => 'Trabajo'
+        ]);
+        DB::table('individual.type')->insert([
+            'id'            => 3,
+            'description'   => 'Mail'
+        ]);
+        DB::table('individual.type')->insert([
+            'id'            => 4,
+            'description'   => 'Otro'
+        ]);        
 
 
         //maritalstatus        
-		DB::table('maritalstatus')->insert([
+		DB::table('individual.maritalstatus')->insert([
+			'id' 				=> 1,
             'description'       => 'Casado'                       
         ]);
-        DB::table('maritalstatus')->insert([
+        DB::table('individual.maritalstatus')->insert([
+        	'id' 				=> 2,
             'description'       => 'Unión Civil'                       
         ]);
-        DB::table('maritalstatus')->insert([
+        DB::table('individual.maritalstatus')->insert([
+        	'id' 				=> 3,
             'description'       => 'Divorciado'                       
         ]);
-        DB::table('maritalstatus')->insert([
+        DB::table('individual.maritalstatus')->insert([
+        	'id' 				=> 4,
             'description'       => 'Viudo'                       
         ]);
-        DB::table('maritalstatus')->insert([
+        DB::table('individual.maritalstatus')->insert([
+        	'id' 				=> 5,
             'description'       => 'Soltero'                       
         ]);
 	
 		
         	
         //Menu
-        DB::insert("REPLACE INTO menu (description, i18n, icon, url, sub_menu_parent_id) VALUES 
-					('Home','system.menu.100','system.icon.home','/',NULL),					
-					('Académico','system.menu.200','system.icon.academic',NULL,NULL),
-					('Usuarios','system.menu.300','system.icon.user',NULL,NULL),
-					('Administración','system.menu.400','system.icon.admon',NULL,NULL),					
-					('ePublish','system.menu.600','system.icon.pictour','/epublish',NULL),
-					('Configuración','system.menu.600','system.icon.settings','/settings',NULL),
+        DB::insert("INSERT INTO security.menu (id, description, icon, path, submenu_parent) VALUES 
+					(1,'Home','system.icon.home','/',NULL),					
+					(2,'Académico','system.icon.academic',NULL,NULL),
+					(3,'Usuarios','system.icon.user',NULL,NULL),
+					(4,'Administración','system.icon.admon',NULL,NULL),					
+					(5,'ePublish','system.icon.pictour','/epublish',NULL),
+					(6,'Configuración','system.icon.settings','/settings',NULL),
 
-					('Curso Escolar','system.submenu.201',NULL,'/Academic/Schoolyear',2),
-					('Grados','system.submenu.202',NULL,'/Academic/Grades',2),
-					('Grupos','system.submenu.203',NULL,'/Academic/Groups',2),
-					('Salones','system.submenu.204',NULL,'/Academic/Classrooms',2),
-					('Materias','system.submenu.205',NULL,'/Academic/Assignments',2),
-					('Escuela','system.submenu.206',NULL,'/Academic/School',2),
-					('Autorizaciones','system.submenu.207',NULL,'/Academic/Authorizations',2),
+					(7,'Curso Escolar',NULL,'/Academic/Schoolyear',2),
+					(8,'Grados',NULL,'/Academic/Grades',2),
+					(9,'Grupos',NULL,'/Academic/Groups',2),
+					(10,'Salones',NULL,'/Academic/Classrooms',2),
+					(11,'Materias',NULL,'/Academic/Assignments',2),
+					(12,'Escuela',NULL,'/Academic/School',2),
+					(13,'Autorizaciones',NULL,'/Academic/Authorizations',2),
 
-					('Lista Asistencia','system.submenu.2031',NULL,'/Academic/Groups/Lists',9),
+					(14,'Lista Asistencia',NULL,'/Academic/Groups/Lists',9),
 
-					('Materias Asignadas','system.submenu.2051',NULL,'/Academic/Assignments/Lists',11),
-					('Recursos','system.submenu.2052',NULL,'/Academic/Assignments/Resources',11),
+					(15,'Materias Asignadas',NULL,'/Academic/Assignments/Lists',11),
+					(16,'Recursos',NULL,'/Academic/Assignments/Resources',11),
 
-					('Personal Administrativo','system.submenu.301',NULL,'/Usuarios/Administrativo',3),
-					('Personal Docente','system.submenu.302',NULL,'/Usuarios/Docente',3),
-					('Tutores','system.submenu.303',NULL,'/Usuarios/Tutores',3),					
-					('Estudiantes','system.submenu.305',NULL,'/Usuarios/Estudiantes',3),
+					(17,'Personal Administrativo',NULL,'/Usuarios/Administrativo',3),
+					(18,'Personal Docente',NULL,'/Usuarios/Docente',3),
+					(19,'Tutores',NULL,'/Usuarios/Tutores',3),					
+					(20,'Estudiantes',NULL,'/Usuarios/Estudiantes',3),
 					
-					('Contable','system.submenu.401',NULL,'/Administrative/Accounting',4)		
-					
+					(21,'Contable',NULL,'/Administrative/Accounting',4)					
 					");
 
 
 
         //permission
-        DB::insert("REPLACE INTO permission (description, permission) VALUES 
-					('READ',1),
-					('UPDATE',2),
-					('CREATE',3),
-					('DELETE',4)");
+        DB::insert("INSERT INTO security.permission (id, description, action) VALUES 
+					(1,'READ',1),
+					(2,'UPDATE',2),
+					(3,'CREATE',3),
+					(4,'DELETE',4)");
 
 
         //role
-        DB::insert("REPLACE INTO role (description, name) VALUES 
-        			('ROLADMIN','ADMINISTRATOR'),
-					('ROLASSISTANT','ASSISTANT'),
-					('ROLTEACHER','DEAN'),					
-					('ROLSTUDENT','STUDENT'),
-					('ROLTUTOR','TUTOR')");
+        DB::insert("INSERT INTO security.role (id, description, name) VALUES 
+        			(1,'ROLE_ADMIN','ADMINISTRATOR'),
+					(2,'ROLE_ASSISTANT','ASSISTANT'),
+					(3,'ROLE_TEACHER','DEAN'),					
+					(4,'ROLE_STUDENT','STUDENT'),
+					(5,'ROLE_TUTOR','TUTOR')");
 
 
 
         //role_has_permission
-        DB::insert("REPLACE INTO role_has_permission (role_id, permissions_id) VALUES 
+        DB::insert("INSERT INTO security.role_permission (role, permission) VALUES 
 					(1,1),
 					(1,2),
 					(1,3),
@@ -134,40 +183,40 @@ class OtherTableSeeder extends Seeder
 
 
         //persontype
-        DB::insert("REPLACE INTO persontype (description,code, i18n, role_id) VALUES 
-					('Director','director','person.type.100',1),
-					('Secretaria', 'secretary', 'person.type.200',2),					
-					('Profesor','teacher','person.type.300',3),					
-					('Estudiante','student','person.type.500',4),
-					('Tutor','tutor','person.type.600',5),
-					('System','system','system.user',1)");
+        DB::insert("INSERT INTO individual.person_type (id, description, code, role) VALUES 
+					(1,'Director','director',1),
+					(2,'Secretaria', 'secretary',2),					
+					(3,'Profesor','teacher',3),					
+					(4,'Estudiante','student',4),
+					(5,'Tutor','tutor',5),
+					(6,'System','system',1)");
 
 
 
         //publication_type
-        DB::insert("REPLACE INTO publication_type (description, i18n) VALUES 
+        /*DB::insert("INSERT INTO publication_type (description, i18n) VALUES 
 					('Warning','publication.type.warn'),
 					('Notice','publication.type.info'),
 					('Urgent','publication.type.urgent'),
 					('Important','publication.type.important'),
-					('Hollyday','publication.type.holliday')");
+					('Hollyday','publication.type.holliday')"); */
 
 
         //relationship_type
-        DB::insert("REPLACE INTO relationship_type (description, i18n) VALUES 
-                    ('Padre','person.relationship.father'),
-                    ('Madre','person.relationship.mother'),
-                    ('Hijo','person.relationship.son'),
-                    ('Hija','person.relationship.daughtar'),
-                    ('Tia','person.relationship.aunt'),
-                    ('Tio','person.relationship.uncle'),
-                    ('Abuelo','person.relationship.grandfather'),
-                    ('Abuela','person.relationship.grandmother'),
-                    ('Mentor','person.relationship.tutor')");
+        DB::insert("INSERT INTO individual.relationship_type (id, description) VALUES 
+                    (1,'Padre'),
+                    (2,'Madre'),
+                    (3,'Hijo'),
+                    (4,'Hija'),
+                    (5,'Tia'),
+                    (6,'Tio'),
+                    (7,'Abuelo'),
+                    (8,'Abuela'),
+                    (9,'Mentor')");
 
 
-        //persontype_has_menu  Director
-        DB::insert("REPLACE INTO persontype_has_menu (menu_id, person_type_id) VALUES 
+        //security.persontype_menu  Director
+        DB::insert("INSERT INTO security.persontype_menu (menu, persontype) VALUES 
 					(1,1),
 					(2,1),
 					(3,1),
@@ -190,8 +239,8 @@ class OtherTableSeeder extends Seeder
 					(20,1),
 					(21,1)");
 
-        //persontype_has_menu  System
-        DB::insert("REPLACE INTO persontype_has_menu (menu_id, person_type_id) VALUES 
+        //security.persontype_menu  System
+        DB::insert("INSERT INTO security.persontype_menu (menu, persontype) VALUES 
 					(1,6),
 					(2,6),
 					(3,6),
@@ -215,8 +264,8 @@ class OtherTableSeeder extends Seeder
 					(21,6)");
 
 
-         //persontype_has_menu  Secretary
-        DB::insert("REPLACE INTO persontype_has_menu (menu_id, person_type_id) VALUES 
+         //security.persontype_menu  Secretary
+        DB::insert("INSERT INTO security.persontype_menu (menu, persontype) VALUES 
 					(1,2),
 					(2,2),
 					(5,2),
@@ -229,8 +278,8 @@ class OtherTableSeeder extends Seeder
 					(16,2)");
 
 
-         //persontype_has_menu  Professor
-        DB::insert("REPLACE INTO persontype_has_menu (menu_id, person_type_id) VALUES 
+         //security.persontype_menu  Professor
+        DB::insert("INSERT INTO security.persontype_menu (menu, persontype) VALUES 
 					(1,3),
 					(2,3),
 					(5,3),
@@ -243,8 +292,8 @@ class OtherTableSeeder extends Seeder
 					(16,3)");
 
 
-        //persontype_has_menu  Student
-        DB::insert("REPLACE INTO persontype_has_menu (menu_id, person_type_id) VALUES 
+        //security.persontype_menu  Student
+        DB::insert("INSERT INTO security.persontype_menu (menu, persontype) VALUES 
 					(1,4),
 					(2,4),
 					(5,4),
@@ -256,8 +305,8 @@ class OtherTableSeeder extends Seeder
 					(16,4)");
 
 
-         //persontype_has_menu  Tutor
-        DB::insert("REPLACE INTO persontype_has_menu (menu_id, person_type_id) VALUES 
+         //security.persontype_menu  Tutor
+        DB::insert("INSERT INTO security.persontype_menu (menu, persontype) VALUES 
 					(1,4),
 					(2,4),					
 					(6,4),										

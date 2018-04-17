@@ -11,7 +11,7 @@ class CountryTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::insert("REPLACE INTO country (code, country_name) VALUES 
+        DB::insert("INSERT INTO country (code, name) VALUES 
 					('AA','Aruba'),
 					('AC','Antigua and Barbuda'),
 					('AE','United Arab Emirates'),
@@ -132,7 +132,7 @@ class CountryTableSeeder extends Seeder
 					('IR','Iran'),
 					('IS','Israel'),
 					('IT','Italy'),
-					('IV','Cote d\'Ivoire'),
+					('IV','Cote dIvoire'),
 					('IZ','Iraq'),
 					('JA','Japan'),
 					('JE','Jersey'),
@@ -191,7 +191,7 @@ class CountryTableSeeder extends Seeder
 					('NH','Vanuatu'),
 					('NI','Nigeria'),
 					('NL','Netherlands'),
-					('NM','No Man\'s Land'),
+					('NM','No Mans Land'),
 					('NO','Norway'),
 					('NP','Nepal'),
 					('NR','Nauru'),

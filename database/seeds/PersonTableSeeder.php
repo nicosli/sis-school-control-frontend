@@ -16,35 +16,18 @@ class PersonTableSeeder extends Seeder
         $faker = Faker::create();
         $gender = ['male', 'female'];
        
-       //STATUS
-        DB::table('security.status')->insert([
-            'id'              => 200,
-            'description'     => 'ACTIVE'
-        ]);
-        DB::table('security.status')->insert([
-            'id'              => 201,
-            'description'     => 'CREATED'
-        ]);
-        DB::table('security.status')->insert([
-            'id'              => 401,
-            'description'     => 'Unauthorized'
-        ]);
-        DB::table('security.status')->insert([
-            'id'              => 403,
-            'description'     => 'Forbiden'
-        ]);
+       
         
         
                 
         // ADMIN -------
-        $networkid = DB::table('person')->insertGetId([
+        $networkid = DB::table('individual.person')->insertGetId([
             'first_name'      => 'Admin',
             'middle_name'     => 'Admin',
             'last_name'       => 'Admin',
             'second_last_name'=> 'Admin',
             'dob'             => '1985-05-29',
-            'gender'          => 1,
-            'fullname'        => 'Admi Admin',
+            'gender'          => 1,            
             'curp'            => $faker->numerify('CURP-######'),
             'tin'             => $faker->numerify('RFC-########'),
             'citizenship'     => 'M',
@@ -52,7 +35,8 @@ class PersonTableSeeder extends Seeder
             'image_path'      => 2,
             'maritalstatus'   => rand(1,5),
             'type'	          => 1,
-            'created_at'      => 'NOW()'
+            'created_at'      => 'NOW()',
+            'created_by'      => 'admin'
         ], 'networkid');
 
 
@@ -60,7 +44,9 @@ class PersonTableSeeder extends Seeder
         DB::table('security.sam')->insert([
             'networkid'     => $networkid,
             'keyword'       => '8c3818afbd9338f12350229831de9cf7230b696273919be4371d11b48714feb6',
-            'status'        => 200
+            'status'        => 200,
+            'created_at'      => 'NOW()',
+            'created_by'      => 'admin'
         ]);
 
         //CONTACT address
@@ -74,7 +60,9 @@ class PersonTableSeeder extends Seeder
             'type'          => 1,
             'contact'       => $contact_address_id,
             'primary'       => 1,
-            'township'      => 654
+            'township'      => 654,
+            'created_at'      => 'NOW()',
+            'created_by'      => 'admin'
         ]); 
 
 
@@ -88,7 +76,9 @@ class PersonTableSeeder extends Seeder
             'address'         => 'admin@emile.com',
             'type'          => 1,
             'contact'       => $contact_email_id,
-            'primary'       => 1
+            'primary'       => 1,
+            'created_at'      => 'NOW()',
+            'created_by'      => 'admin'
         ]); 
 
 
@@ -102,7 +92,9 @@ class PersonTableSeeder extends Seeder
             'number'         => $faker->phoneNumber,
             'type'          => 1,
             'contact'       => $contact_phone_id,
-            'primary'       => 1
+            'primary'       => 1,
+            'created_at'      => 'NOW()',
+            'created_by'      => 'admin'
         ]);
 
 
@@ -114,8 +106,7 @@ class PersonTableSeeder extends Seeder
 
         	$gender_idx = rand(0,1);
 
-            $networkid = DB::table('individual.person')->insertGetId([
-                'fullname'        => $faker->name($gender[$gender_idx]),
+            $networkid = DB::table('individual.person')->insertGetId([                
                 'first_name'      => $faker->firstName(),
                 'middle_name'     => '',
                 'last_name'       => $faker->lastName,
@@ -129,7 +120,8 @@ class PersonTableSeeder extends Seeder
                 'image_path'      => $gender[$gender_idx]=='male'?2:1,
                 'maritalstatus'   => rand(1,5),
                 'type'            => rand(1,6),
-                'created_at'      => 'NOW()'
+                'created_at'      => 'NOW()',
+                'created_by'      => 'admin'
             ], 'networkid');
 
 
@@ -137,7 +129,9 @@ class PersonTableSeeder extends Seeder
             DB::table('security.sam')->insert([
                 'networkid'     => $networkid,
                 'keyword'       => $faker->sha256,
-                'status'        => 200
+                'status'        => 200,
+                'created_at'      => 'NOW()',
+                'created_by'      => 'admin'
             ]);
 
             //CONTACT address
@@ -151,7 +145,9 @@ class PersonTableSeeder extends Seeder
                 'type'          => rand(1,3),
                 'contact'       => $contact_address_id,
                 'primary'       => 1,
-                'township'      => rand(1, 145850)
+                'township'      => rand(1, 145850),
+                'created_at'      => 'NOW()',
+                'created_by'      => 'admin'
             ]); 
 
 
@@ -165,7 +161,9 @@ class PersonTableSeeder extends Seeder
                 'address'       => $faker->email,
                 'type'          => rand(1,3),
                 'contact'       => $contact_email_id,
-                'primary'       => 1
+                'primary'       => 1,
+                'created_at'      => 'NOW()',
+                'created_by'      => 'admin'
             ]); 
 
 
@@ -179,7 +177,9 @@ class PersonTableSeeder extends Seeder
                 'number'        => $faker->phoneNumber,
                 'type'          => rand(1,3),
                 'contact'       => $contact_phone_id,
-                'primary'       => 1
+                'primary'       => 1,
+                'created_at'      => 'NOW()',
+                'created_by'      => 'admin'
             ]);
 
 

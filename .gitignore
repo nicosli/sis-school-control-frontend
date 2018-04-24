@@ -15,3 +15,7 @@ public/css/app.css
 public/mixed/css/app.css
 public/js/app.js
 package-lock.json
+/.project
+/.buildpath
+/.settings/
+/composer.lock

@@ -44,6 +44,25 @@ class OtherTableSeeder extends Seeder
         } */
 
 
+        //STATUS
+        DB::table('security.status')->insert([
+            'id'              => 200,
+            'description'     => 'ACTIVE'
+        ]);
+        DB::table('security.status')->insert([
+            'id'              => 201,
+            'description'     => 'CREATED'
+        ]);
+        DB::table('security.status')->insert([
+            'id'              => 401,
+            'description'     => 'Unauthorized'
+        ]);
+        DB::table('security.status')->insert([
+            'id'              => 403,
+            'description'     => 'Forbiden'
+        ]);
+
+
         // Gender
         DB::table('individual.gender')->insert([
             'id'            => 1,

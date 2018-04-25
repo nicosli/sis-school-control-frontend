@@ -15,10 +15,6 @@ class PersonTableSeeder extends Seeder
 
         $faker = Faker::create();
         $gender = ['male', 'female'];
-       
-       
-        
-        
                 
         // ADMIN -------
         $networkid = DB::table('individual.person')->insertGetId([
@@ -29,6 +25,9 @@ class PersonTableSeeder extends Seeder
             'dob'             => '1985-05-29',
             'gender'          => 1,            
             'curp'            => $faker->numerify('CURP-######'),
+            'phone'           => $faker->phoneNumber,
+            'cellphone'       => $faker->phoneNumber,
+            'email'           => 'admin@emile.com',
             'tin'             => $faker->numerify('RFC-########'),
             'citizenship'     => 'M',
             'occupation'       => $faker->sentence(2),
@@ -49,57 +48,17 @@ class PersonTableSeeder extends Seeder
             'created_by'      => 'admin'
         ]);
 
-        //CONTACT address
-        $contact_address_id = DB::table('individual.contact')->insertGetId([            
-            'networkid'     => $networkid,
-            'type'          => 1
-        ]); 
         //ADDRESS
         DB::table('individual.address')->insert([            
             'line1'         => 'line 1 no 1',
             'type'          => 1,
-            'contact'       => $contact_address_id,
+            'networkid'     => $networkid,
             'primary'       => 1,
             'township'      => 654,
             'created_at'      => 'NOW()',
             'created_by'      => 'admin'
         ]); 
 
-
-        //CONTACT EMAIL
-        $contact_email_id = DB::table('individual.contact')->insertGetId([            
-            'networkid'     => $networkid,
-            'type'          => 2
-        ]);
-        //EMAIL
-        DB::table('individual.email')->insert([            
-            'address'         => 'admin@emile.com',
-            'type'          => 1,
-            'contact'       => $contact_email_id,
-            'primary'       => 1,
-            'created_at'      => 'NOW()',
-            'created_by'      => 'admin'
-        ]); 
-
-
-        //CONTACT PHONE
-        $contact_phone_id = DB::table('individual.contact')->insertGetId([            
-            'networkid'     => $networkid,
-            'type'          => 3
-        ]);
-        //PHONE
-        DB::table('individual.phone')->insert([            
-            'number'         => $faker->phoneNumber,
-            'type'          => 1,
-            'contact'       => $contact_phone_id,
-            'primary'       => 1,
-            'created_at'      => 'NOW()',
-            'created_by'      => 'admin'
-        ]);
-
-
-        
-        
         
 
         foreach (range(1, 700) as $i => $v) {   
@@ -114,6 +73,9 @@ class PersonTableSeeder extends Seeder
                 'dob'             => $faker->dateTimeThisCentury->format('Y-m-d'),
                 'gender'          => $gender_idx+1,                
                 'curp'            => $faker->numerify('CURP-######'),
+                'phone'           => $faker->phoneNumber,
+                'cellphone'       => $faker->phoneNumber,
+                'email'           => $faker->email,
                 'tin'             => $faker->numerify('RFC-########'),
                 'citizenship'     => 'M',
                 'occupation'       => $faker->sentence(2),
@@ -134,55 +96,17 @@ class PersonTableSeeder extends Seeder
                 'created_by'      => 'admin'
             ]);
 
-            //CONTACT address
-            $contact_address_id = DB::table('individual.contact')->insertGetId([            
-                'networkid'     => $networkid,
-                'type'          => 1
-            ]); 
+            
             //ADDRESS
             DB::table('individual.address')->insert([            
                 'line1'         => $faker->address,
                 'type'          => rand(1,3),
-                'contact'       => $contact_address_id,
+                'networkid'     => $networkid,
                 'primary'       => 1,
                 'township'      => rand(1, 145850),
                 'created_at'      => 'NOW()',
                 'created_by'      => 'admin'
             ]); 
-
-
-            //CONTACT EMAIL
-            $contact_email_id = DB::table('individual.contact')->insertGetId([            
-                'networkid'     => $networkid,
-                'type'          => 2
-            ]);
-            //EMAIL
-            DB::table('individual.email')->insert([            
-                'address'       => $faker->email,
-                'type'          => rand(1,3),
-                'contact'       => $contact_email_id,
-                'primary'       => 1,
-                'created_at'      => 'NOW()',
-                'created_by'      => 'admin'
-            ]); 
-
-
-            //CONTACT PHONE
-            $contact_phone_id = DB::table('individual.contact')->insertGetId([            
-                'networkid'     => $networkid,
-                'type'          => 3
-            ]);
-            //PHONE
-            DB::table('individual.phone')->insert([            
-                'number'        => $faker->phoneNumber,
-                'type'          => rand(1,3),
-                'contact'       => $contact_phone_id,
-                'primary'       => 1,
-                'created_at'      => 'NOW()',
-                'created_by'      => 'admin'
-            ]);
-
-
             
         } 
     }

@@ -53,7 +53,7 @@ class PersonTableSeeder extends Seeder
             'line1'         => 'line 1 no 1',
             'type'          => 1,
             'networkid'     => $networkid,
-            'primary'       => 1,
+            'is_primary'       => 1,
             'township'      => 654,
             'created_at'      => 'NOW()',
             'created_by'      => 'admin'
@@ -102,7 +102,7 @@ class PersonTableSeeder extends Seeder
                 'line1'         => $faker->address,
                 'type'          => rand(1,3),
                 'networkid'     => $networkid,
-                'primary'       => 1,
+                'is_primary'       => 1,
                 'township'      => rand(1, 145850),
                 'created_at'      => 'NOW()',
                 'created_by'      => 'admin'

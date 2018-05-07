@@ -17,7 +17,7 @@ class PersonTableSeeder extends Seeder
         $gender = ['male', 'female'];
                 
         // ADMIN -------
-        $networkid = DB::table('individual.person')->insertGetId([
+        $networkid = DB::table('mdm.person')->insertGetId([
             'first_name'      => 'Admin',
             'middle_name'     => 'Admin',
             'last_name'       => 'Admin',
@@ -49,7 +49,7 @@ class PersonTableSeeder extends Seeder
         ]);
 
         //ADDRESS
-        DB::table('individual.address')->insert([            
+        DB::table('mdm.address')->insert([            
             'line1'         => 'line 1 no 1',
             'type'          => 1,
             'networkid'     => $networkid,
@@ -65,7 +65,7 @@ class PersonTableSeeder extends Seeder
 
         	$gender_idx = rand(0,1);
 
-            $networkid = DB::table('individual.person')->insertGetId([                
+            $networkid = DB::table('mdm.person')->insertGetId([                
                 'first_name'      => $faker->firstName(),
                 'middle_name'     => '',
                 'last_name'       => $faker->lastName,
@@ -98,7 +98,7 @@ class PersonTableSeeder extends Seeder
 
             
             //ADDRESS
-            DB::table('individual.address')->insert([            
+            DB::table('mdm.address')->insert([            
                 'line1'         => $faker->address,
                 'type'          => rand(1,3),
                 'networkid'     => $networkid,

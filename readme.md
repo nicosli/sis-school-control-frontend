@@ -1,7 +1,7 @@
 #Sis Control Escolar
 ![](https://img.shields.io/badge/Sis%20Control%20Escolar%20--%20Alpha-v1.0.0-blue.svg)
 
-Sistema especializado para el control escolar, funcional para cualquier institución que requiera tener el dominio total de toda la información generada.
+Sistema especializado para administrar el área de control escolar, funcional para cualquier institucion educativa que requiera tener acceso a toda su información generada por la misma intitución.
 
 
 # Instalación
